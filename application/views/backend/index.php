@@ -23,26 +23,11 @@
     								<div class="card-body card-dashboard">
 
     									<table class="table table-bordered">
-    										<tr>
-    											<th>No</th>
-    											<th>Alternatif</th>
-    											<?php 
-    											$dd = $this->Mymod->ViewData('kriteria'); 
-    											foreach($dd as $i):
-    												?>
-    												<th><?= $i['kriteria_nama']; ?></th>
-    											<?php endforeach; ?>
-    										</tr>
-
     										<?php
-// $gc= $this->db->query("SELECT * from nilai GROUP by alternatif_kode,kriteria_kode")->result_array();
     										$gc= $this->db->query("SELECT * from alternatif")->result_array();
-
     										foreach ($gc as $cc):
     											?>
     											<tr>
-    												<td>a</td>
-    												<td><?= $cc['alternatif_nama']; ?></td>
     												<?php
     												$de= $this->db->query("SELECT * from nilai where alternatif_kode = '$cc[alternatif_kode]'")->result_array();
     												foreach ($de as $cdd):
@@ -56,25 +41,11 @@
 
 
     									<table class="table table-bordered">
-    										<tr>
-    											<th>No</th>
-    											<th>Alternatif</th>
-    											<?php 
-    											$dd = $this->Mymod->ViewData('kriteria'); 
-    											foreach($dd as $i):
-    												?>
-    												<th><?= $i['kriteria_nama']; ?></th>
-    											<?php endforeach; ?>
-    										</tr>
-
     										<?php
-// $gc= $this->db->query("SELECT * from nilai GROUP by alternatif_kode,kriteria_kode")->result_array();
     										$gc= $this->db->query("SELECT * from alternatif")->result_array();
     										foreach ($gc as $cc):
     											?>
     											<tr>
-    												<td>a</td>
-    												<td><?= $cc['alternatif_nama']; ?></td>
     												<?php
     												$de= $this->db->query("SELECT * from nilai where alternatif_kode = '$cc[alternatif_kode]'")->result_array();
     												foreach ($de as $cdd):
@@ -90,64 +61,44 @@
 
 
     									<table class="table table-bordered">
-    										<tr>
-    											<th>No</th>
-    											<th>Alternatif</th>
-    											<?php 
-    											$dd = $this->Mymod->ViewData('kriteria'); 
-    											foreach($dd as $i):
-    												?>
-    												<th><?= $i['kriteria_nama']; ?></th>
-    											<?php endforeach; ?>
-    										</tr>
-
     										<?php
-    										$gc= $this->db->query("SELECT * from alternatif")->result_array();
-                                            $dbobot=array();
-                                            $nana=0;
-                                            foreach ($gc as $cc):
-                                               $nana++;
-                                               ?>
-                                               <tr>
-                                                <td>a</td>
-                                                <td><?= $cc['alternatif_nama']; ?></td>
-                                                <?php
-                                                $de= $this->db->query("SELECT * from nilai where alternatif_kode = '$cc[alternatif_kode]'")->result_array();
-                                                $no=0;
-                                                $re=0;
-                                                foreach ($de as $cdd):
-                                                    $no++;
-                                                    $ef= $this->db->query("SELECT max(nilai_nilai) as maxNilaiK  from nilai where kriteria_kode = '$cdd[kriteria_kode]'")->row_array();
-                                                    $dbobot = array($Mnormal = $cdd['nilai_nilai'] / $ef['maxNilaiK']);
-
-                                                    ?>
-                                                    <td><?= $Mnormal; ?></td>
-
-                                                    <?php
-                                                endforeach; ?>
-                                            </tr>
-
-                                            <?php 
-                                            
-                                        endforeach;
-                                        ?>
-                                    </table>    
-
-<!-- 
-                                        <?php
-                                        $krt = $this->db->query("SELECT * from kriteria")->result_array();
-                                        foreach ($krt as $vkrt) {
-                                            $jkriteria = $this->db->query("SELECT * FROM nilai where kriteria_kode='$vkrt[kriteria_kode]'")->result_array();
                                             $no=0;
-                                            foreach ($jkriteria as $vjkriteria) {
+                                            $gc= $this->db->query("SELECT * from alternatif")->result_array();
+                                            foreach ($gc as $cc):
                                                 $no++;
-                                                print_r(array($vjkriteria['nilai_nilai']));
-                                            }
+                                                ?>
+                                                <tr>
+                                                    <?php
+                                                    $nom = 0; 
+                                                    $de= $this->db->query("SELECT * from nilai where alternatif_kode = '$cc[alternatif_kode]'")->result_array();
+                                                    foreach ($de as $cdd):
+                                                        $nom++;
+                                                        $ef= $this->db->query("SELECT max(nilai_nilai) as maxNilaiK  from nilai where kriteria_kode = '$cdd[kriteria_kode]'")->row_array();
 
+                                                        $arrN[$no][$nom] = array([$Mnormal = $cdd['nilai_nilai'] / $ef['maxNilaiK']]);
+                                                        ?>
+                                                        <td><?= print_r($arrN[$no][$nom]); ?></td>
+                                                        <?php
+                                                    endforeach; ?>
+                                                </tr>
 
-                                        }
-                                        ?> -->
+                                                <?php 
 
+                                            endforeach;
+                                            ?>
+                                        </table>    
+
+                                        <?php
+                                        $cars = array(["Volvo",22,18],["BMW",15,13],["Saab",5,2],["Land Rover",17,15]);
+
+                                        echo $cars[0][0].":".$cars[0][1].":".$cars[0][2].".<br>";
+                                        echo $cars[1][0].":".$cars[1][1].":".$cars[1][2].".<br>";
+                                        echo $cars[2][0].":".$cars[2][1].":".$cars[2][2].".<br>";
+                                        echo $cars[3][0].":".$cars[3][1].":".$cars[3][2].".<br>";
+
+                                        echo array_sum([$cars[0][1],$cars[1][1],$cars[2][1],$cars[3][1]]);
+
+                                        ?>
 
                                     </div>
                                 </div>
