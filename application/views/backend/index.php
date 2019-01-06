@@ -282,6 +282,38 @@ for ($i=0;$i<count($kriteria);$i++)
                                         return $newArr;
                                     }));*/
 
+                                    for($x=0;$x<1;$x++){
+                                        $nth = $x;
+                                        $entz = array();
+                                        for ($i=0;$i<count($kriteria);$i++)
+                                        {
+                                            for ($j=0;$j<count($alternatif);$j++)
+                                            {
+                                                ${"entz$nth"}[$i] = (((-1)/log(7)) *( 
+                                                    ($probabilitas[0][$nth]*log($probabilitas[0][$nth]))+
+                                                    ($probabilitas[1][$nth]*log($probabilitas[1][$nth]))+
+                                                    ($probabilitas[2][$nth]*log($probabilitas[2][$nth]))+
+                                                    ($probabilitas[3][$nth]*log($probabilitas[3][$nth]))+
+                                                    ($probabilitas[4][$nth]*log($probabilitas[4][$nth]))+
+                                                    ($probabilitas[5][$nth]*log($probabilitas[5][$nth]))+
+                                                    ($probabilitas[6][$nth]*log($probabilitas[6][$nth]))
+                                                ));
+                                            }
+                                        }
+                                    }
+                                    showb(${"entz$nth"});
+
+
+
+
+
+
+
+
+
+
+
+
 
 
                                     $nEntropy = array();
