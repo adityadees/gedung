@@ -282,170 +282,47 @@ for ($i=0;$i<count($kriteria);$i++)
                                         return $newArr;
                                     }));*/
 
-                                    for($x=0;$x<1;$x++){
-                                        $nth = $x;
-                                        $entz = array();
-                                        for ($i=0;$i<count($kriteria);$i++)
-                                        {
-                                            for ($j=0;$j<count($alternatif);$j++)
-                                            {
-                                                ${"entz$nth"}[$i] = (((-1)/log(7)) *( 
-                                                    ($probabilitas[0][$nth]*log($probabilitas[0][$nth]))+
-                                                    ($probabilitas[1][$nth]*log($probabilitas[1][$nth]))+
-                                                    ($probabilitas[2][$nth]*log($probabilitas[2][$nth]))+
-                                                    ($probabilitas[3][$nth]*log($probabilitas[3][$nth]))+
-                                                    ($probabilitas[4][$nth]*log($probabilitas[4][$nth]))+
-                                                    ($probabilitas[5][$nth]*log($probabilitas[5][$nth]))+
-                                                    ($probabilitas[6][$nth]*log($probabilitas[6][$nth]))
-                                                ));
-                                            }
-                                        }
+
+
+             /*                  $alternatif_count = count($probabilitas[0]);
+
+                                    for($j=0; $j<$alternatif_count; $j++){
+                                        $col_arr[] = array_column($probabilitas, $j);
                                     }
-                                    showb(${"entz$nth"});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    $nEntropy = array();
-                                    for ($i=0;$i<count($kriteria);$i++)
-                                    {
-                                        for ($j=0;$j<count($alternatif);$j++)
-                                        {
-
-                                            $nEntropy[$i] = (((-1)/log(7)) *( 
-                                                ($probabilitas[0][0]*log($probabilitas[0][0]))+
-                                                ($probabilitas[1][0]*log($probabilitas[1][0]))+
-                                                ($probabilitas[2][0]*log($probabilitas[2][0]))+
-                                                ($probabilitas[3][0]*log($probabilitas[3][0]))+
-                                                ($probabilitas[4][0]*log($probabilitas[4][0]))+
-                                                ($probabilitas[5][0]*log($probabilitas[5][0]))+
-                                                ($probabilitas[6][0]*log($probabilitas[6][0]))
-                                            ));
-
+                                    $entropys = array();
+                                    $no=-1;
+                                    foreach($col_arr as $col){
+                                        $no++;
+                                        $calc = 0;
+                                        foreach($col as $prob){
+                                            $calc += $prob * log($prob);
+                                            $entropy = ((-1)/log(7)) * $calc;
                                         }
+                                        $entropys[$no] = $entropy;
                                     }
 
-                                    $nEntropy1 = array();
-                                    for ($i=0;$i<count($kriteria);$i++)
-                                    {
-                                        for ($j=0;$j<count($alternatif);$j++)
-                                        {
+                                    showb($entropys);*/
 
-                                            $nEntropy1[$i] = (((-1)/log(7)) *( 
-                                                ($probabilitas[0][1]*log($probabilitas[0][1]))+
-                                                ($probabilitas[1][1]*log($probabilitas[1][1]))+
-                                                ($probabilitas[2][1]*log($probabilitas[2][1]))+
-                                                ($probabilitas[3][1]*log($probabilitas[3][1]))+
-                                                ($probabilitas[4][1]*log($probabilitas[4][1]))+
-                                                ($probabilitas[5][1]*log($probabilitas[5][1]))+
-                                                ($probabilitas[6][1]*log($probabilitas[6][1]))
-                                            ));
 
-                                        }
+                                    $alternatif_count = count($probabilitas[0]);
+
+// We choose eg. every first element of every alternatif array, and push them onto a column array
+                                    for($j=0; $j<$alternatif_count; $j++){
+                                        $col_arr[] = array_column($probabilitas, $j);
                                     }
 
-
-                                    $nEntropy2 = array();
-                                    for ($i=0;$i<count($kriteria);$i++)
-                                    {
-                                        for ($j=0;$j<count($alternatif);$j++)
-                                        {
-
-                                            $nEntropy2[$i] = (((-1)/log(7)) *( 
-                                                ($probabilitas[0][2]*log($probabilitas[0][2]))+
-                                                ($probabilitas[1][2]*log($probabilitas[1][2]))+
-                                                ($probabilitas[2][2]*log($probabilitas[2][2]))+
-                                                ($probabilitas[3][2]*log($probabilitas[3][2]))+
-                                                ($probabilitas[4][2]*log($probabilitas[4][2]))+
-                                                ($probabilitas[5][2]*log($probabilitas[5][2]))+
-                                                ($probabilitas[6][2]*log($probabilitas[6][2]))
-                                            ));
-
+// Then for each column we calculate entropy
+                                    $entropy_arr = array();
+                                    foreach($col_arr as $col){
+                                        $calc = 0;
+                                        foreach($col as $prob){
+                                            $calc += $prob * log($prob);
+                                            $entropy = ((-1)/log(7)) * $calc;
                                         }
+                                        array_push($entropy_arr, $entropy);
                                     }
 
-
-                                    $nEntropy3 = array();
-                                    for ($i=0;$i<count($kriteria);$i++)
-                                    {
-                                        for ($j=0;$j<count($alternatif);$j++)
-                                        {
-
-                                            $nEntropy3[$i] = (((-1)/log(7)) *( 
-                                                ($probabilitas[0][3]*log($probabilitas[0][3]))+
-                                                ($probabilitas[1][3]*log($probabilitas[1][3]))+
-                                                ($probabilitas[2][3]*log($probabilitas[2][3]))+
-                                                ($probabilitas[3][3]*log($probabilitas[3][3]))+
-                                                ($probabilitas[4][3]*log($probabilitas[4][3]))+
-                                                ($probabilitas[5][3]*log($probabilitas[5][3]))+
-                                                ($probabilitas[6][3]*log($probabilitas[6][3]))
-                                            ));
-
-                                        }
-                                    }
-
-
-                                    $nEntropyy4 = array();
-                                    for ($i=0;$i<count($kriteria);$i++)
-                                    {
-                                        for ($j=0;$j<count($alternatif);$j++)
-                                        {
-
-                                            $nEntropy4[$i] = (((-1)/log(7)) *( 
-                                                ($probabilitas[0][4]*log($probabilitas[0][4]))+
-                                                ($probabilitas[1][4]*log($probabilitas[1][4]))+
-                                                ($probabilitas[2][4]*log($probabilitas[2][4]))+
-                                                ($probabilitas[3][4]*log($probabilitas[3][4]))+
-                                                ($probabilitas[4][4]*log($probabilitas[4][4]))+
-                                                ($probabilitas[5][4]*log($probabilitas[5][4]))+
-                                                ($probabilitas[6][4]*log($probabilitas[6][4]))
-                                            ));
-
-                                        }
-                                    }
-
-
-                                    $nEntropy5 = array();
-                                    for ($i=0;$i<count($kriteria);$i++)
-                                    {
-                                        for ($j=0;$j<count($alternatif);$j++)
-                                        {
-
-                                            $nEntropy5[$i] = (((-1)/log(7)) *( 
-                                                ($probabilitas[0][5]*log($probabilitas[0][5]))+
-                                                ($probabilitas[1][5]*log($probabilitas[1][5]))+
-                                                ($probabilitas[2][5]*log($probabilitas[2][5]))+
-                                                ($probabilitas[3][5]*log($probabilitas[3][5]))+
-                                                ($probabilitas[4][5]*log($probabilitas[4][5]))+
-                                                ($probabilitas[5][5]*log($probabilitas[5][5]))+
-                                                ($probabilitas[6][5]*log($probabilitas[6][5]))
-                                            ));
-
-                                        }
-                                    }
-
-
-
-                                    showb($nEntropy);
-                                    showb($nEntropy1);
-                                    showb($nEntropy2);
-                                    showb($nEntropy3);
-                                    showb($nEntropy4);
-                                    showb($nEntropy5);
-
-
-
-
+                                    showb($entropy_arr);
 
 // print_r($probabilitas);
 
