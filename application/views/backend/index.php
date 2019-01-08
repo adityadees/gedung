@@ -135,14 +135,14 @@ for ($i=0;$i<count($kriteria);$i++)
 
 
                                     $sumBobot = $this->db->query('SELECT sum(kriteria_bobot) as sumbot FROM kriteria')->row_array();
-                                    $cAlter = $this->db->query('SELECT count(*) as cAlternatif FROM alternatif')->row_array();
+                                    $cAlter = $this->db->query('SELECT count(*) as cAlternatif FROM gedung')->row_array();
 
                                     $alternatif = array(); 
 
                                     $i=0;
-                                    $galternatif = $this->db->query('SELECT * FROM alternatif');
+                                    $galternatif = $this->db->query('SELECT * FROM gedung');
                                     foreach ($galternatif->result_array()  as $dataalternatif) :
-                                        $alternatif[$i] = $dataalternatif['alternatif_nama'];
+                                        $alternatif[$i] = $dataalternatif['gedung_nama'];
                                         $i++;
                                     endforeach;
 
@@ -168,11 +168,11 @@ for ($i=0;$i<count($kriteria);$i++)
 
                                     $i=0;
                                     foreach ($galternatif->result_array()  as $dataalternatif) :
-                                        $dataalternatif1=$dataalternatif['alternatif_kode'];
+                                        $dataalternatif1=$dataalternatif['gedung_kode'];
                                         $j=0;
                                         foreach ($gkriteria->result_array()  as $datakriteria) :
                                             $datakriteria1=$datakriteria['kriteria_kode'];
-                                            $queryalternatifkriteria=   $this->db->query("SELECT * FROM nilai WHERE alternatif_kode ='$dataalternatif1' AND kriteria_kode = '$datakriteria1'");
+                                            $queryalternatifkriteria=   $this->db->query("SELECT * FROM nilai WHERE gedung_kode ='$dataalternatif1' AND kriteria_kode = '$datakriteria1'");
 
                                             $dataalterkriteria=$queryalternatifkriteria->row_array() ;
 
@@ -231,7 +231,6 @@ for ($i=0;$i<count($kriteria);$i++)
                                         for ($j=0;$j<count($alternatif);$j++)
                                         {
                                             $sumNormal[$i] += $normalisasi[$j][$i];
-       // print_r($sumNormal); 
                                         }
                                     }
 
@@ -272,46 +271,13 @@ for ($i=0;$i<count($kriteria);$i++)
 
 
 
-                                  /*  print_r(array_reduce($probabilitas, function ($newArr, $item) {
-                                        $sumOfProducts = 0;
-                                        foreach ($item as $k => $v) {
-                                            $sumOfProducts += $v * $v;
-                                        }
-                                        $newArr[] = $sumOfProducts;
-
-                                        return $newArr;
-                                    }));*/
-
-
-
-             /*                  $alternatif_count = count($probabilitas[0]);
-
-                                    for($j=0; $j<$alternatif_count; $j++){
-                                        $col_arr[] = array_column($probabilitas, $j);
-                                    }
-                                    $entropys = array();
-                                    $no=-1;
-                                    foreach($col_arr as $col){
-                                        $no++;
-                                        $calc = 0;
-                                        foreach($col as $prob){
-                                            $calc += $prob * log($prob);
-                                            $entropy = ((-1)/log(7)) * $calc;
-                                        }
-                                        $entropys[$no] = $entropy;
-                                    }
-
-                                    showb($entropys);*/
-
 
                                     $alternatif_count = count($probabilitas[0]);
 
-// We choose eg. every first element of every alternatif array, and push them onto a column array
                                     for($j=0; $j<$alternatif_count; $j++){
                                         $col_arr[] = array_column($probabilitas, $j);
                                     }
 
-// Then for each column we calculate entropy
                                     $entropy_arr = array();
                                     foreach($col_arr as $col){
                                         $calc = 0;
@@ -322,56 +288,115 @@ for ($i=0;$i<count($kriteria);$i++)
                                         array_push($entropy_arr, $entropy);
                                     }
 
-                                    showb($entropy_arr);
-
-// print_r($probabilitas);
-
-        //$nEntropy[$i] = (-1/log($cAlter['cAlternatif']));
-
-// showb($nEntropy); 
 
 
 
+                                    $divergence = array();
+                                    for ($i=0;$i<count($kriteria);$i++)
+                                    {
+                                        $divergence[$i] = (1-$entropy_arr[$i]);
+                                    }
+
+                                    $sumDiv = array_sum($divergence);
 
 
+                                    $lamda = array();
+                                    for ($i=0;$i<count($kriteria);$i++)
+                                    {
+                                        $lamda[$i] = $divergence[$i]/$sumDiv;
+                                    }
+
+                                    $lamdaXbobotA = array();
+                                    for ($i=0;$i<count($kriteria);$i++)
+                                    {
+                                        $lamdaXbobotA[$i] = $lamda[$i]*$bobotAwal[$i];
+                                    }
 
 
+                                    $sumLamdaXbobotA = array_sum($lamdaXbobotA);
+
+
+                                    $bobotEntropy = array();
+                                    for ($i=0;$i<count($kriteria);$i++)
+                                    {
+                                        $bobotEntropy[$i] = $lamdaXbobotA[$i]/$sumLamdaXbobotA;
+                                    }
 
                                     $solusi = array();
-
                                     for ($i=0;$i<count($alternatif);$i++)
                                     {
                                         for ($j=0;$j<count($kriteria);$j++)
                                         {
-                                            $solusi[$i][$j] = $probabilitas[$i][$j]*(($fiMax[$j]-$normalisasi[$i][$j])/($fiMax[$j]-$fiMin[$j]));
+                                            $solusi[$i][$j] = $bobotEntropy[$j]*(($fiMax[$j]-$normalisasi[$i][$j])/($fiMax[$j]-$fiMin[$j]));
 
-        /*
-        $solusi[$i][$j] = $probabilitas[$i][$j]*(($fiMax[$j]-$normalisasi[$i][$j])/($fiMax[$j]-$fiMin[$j]));*/
-    }
-}
+                                        }
+                                    }
 
-//probabilitas * (fiMax-Normal)/(fiMax-fiMin)
+                                    $sj = array();
+                                    $rj = array();
+                                    for ($i=0;$i<count($alternatif);$i++)
+                                    {
+                                        $sj[$i] = array_sum($solusi[$i]);
+                                        $rj[$i] = max($solusi[$i]);
+                                    }
 
-
-showt($solusi);
-
-
-
-$setMatriks = array();
-$a=0;
-$talternatif = $this->db->query('SELECT * FROM alternatif');
-$tkriteria = $this->db->query('SELECT * FROM kriteria');
-foreach ($talternatif->result() as $baris) {
-    $b=0;
-    foreach ($tkriteria->result() as $kolom) {
-        $tnilai = $this->db->query("SELECT * FROM nilai WHERE kriteria_kode = '$kolom->kriteria_kode'")->row()->nilai_nilai;
-        $setMatriks[$a][$b] = $tnilai;
-        $b++;
-    }
-    $a++;
-}
+                                    $sjMin = min($sj);
+                                    $sjMax = max($sj);
+                                    $rjMin = min($rj);
+                                    $rjMax = max($rj);
 
 
+                                    $Qj = array();
+                                    for ($i=0;$i<count($alternatif);$i++)
+                                    {
+                                        $Qj[$i] = (0.5*(($sj[$i]-$sjMin)/($sjMax-$sjMin))) + ((1-0.5) * (($rj[$i]-$rjMin) / ($rjMax-$rjMin)));
+                                    }
+
+                                    showb($Qj);
+
+
+                                    sort($Qj,1);
+                                    $arrlength = count($Qj);
+                                    $rank = 1;
+                                    $prev_rank = $rank;
+
+                                    for($x = 0; $x < $arrlength; $x++) {
+
+                                        if ($x==0) {
+                                            echo $Qj[$x]." - ".($rank);
+                                        }
+
+                                        elseif ($Qj[$x] != $Qj[$x-1]) {
+                                            $rank++;
+                                            $prev_rank = $rank;
+                                            echo $Qj[$x]." - ".($rank);
+                                        }
+
+                                        else{
+                                            $rank++;
+                                            echo $Qj[$x]." - ".($prev_rank);
+                                        }
+                                        echo "<br>";
+                                    }
+
+
+
+
+
+
+                                    $setMatriks = array();
+                                    $a=0;
+                                    $talternatif = $this->db->query('SELECT * FROM gedung');
+                                    $tkriteria = $this->db->query('SELECT * FROM kriteria');
+                                    foreach ($talternatif->result() as $baris) {
+                                        $b=0;
+                                        foreach ($tkriteria->result() as $kolom) {
+                                            $tnilai = $this->db->query("SELECT * FROM nilai WHERE kriteria_kode = '$kolom->kriteria_kode'")->row()->nilai_nilai;
+                                            $setMatriks[$a][$b] = $tnilai;
+                                            $b++;
+                                        }
+                                        $a++;
+                                    }
 
 
 
@@ -381,68 +406,70 @@ foreach ($talternatif->result() as $baris) {
 
 
 
-$matriksKuadrat = array();
-$c=0;
-foreach ($talternatif->result() as $baris) {
-    $d=0;
-    foreach ($tkriteria->result() as $kolom) {
-        $tnilai = $this->db->query("SELECT * FROM nilai WHERE kriteria_kode = '$kolom->kriteria_kode'")->row()->nilai_nilai;
-        $matriksKuadrat[$c][$d] = pow($tnilai, 2);
-        $d++;
-    }
-    $c++;
-}
-
-// print json_encode($matriksKuadrat); 
 
 
-$jumlahBarisMatriks = array();
-$e=0;
-foreach ($talternatif->result() as $row) {
-    $f=0;
-    $jumlah = 0;
-    foreach ($tkriteria->result() as $column) {
-        $jumlah = $jumlah + $matriksKuadrat[$e][$f];
-        $f++;
-    }
+                                    $matriksKuadrat = array();
+                                    $c=0;
+                                    foreach ($talternatif->result() as $baris) {
+                                        $d=0;
+                                        foreach ($tkriteria->result() as $kolom) {
+                                            $tnilai = $this->db->query("SELECT * FROM nilai WHERE kriteria_kode = '$kolom->kriteria_kode'")->row()->nilai_nilai;
+                                            $matriksKuadrat[$c][$d] = pow($tnilai, 2);
+                                            $d++;
+                                        }
+                                        $c++;
+                                    }
 
-    $jumlahBarisMatriks[] = $jumlah;
-    $e++;
-}
-
-$akarMatriks = array();
-for ($g=0; $g < count($jumlahBarisMatriks) ; $g++) { 
-    $akarMatriks[$g] = round(sqrt($jumlahBarisMatriks[$g]),3);
-}
-
-$normalisasi = array();
-for ($h=0; $h < $talternatif->num_rows() ; $h++) { 
-    for ($i=0; $i < $tkriteria->num_rows() ; $i++) { 
-        $normalisasi[$h][$i] = round($setMatriks[$h][$i]/$akarMatriks[$h],3);  
-    }
-}   
-$nilaiBobot = array();
-$j=0;
-foreach ($talternatif->result() as $baris) {
-    $k=0;
-    foreach ($tkriteria->result() as $kolom) {
-        $tnilai = $this->db->query("SELECT * FROM nilai WHERE kriteria_kode = '$kolom->kriteria_kode'")->row()->nilai_nilai;
-        $bobot = $this->db->query("SELECT * FROM kriteria WHERE kriteria_kode = '$kolom->kriteria_kode'")->row()->kriteria_bobot;
-        $nilaiBobot[$j][$k] = round($normalisasi[$j][$k] * $bobot , 3);
-        $k++;
-    }
-    $j++;
-}
+                // print json_encode($matriksKuadrat); 
 
 
-?>
+                                    $jumlahBarisMatriks = array();
+                                    $e=0;
+                                    foreach ($talternatif->result() as $row) {
+                                        $f=0;
+                                        $jumlah = 0;
+                                        foreach ($tkriteria->result() as $column) {
+                                            $jumlah = $jumlah + $matriksKuadrat[$e][$f];
+                                            $f++;
+                                        }
+
+                                        $jumlahBarisMatriks[] = $jumlah;
+                                        $e++;
+                                    }
+
+                                    $akarMatriks = array();
+                                    for ($g=0; $g < count($jumlahBarisMatriks) ; $g++) { 
+                                        $akarMatriks[$g] = round(sqrt($jumlahBarisMatriks[$g]),3);
+                                    }
+
+                                    $normalisasi = array();
+                                    for ($h=0; $h < $talternatif->num_rows() ; $h++) { 
+                                        for ($i=0; $i < $tkriteria->num_rows() ; $i++) { 
+                                            $normalisasi[$h][$i] = round($setMatriks[$h][$i]/$akarMatriks[$h],3);  
+                                        }
+                                    }   
+                                    $nilaiBobot = array();
+                                    $j=0;
+                                    foreach ($talternatif->result() as $baris) {
+                                        $k=0;
+                                        foreach ($tkriteria->result() as $kolom) {
+                                            $tnilai = $this->db->query("SELECT * FROM nilai WHERE kriteria_kode = '$kolom->kriteria_kode'")->row()->nilai_nilai;
+                                            $bobot = $this->db->query("SELECT * FROM kriteria WHERE kriteria_kode = '$kolom->kriteria_kode'")->row()->kriteria_bobot;
+                                            $nilaiBobot[$j][$k] = round($normalisasi[$j][$k] * $bobot , 3);
+                                            $k++;
+                                        }
+                                        $j++;
+                                    }
 
 
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+                                    ?>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -9,7 +9,7 @@ class FrontendC extends CI_Controller{
 	public function index()
 	{
 
-		$prod = $this->Mymod->ViewData('produk');
+		/*$prod = $this->Mymod->ViewData('produk');
 		$kat = $this->Mymod->ViewData('kategori');
 		$slide = $this->Mymod->ViewData('slider');
 		$promo = $this->Mymod->ViewData('promo');
@@ -38,11 +38,13 @@ class FrontendC extends CI_Controller{
 
 
 
-		$y['title']='Produk';
+		*/
+		$y['title']='Home';
 		$this->load->view('frontend/layout/header',$y);
+		$this->load->view('frontend/layout/topbar');
 		$this->load->view('frontend/slider/slider');
-		$this->load->view('frontend/index',$x);
-		$this->load->view('frontend/layout/footer',$xx);
+		$this->load->view('frontend/index');
+		$this->load->view('frontend/layout/footer');
 
 	}
 

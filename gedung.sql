@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 29, 2018 at 02:57 PM
+-- Generation Time: Jan 08, 2019 at 04:26 PM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -25,26 +25,56 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `alternatif`
+-- Table structure for table `foto_gedung`
 --
 
-CREATE TABLE `alternatif` (
-  `alternatif_kode` varchar(20) NOT NULL,
-  `alternatif_nama` varchar(50) NOT NULL
+CREATE TABLE `foto_gedung` (
+  `fg_id` int(11) NOT NULL,
+  `gedung_kode` varchar(20) NOT NULL,
+  `fg_foto` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `gedung`
+--
+
+CREATE TABLE `gedung` (
+  `gedung_kode` varchar(20) NOT NULL,
+  `gedung_nama` varchar(50) NOT NULL,
+  `gedung_lat` float NOT NULL,
+  `gedung_long` float NOT NULL,
+  `gedung_alamat` text NOT NULL,
+  `gedung_deskripsi` text NOT NULL,
+  `gedung_header` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `alternatif`
+-- Dumping data for table `gedung`
 --
 
-INSERT INTO `alternatif` (`alternatif_kode`, `alternatif_nama`) VALUES
-('ALT1', 'Gedung A'),
-('ALT2', 'Gedung B'),
-('ALT3', 'Gedung C'),
-('ALT4', 'Gedung D'),
-('ALT5', 'Gedung E'),
-('ALT6', 'Gedung F'),
-('ALT7', 'Gedung G');
+INSERT INTO `gedung` (`gedung_kode`, `gedung_nama`, `gedung_lat`, `gedung_long`, `gedung_alamat`, `gedung_deskripsi`, `gedung_header`) VALUES
+('ALT1', 'Gedung A', 0, 0, '', '', ''),
+('ALT2', 'Gedung B', 0, 0, '', '', ''),
+('ALT3', 'Gedung C', 0, 0, '', '', ''),
+('ALT4', 'Gedung D', 0, 0, '', '', ''),
+('ALT5', 'Gedung E', 0, 0, '', '', ''),
+('ALT6', 'Gedung F', 0, 0, '', '', ''),
+('ALT7', 'Gedung G', 0, 0, '', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `gedung_detail`
+--
+
+CREATE TABLE `gedung_detail` (
+  `gd_id` int(11) NOT NULL,
+  `gedung_kode` varchar(15) NOT NULL,
+  `kriteria_kode` varchar(15) NOT NULL,
+  `gd_val` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -79,7 +109,7 @@ INSERT INTO `kriteria` (`kriteria_kode`, `kriteria_nama`, `kriteria_bobot`, `kri
 
 CREATE TABLE `nilai` (
   `nilai_id` int(11) NOT NULL,
-  `alternatif_kode` varchar(20) DEFAULT NULL,
+  `gedung_kode` varchar(20) DEFAULT NULL,
   `kriteria_kode` varchar(5) DEFAULT NULL,
   `nilai_nilai` double DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -88,7 +118,7 @@ CREATE TABLE `nilai` (
 -- Dumping data for table `nilai`
 --
 
-INSERT INTO `nilai` (`nilai_id`, `alternatif_kode`, `kriteria_kode`, `nilai_nilai`) VALUES
+INSERT INTO `nilai` (`nilai_id`, `gedung_kode`, `kriteria_kode`, `nilai_nilai`) VALUES
 (83, 'ALT1', 'C1', 5),
 (84, 'ALT1', 'C2', 1),
 (85, 'ALT1', 'C3', 5),
@@ -135,6 +165,20 @@ INSERT INTO `nilai` (`nilai_id`, `alternatif_kode`, `kriteria_kode`, `nilai_nila
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sub_kriteria`
+--
+
+CREATE TABLE `sub_kriteria` (
+  `sk_id` int(11) NOT NULL,
+  `kriteria_kode` varchar(15) NOT NULL,
+  `sk_klasifikasi` int(11) NOT NULL,
+  `sk_range` varchar(30) NOT NULL,
+  `sk_nilai` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -147,7 +191,7 @@ CREATE TABLE `user` (
   `user_tel` char(12) NOT NULL,
   `user_alamat` text NOT NULL,
   `user_jk` enum('L','P') NOT NULL,
-  `user_role` enum('customer','admin','pemilik') NOT NULL
+  `user_role` enum('pemilik','admin') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -162,10 +206,22 @@ INSERT INTO `user` (`user_id`, `user_username`, `user_password`, `user_nama`, `u
 --
 
 --
--- Indexes for table `alternatif`
+-- Indexes for table `foto_gedung`
 --
-ALTER TABLE `alternatif`
-  ADD PRIMARY KEY (`alternatif_kode`);
+ALTER TABLE `foto_gedung`
+  ADD PRIMARY KEY (`fg_id`);
+
+--
+-- Indexes for table `gedung`
+--
+ALTER TABLE `gedung`
+  ADD PRIMARY KEY (`gedung_kode`);
+
+--
+-- Indexes for table `gedung_detail`
+--
+ALTER TABLE `gedung_detail`
+  ADD PRIMARY KEY (`gd_id`);
 
 --
 -- Indexes for table `kriteria`
@@ -180,14 +236,38 @@ ALTER TABLE `nilai`
   ADD PRIMARY KEY (`nilai_id`);
 
 --
+-- Indexes for table `sub_kriteria`
+--
+ALTER TABLE `sub_kriteria`
+  ADD PRIMARY KEY (`sk_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `foto_gedung`
+--
+ALTER TABLE `foto_gedung`
+  MODIFY `fg_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `gedung_detail`
+--
+ALTER TABLE `gedung_detail`
+  MODIFY `gd_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `nilai`
 --
 ALTER TABLE `nilai`
   MODIFY `nilai_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
+
+--
+-- AUTO_INCREMENT for table `sub_kriteria`
+--
+ALTER TABLE `sub_kriteria`
+  MODIFY `sk_id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

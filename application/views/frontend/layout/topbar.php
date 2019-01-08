@@ -1,237 +1,152 @@
-<?php 
-if(isset($_SESSION['logged_in_user'])){
-    $ses_user=$_SESSION['user_id'];
-    $join='user';
-    $where=[
-        't1.user_id'=>$ses_user,
-    ];
+<div id="wrapper-navbar">
+    <nav id="top" class="navbar py-3 fixed-top navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand ml-sm-5" href="#"><img src="<?= base_url();?>assets/frontend/assets/images/logo.png" alt="image"></a>
+        <button class="navbar-toggler collapsed navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="icon-bar top-bar"></span>
+            <span class="icon-bar middle-bar"></span>
+            <span class="icon-bar bottom-bar"></span>
+            <span class="sr-only">Toggle navigation</span>
+        </button> 
+        <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link  mr-3 open my-lg-0 my-2 ml-lg-0 ml-3" href="<?= base_url();?>" >
+                        Home
+                    </a>
+                </li>
 
-    $jtable=[
-        'keranjang' => 'produk_kode',
-        'produk' => 'produk_kode'
-    ];
-    $getcart = $this->Mymod->GetDataJoin($jtable,$where);
-
-    $countcart=$getcart->num_rows();
-    $getCartData=$getcart->result_array();
-}else {}
-?>
-
-<header class="header-area">
-    <div class="header-top"  style="background: #e83e8c;;">
-        <div class="container">
-            <div class="border-bottom-0">
-                <div class="row">
-                    <div class="col-lg-4 col-md-4 col-12">
-                        <div class="welcome-area">
-                            <p>
-                                <?php if($this->session->flashdata('cartsuccess')){ ?>
-                                    <div class="alert alert-success">
-                                        <a href="#" class="close" data-dismiss="alert">&times;</a>
-                                        <strong>Sukses!</strong> <?php echo $this->session->flashdata('cartsuccess'); ?>
-                                    </div>
-                                <?php } else if($this->session->flashdata('successlogin')){?>
-                                    <div class="alert alert-success">
-                                        <a href="#" class="close" data-dismiss="alert">&times;</a>
-                                        <strong>Welcome !</strong> <?php echo $this->session->flashdata('successlogin'); ?>
-                                    </div>
-                                <?php } else if($this->session->flashdata('error')){?>
-                                    <div class="alert alert-warning">
-                                        <a href="#" class="close" data-dismiss="alert">&times;</a>
-                                        <strong>Error!</strong> <?php echo $this->session->flashdata('error'); ?>
-                                    </div>
-                                <?php }?>
-
-                            </p>
-                        </div>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle mr-3 open my-lg-0 my-2 ml-lg-0 ml-3" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Destinations
+                    </a>
+                    <div class="dropdown-menu dropdownId dropdown-menu-right" aria-labelledby="navbarDropdown2">                      
+                        <a class="dropdown-item mt-1" href="destinations-list-fullwidth.html">Destinations Full-Width</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="destinations-list-sidebar.html">Destinations Sidebar</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item mb-1" href="destination-single.html">Destination Single</a>
                     </div>
-                    <div class="col-lg-8 col-md-8 col-12">
-                        <div class="account-curr-lang-wrap f-right" >
-                            <ul>
-                                <?php if(!isset($_SESSION['logged_in_user'])) {?>
-                                    <li><a href="<?= base_url();?>Login"><span style="color:white;">Login</span></a></li>
-                                    <li><a href="<?= base_url();?>Register"><span style="color:white;">Register</span></a></li>
-                                <?php }else {?>
+                </li>
 
-                                    <li class="top-hover"><a href="#">My Account <i class="ion-chevron-down"></i></a>
-                                        <ul>
-                                            <li><a href="<?= base_url();?>myaccount">my account</a></li>
-                                            <li><a href="<?= base_url();?>Logout">Logout</a></li>
-                                        </ul>
-                                    </li>
-                                <?php } ?>
-                            </ul>
-                        </div>
+                <li class="nav-item dropdown">
+                    <div class="dropdown-divider d-lg-none"></div>
+                    <a class="nav-link dropdown-toggle  mr-3 my-lg-0 my-2 ml-lg-0 ml-3" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Tours
+                    </a>
+                    <div class="dropdown-divider d-lg-none"></div>
+                    <div  class="dropdown-menu dropdownId dropdown-menu-right" aria-labelledby="navbarDropdown3">
+                        <a class="dropdown-item mt-1" href="tour-search-2-cols-card.html">Tours 2 Columns Cards</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="tour-search-3-cols-card.html">Tours 3 Columns Cards</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item mb-1" href="tour-search-2-cols-image.html">Tours 2 Columns Images</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item mb-1" href="tour-single.html">Tour Single Item </a>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="header-bottom transparent-bar">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="logo">
-                        <a href="<?= base_url();?>">
-                            <img alt="" src="<?php echo base_url();?>assets/frontend/assets/img/logo/logos.png">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-9 col-md-8 col-6">
-                    <div class="header-bottom-right">
-                        <div class="main-menu">
-                            <nav>
-                                <ul>
-                                    <li><a href="<?= base_url();?>"> Home </a></li>
-                                    <li><a href="<?= base_url();?>produk"> Produk </a></li>
-                                    <li><a href="<?= base_url();?>contactus"> Contact us </a></li>
-                                </ul>
-                            </nav>
-                        </div>
+                </li>
 
-                        <?php if(isset($_SESSION['logged_in_user'])) {?>
-                            <div class="header-cart">
-                                <a href="#">
-                                    <div class="cart-icon">
-                                        <i class="ion-bag"></i>
-                                        <span class="count-style"><?= $countcart;?></span>
-                                    </div>
-                                    <div class="cart-text">
-                                        <span class="digit">My Cart</span>
-                                        <span>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle mr-3 my-lg-0 my-2 ml-lg-0 ml-3" href="#" id="navbarDropdown4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Elements
+                    </a>
+                    <div class="dropdown-divider d-lg-none"></div>
 
-                                            <?php
-                                            $total=0;
-                                            foreach($getCartData as $gcart):
-                                              if($gcart['keranjang_ukuran']=='m2'){
-                                                $subtotal=($gcart['produk_harga']-($gcart['produk_harga']*15/100))*$gcart['keranjang_qty'];
-                                                $subdsc=(($gcart['produk_harga']*15)/100)*$gcart['keranjang_qty'];
-                                                $subongkir=0*$gcart['keranjang_qty'];
-                                            }else {
-                                                $subongkir=10000*$gcart['keranjang_qty'];
-                                                if($gcart['keranjang_qty']>=3){
-                                                    $subtotal=($gcart['produk_harga']-($gcart['produk_harga']*5/100))*$gcart['keranjang_qty'];
-                                                    $subtqty=(($gcart['produk_harga']*5)/100)*$gcart['keranjang_qty'];
-                                                }else{
-                                                    $subtotal=$gcart['produk_harga']*$gcart['keranjang_qty'];
-                                                }
+                    <div class="dropdown-menu dropdownId dropdown-menu-right multi-column columns-2" aria-labelledby="navbarDropdown4">
 
-                                            }
-                                            $total +=$subtotal;
-                                            
-                                        endforeach; ?>
-                                        <?= "Rp. ".number_format($total);?>
-
-                                    </span>
-                                </div>
-                            </a>
-                            <div class="shopping-cart-content" style="overflow-y: scroll;max-width:400px;max-height:500px;">
-                                <ul>
-                                    <?php
-                                    $total=0;
-                                    $tsubdsc=0;
-                                    $tnodsc=0;
-                                    $tqty=0;
-                                    $subtqty=0;
-                                    $tongkir=0;
-                                    foreach($getCartData as $gcart):
-                                        if($gcart['keranjang_ukuran']=='m2'){
-                                            $subtotal=($gcart['produk_harga']-($gcart['produk_harga']*15/100))*$gcart['keranjang_qty'];
-                                            $subdsc=(($gcart['produk_harga']*15)/100)*$gcart['keranjang_qty'];
-                                            $subongkir=0*$gcart['keranjang_qty'];
-                                        }else {
-                                            $subongkir=10000*$gcart['keranjang_qty'];
-                                            if($gcart['keranjang_qty']>=3){
-                                                $subtotal=($gcart['produk_harga']-($gcart['produk_harga']*5/100))*$gcart['keranjang_qty'];
-                                                $subtqty=(($gcart['produk_harga']*5)/100)*$gcart['keranjang_qty'];
-                                            }else{
-                                                $subtotal=$gcart['produk_harga']*$gcart['keranjang_qty'];
-                                            }
-
-                                        }
-                                        $total +=$subtotal;
-                                        @$tsubdsc +=$subdsc;
-                                        $tnodsc +=$gcart['produk_harga']*$gcart['keranjang_qty'];
-                                        $tqty +=$subtqty;
-                                        $tongkir +=$subongkir;
-                                        ?>
-                                        <li class="single-shopping-cart">
-                                            <div class="shopping-cart-img">
-                                                <a href="#"><img alt="" src="<?php echo base_url();?>assets/images/<?= $gcart['produk_gambar'];?>" style="width: 82px;height: 82px;"></a>
-                                            </div>
-                                            <div class="shopping-cart-title">
-                                                <h4><a href="#"><?= $gcart['produk_nama']; ?> </a></h4>
-                                                <h6>Qty: <?= $gcart['keranjang_qty']; ?></h6>
-                                                <h6>Ukuran: <?= $gcart['keranjang_ukuran']; ?></h6>
-                                                <span><?= "Rp. ".number_format($subtotal); ?></span>
-                                            </div>
-                                            <div class="shopping-cart-delete">
-                                                <a href="#" data-target="#delCart<?= $gcart['keranjang_id']; ?>" data-toggle="modal"><i class="ion ion-close"></i></a>
-                                            </div>
-                                        </li>
-                                    <?php endforeach; ?>
-                                </ul>
-                                <div class="shopping-cart-total">
-                                    <h4>Total : <span class="shop-total"><?= "Rp. ".number_format($total);?></span></h4>
-                                </div>
-                                <div class="shopping-cart-btn">
-                                    <a href="<?= base_url();?>cart">view cart</a>
-                                    <a href="<?= base_url();?>checkout">checkout</a>
-                                </div>
+                        <div class="row" >
+                            <div class="col-lg-6 col-12">
+                                <div class=" multi-column-dropdown">
+                                    <a class="dropdown-item mt-1" href="accordions.html">Accordions</a>
+                                    <div class="dropdown-divider ml-1"></div>
+                                    <a class="dropdown-item" href="call-to-action.html">Call to Action Boxes</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item mb-1" href="columns.html">Columns &amp; Separators </a>
+                                    <div class="dropdown-divider d-lg-none"></div>
+                                </div>    
                             </div>
-                        </div>
-                    <?php } else {}?>
+                            <div class="col-lg-6 col-12">
+                                <div class=" multi-column-dropdown">
+                                    <a class="dropdown-item mt-1 mb-1" href="images-cols.html">Images with Columns</a>
+                                    <div class="dropdown-divider "></div>
+                                    <a class="dropdown-item mb-1" href="image-slider-popup.html">Image slider &amp; pop-ups</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item mb-1" href="video-gallery.html">Video Gallery</a>
+                                </div>    
+                            </div>    
+                        </div>  
+                    </div>
+                </li>
 
-                </div>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle dropdown-menu-right  ml-lg-0 ml-3 mr-3 my-lg-0 my-2 lastitem" href="#" id="navbarDropdown5" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Blogs
+                    </a>
+                    <div class="dropdown-divider d-lg-none"></div>
+                    <div class="dropdown-menu dropdownId dropdown-menu-right" aria-labelledby="navbarDropdown5">
+                        <a class="dropdown-item mt-1" href="blog-single.html">Blog Single</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="blog-listing.html">Blog Listing</a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle dropdown-menu-right  ml-lg-0 ml-3 mr-4 my-lg-0 my-2 lastitem" href="#" id="navbarDropdown6" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Pages
+                    </a>
+                    <div class="dropdown-divider d-lg-none"></div>
+                    <div class="dropdown-menu dropdownId dropdown-menu-right" aria-labelledby="navbarDropdown6">
+                        <a class="dropdown-item mt-1" href="about.html">About Us</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="our-team.html">Our Team</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item mb-1" href="contact.html">Contact Us</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item mb-1" href="404-page.html">404 Page</a>
+                    </div>
+                </li>
+            </ul>               
+
+            <div class="row d-none d-lg-block sidebartop">
+                <div class="col-12 mr-4 sidebar">
+                    <div class="mini-submenu">
+                        <span class="icon-bar2"></span>
+                        <span class="icon-bar2"></span>
+                        <span class="icon-bar2"></span>
+                    </div>
+                    <div class="list-group">
+                        <span class="list-group-item active">
+                            <img class="svgcenter mt-4 logo-light" src="<?= base_url();?>assets/frontend/assets/svgs/logolight.svg" alt="image">
+                            <span class="pull-right" id="slide-submenu">
+                                <i class="fa fa-times"></i>
+                            </span>
+                        </span>
+                        <p class="white py-4 px-5 text-center  list-group-item light">
+                            Lorem ipsum diocritatem eu, fierent molestie petentium id his. Ut aeterno nostrum nam, solet sapientem ea quo. Cum te meis illud, aeterno accusata ut vix.
+                        </p>
+                        <ul  class="list-group-item py-4">
+                            <li><h5 class="white text-center"><i class="white fas fa-map-marker-alt mr-2"></i>Mave Avenue, New York</h5></li>
+                            <li><h5 class="white text-center"><i class="white fas fa-phone-square mr-2"></i>United States (+1) 3333.1111</h5></li>
+                            <li><h5 class="white text-center"><i class="white fas fa-envelope mr-2"></i>hello@ourcompany.com</h5></li>
+                        </ul>
+                        <div class="list-group-item text-center pt-4 ">
+                            <h6>Follow Us</h6>
+                            <ul class="text-center py-3">
+                                <li class="list-inline-item"><a href="http://www.facebook.com/"><i class="fab fa-facebook-f"></i></a></li>
+                                <li class="list-inline-item"><a href="http://www.twitter.com/"><i class="fab fa-twitter"></i></a></li>
+                                <li class="list-inline-item"><a href="http://www.instagram.com/"><i class="fab fa-instagram"></i></a></li>
+                            </ul>     
+                            <div class="list-group-item py-4">                       
+                                <a href="#" class="d-block white py-2">
+                                    <i class="fa fa-users"></i> About Us
+                                </a>
+                                <a class="white d-block" href="#">
+                                    <i class="fa fa-envelope"></i> Contact Us
+                                </a>
+                            </div>
+                        </div>        
+                    </div>
+                </div>        
             </div>
-        </div>
-        <div class="mobile-menu-area">
-            <div class="mobile-menu">
-                <nav id="mobile-menu-active">
-                    <ul class="menu-overflow">
-                        <li><a href="<?= base_url();?>"> Home </a></li>
-                        <li><a href="<?= base_url();?>produk"> Produk </a></li>
-                        <li><a href="<?= base_url();?>contactus"> Contact us </a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </div>
+        </div>        
+    </nav>
 </div>
-</header>
-
-
-<?php
-if(isset($_SESSION['logged_in_user'])){
-
- foreach($getCartData as $gcart): ?>
-    <div class="modal fade text-left" id="delCart<?= $gcart['keranjang_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel34" aria-hidden="true">
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title" id="myModalLabel34">Konfirmasi</h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form action="<?php echo base_url()?>frontendc/delete_cart" method="POST">
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <input type="hidden" name="keranjang_id" value="<?php echo $gcart['keranjang_id'];?>">
-                                    <label class="text-center">Anda yakin ingin menghapus produk <b><?php echo $gcart['produk_nama']; ?></b> ?</label>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <input type="reset" class="btn btn-outline-secondary btn-lg" data-dismiss="modal" value="close">
-                        <input type="submit" class="btn btn-outline-primary btn-lg" value="Submit">
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <?php endforeach; }?>
