@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 08, 2019 at 04:26 PM
+-- Generation Time: Jan 09, 2019 at 01:37 PM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -46,35 +46,30 @@ CREATE TABLE `gedung` (
   `gedung_lat` float NOT NULL,
   `gedung_long` float NOT NULL,
   `gedung_alamat` text NOT NULL,
+  `gedung_sewa` int(11) NOT NULL,
+  `gedung_kapasitas` int(11) NOT NULL,
+  `gedung_parkir` int(11) NOT NULL,
+  `gedung_jenis` enum('pendidikan','instansi','ballroom','serbaguna') NOT NULL,
+  `gedung_fasilitas` varchar(100) NOT NULL,
   `gedung_deskripsi` text NOT NULL,
-  `gedung_header` varchar(50) NOT NULL
+  `gedung_header` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `gedung`
 --
 
-INSERT INTO `gedung` (`gedung_kode`, `gedung_nama`, `gedung_lat`, `gedung_long`, `gedung_alamat`, `gedung_deskripsi`, `gedung_header`) VALUES
-('ALT1', 'Gedung A', 0, 0, '', '', ''),
-('ALT2', 'Gedung B', 0, 0, '', '', ''),
-('ALT3', 'Gedung C', 0, 0, '', '', ''),
-('ALT4', 'Gedung D', 0, 0, '', '', ''),
-('ALT5', 'Gedung E', 0, 0, '', '', ''),
-('ALT6', 'Gedung F', 0, 0, '', '', ''),
-('ALT7', 'Gedung G', 0, 0, '', '', '');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `gedung_detail`
---
-
-CREATE TABLE `gedung_detail` (
-  `gd_id` int(11) NOT NULL,
-  `gedung_kode` varchar(15) NOT NULL,
-  `kriteria_kode` varchar(15) NOT NULL,
-  `gd_val` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `gedung` (`gedung_kode`, `gedung_nama`, `gedung_lat`, `gedung_long`, `gedung_alamat`, `gedung_sewa`, `gedung_kapasitas`, `gedung_parkir`, `gedung_jenis`, `gedung_fasilitas`, `gedung_deskripsi`, `gedung_header`) VALUES
+('ALT1', 'Gedung A', 0, 0, '', 0, 0, 0, 'pendidikan', '', '', ''),
+('ALT2', 'Gedung B', 0, 0, '', 0, 0, 0, 'pendidikan', '', '', ''),
+('ALT3', 'Gedung C', 0, 0, '', 0, 0, 0, 'pendidikan', '', '', ''),
+('ALT4', 'Gedung D', 0, 0, '', 0, 0, 0, 'pendidikan', '', '', ''),
+('ALT5', 'Gedung E', 0, 0, '', 0, 0, 0, 'pendidikan', '', '', ''),
+('ALT6', 'Gedung F', 0, 0, '', 0, 0, 0, 'pendidikan', '', '', ''),
+('ALT7', 'Gedung G', 0, 0, '', 0, 0, 0, 'pendidikan', '', '', ''),
+('GD1909015270', 'Gedung Azhar', -3.28366, 105.009, 'Pampangan, Kabupaten Ogan Komering Ilir, Sumatera Selatan, Indonesia', 100000000, 754, 830, 'serbaguna', '1, 2, 5, 7, 10', 'asds', '48ebb81655d4ed565ece050898d245f0.jpg'),
+('GD1909015944', 'Gedug Alma', -2.97607, 104.775, 'Palembang, Kota Palembang, Sumatera Selatan, Indonesia', 250000, 50, 425, 'serbaguna', '1, 2, 3, 4, 5, 6, 8, 10, 12, 14, 15, 17, 19, 20, 21, 23, 24, 25, 27, 29, 30', ' asdsad', 'book_fair_2010_flyer_copy.jpg'),
+('GD1909016627', 'gedug asdsje', -3.16233, 105.065, 'Unnamed Road, Tj. Kemang, Pangkalan Lapam, Kabupaten Ogan Komering Ilir, Sumatera Selatan 30654, Indonesia', 2412456, 343, 356, 'ballroom', '1, 2, 3, 4, 5, 7', 'asda', 'index.jpg');
 
 -- --------------------------------------------------------
 
@@ -84,10 +79,10 @@ CREATE TABLE `gedung_detail` (
 
 CREATE TABLE `kriteria` (
   `kriteria_kode` varchar(5) NOT NULL,
-  `kriteria_nama` varchar(100) DEFAULT NULL,
-  `kriteria_bobot` float DEFAULT NULL,
-  `kriteria_attribute` enum('cost','benefit') DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `kriteria_nama` varchar(50) NOT NULL,
+  `kriteria_bobot` float NOT NULL,
+  `kriteria_attribute` enum('cost','benefit') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `kriteria`
@@ -160,7 +155,26 @@ INSERT INTO `nilai` (`nilai_id`, `gedung_kode`, `kriteria_kode`, `nilai_nilai`) 
 (121, 'ALT7', 'C3', 2),
 (122, 'ALT7', 'C4', 5),
 (123, 'ALT7', 'C5', 2),
-(124, 'ALT7', 'C6', 1);
+(124, 'ALT7', 'C6', 1),
+(125, 'GD1909015270', 'C', 4),
+(126, 'GD1909015270', 'C', 4),
+(127, 'GD1909015270', 'C', 5),
+(128, 'GD1909015270', 'C', 1),
+(129, 'GD1909015270', 'C', 2),
+(130, 'GD1909015270', 'C', NULL),
+(131, 'GD1909015944', 'C2', 1),
+(132, 'GD1909015944', 'C3', 1),
+(133, 'GD1909015944', 'C4', 5),
+(134, 'GD1909015944', 'C5', 4),
+(135, 'GD1909015944', 'C6', 2),
+(136, 'GD1909015944', NULL, NULL),
+(137, 'GD1909016627', 'C1', 5),
+(138, 'GD1909016627', 'C2', 2),
+(139, 'GD1909016627', 'C3', 1),
+(140, 'GD1909016627', 'C4', 4),
+(141, 'GD1909016627', 'C5', 1),
+(142, 'GD1909016627', 'C6', 2),
+(143, 'GD1909016627', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -171,10 +185,40 @@ INSERT INTO `nilai` (`nilai_id`, `gedung_kode`, `kriteria_kode`, `nilai_nilai`) 
 CREATE TABLE `sub_kriteria` (
   `sk_id` int(11) NOT NULL,
   `kriteria_kode` varchar(15) NOT NULL,
-  `sk_klasifikasi` int(11) NOT NULL,
+  `sk_klasifikasi` varchar(50) NOT NULL,
   `sk_range` varchar(30) NOT NULL,
   `sk_nilai` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `sub_kriteria`
+--
+
+INSERT INTO `sub_kriteria` (`sk_id`, `kriteria_kode`, `sk_klasifikasi`, `sk_range`, `sk_nilai`) VALUES
+(1, 'C1', 'Murah', '<=20000000', 5),
+(2, 'C1', 'Cukup Murah', '>20000000 && <=50000000', 4),
+(3, 'C1', 'Mahal', '>50.000.000 && <=100.000.000', 2),
+(4, 'C1', 'Sangat Mahal', '>100.000.000', 1),
+(5, 'C2', 'Sedikit', '<=300', 1),
+(6, 'C2', 'Cukup', '>300 kursi && <=600 kursi', 2),
+(7, 'C2', 'Banyak', '>600 && <=1200', 4),
+(8, 'C2', 'Sangat Banyak', '>1200', 5),
+(9, 'C3', 'Kecil', ' <=500', 1),
+(10, 'C3', 'Cukup', '>500 && <=800', 2),
+(11, 'C3', 'Luas', '>800 && <=1200', 4),
+(12, 'C3', 'Sangat Luas', '>1200', 5),
+(13, 'C4', 'Gedung Pendidikan', 'Gedung Pendidikan', 1),
+(14, 'C4', 'Gedung Instansi / Pemerintah', 'Gedung Instansi / Pemerintah', 2),
+(15, 'C4', 'Ballroom Hotel', 'Ballroom Hotel', 4),
+(16, 'C4', 'Gedung Serbaguna', 'Gedung Serbaguna', 5),
+(17, 'C5', 'Sedikit', '<=0.4', 1),
+(18, 'C5', 'Cukup', '>0.4  && <=0.6', 2),
+(19, 'C5', 'Lengkap', '>0.60 &&  <=0.8', 4),
+(20, 'C5', 'Sangat Lengkap', '>0.80  && <=1', 5),
+(21, 'C6', 'Sangat Jauh', '>10', 1),
+(22, 'C6', 'Jauh', '>6 && <=10', 2),
+(23, 'C6', 'Cukup', '>2  && <=6', 4),
+(24, 'C6', 'Dekat', '? 2', 5);
 
 -- --------------------------------------------------------
 
@@ -218,12 +262,6 @@ ALTER TABLE `gedung`
   ADD PRIMARY KEY (`gedung_kode`);
 
 --
--- Indexes for table `gedung_detail`
---
-ALTER TABLE `gedung_detail`
-  ADD PRIMARY KEY (`gd_id`);
-
---
 -- Indexes for table `kriteria`
 --
 ALTER TABLE `kriteria`
@@ -239,7 +277,8 @@ ALTER TABLE `nilai`
 -- Indexes for table `sub_kriteria`
 --
 ALTER TABLE `sub_kriteria`
-  ADD PRIMARY KEY (`sk_id`);
+  ADD PRIMARY KEY (`sk_id`),
+  ADD KEY `kriteria_kode` (`kriteria_kode`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -252,22 +291,26 @@ ALTER TABLE `foto_gedung`
   MODIFY `fg_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `gedung_detail`
---
-ALTER TABLE `gedung_detail`
-  MODIFY `gd_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `nilai`
 --
 ALTER TABLE `nilai`
-  MODIFY `nilai_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
+  MODIFY `nilai_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=144;
 
 --
 -- AUTO_INCREMENT for table `sub_kriteria`
 --
 ALTER TABLE `sub_kriteria`
-  MODIFY `sk_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `sk_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `sub_kriteria`
+--
+ALTER TABLE `sub_kriteria`
+  ADD CONSTRAINT `sub_kriteria_ibfk_1` FOREIGN KEY (`kriteria_kode`) REFERENCES `kriteria` (`kriteria_kode`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
