@@ -172,6 +172,28 @@ class Mymod extends CI_Model{
     }
 
 
+    public function getJoin($table){
+        $i=1;
+        foreach($table as $table_name=>$table_id){ 
+            ${'table'.$i}=$table_name;
+            ${'t'.$i.'id'}=$table_id;
+            $i++;
+        }
+
+        $this->db->select('*');
+        $j=1;
+        foreach($table as $table_name=>$table_id){ 
+            if($j==1){$this->db->from(''.$table1.' t1');} else {
+                $this->db->join(''.${'table'.$j}.' t'.$j,'t1.'.${'t'.$j.'id'}.'=t'.$j.'.'.${'t'.$j.'id'});
+            }
+            $j++;
+        }
+        $res = $this->db->get();
+        return $res;
+    }
+
+
+
     public function related($where){
         $this->db->select('*');
         $this->db->from('produk');

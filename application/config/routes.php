@@ -55,8 +55,13 @@ $route['produk/detail/(:any)']='FrontendC/produk_detail/$1';
 $route['Login']='FrontendC/login/';
 $route['Logout']='Login/logout/';
 $route['logout']='loginadmin/logout';
-$route['admin/gedung']='Gedung';
+
+$route['admin/user']='backend/User';
+$route['admin/kriteria']='backend/kriteria';
+$route['admin/kriteria/sub']='backend/kriteria/sub_kriteria';
+$route['admin/gedung']='backend/Gedung/index';
 $route['admin']='BackendC';
+
 $route['default_controller'] = 'FrontendC';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

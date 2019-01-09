@@ -16,7 +16,7 @@
         <ul class="menu-content">
           <li><a class="menu-item" href="<?= base_url();?>admin/gedung">Data Gedung</a>
           </li>
-          <li><a class="menu-item" href="<?= base_url();?>admin/pemilik-gedung">Pemilik Gedung</a>
+          <li><a class="menu-item" href="<?= base_url();?>admin/gedung/pemilik">Pemilik Gedung</a>
           </li>
         </ul>
       </li>
@@ -26,7 +26,7 @@
         <ul class="menu-content">
           <li><a class="menu-item" href="<?= base_url();?>admin/kriteria">Data Kriteria</a>
           </li>
-          <li><a class="menu-item" href="<?= base_url();?>admin/sub-kriteria">Sub Kriteria</a>
+          <li><a class="menu-item" href="<?= base_url();?>admin/kriteria/sub">Sub Kriteria</a>
           </li>
         </ul>
       </li>
