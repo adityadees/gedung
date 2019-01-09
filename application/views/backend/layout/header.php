@@ -26,11 +26,16 @@
   <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/backend/vendors/css/extensions/sweetalert.css">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/backend/vendors/css/extensions/toastr.css">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/backend/css/plugins/extensions/toastr.min.css">
-<!--
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/backend/vendors/css/forms/icheck/custom.css">
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/backend/css/plugins/forms/checkboxes-radios.min.css">
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/backend/vendors/css/forms/icheck/icheck.css">
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/backend/css/plugins/file-uploaders/dropzone.min.css">
+
+    <!--
   <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/vendors/css/forms/toggle/switchery.min.css">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/core/menu/menu-types/vertical-menu-modern.css">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/plugins/forms/switch.min.css">
 -->
-  <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/backend/assets/css/style.css">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/backend/assets/css/style.css">
 </head>
 <body class="vertical-layout vertical-menu-modern 2-columns   menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
