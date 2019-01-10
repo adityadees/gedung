@@ -7,35 +7,35 @@
         </ol>
         <div class="carousel-inner " role="listbox">
             <div class="carousel-item active">
-                <img class="d-block img-fluid" src="<?= base_url();?>assets/frontend/assets/images/girls-beach.jpg" alt="First slide">
+                <img class="d-block img-fluid" src="<?= base_url();?>assets/frontend/assets/images/bannergedung.jpg" alt="First slide">
                 <div class="carousel-caption justify-content-center  mb-lg-4 mb-0 align-items-center text-center">
                     <div class="toggleCaption">
-                        <h1 class="white shadow-text  align-middle">Thailand</h1>
+                        <h1 class="white shadow-text  align-middle">Paket Lengkap</h1>
                     </div>
                     <div class="toggleButton">
-                        <h4 class="white shadow-text align-middle" >Get to know the best of Thailand</h4>
+                        <h4 class="white shadow-text align-middle" >Katering Terbaik</h4>
                     </div>
                 </div>
             </div>
             <div class="carousel-item">
-                <img class="d-block img-fluid" src="<?= base_url();?>assets/frontend/assets/images/bigcarousel.jpg" alt="Second slide">
+                <img class="d-block img-fluid" src="<?= base_url();?>assets/frontend/assets/images/pelaminan.jpg" alt="Second slide">
                 <div class="carousel-caption justify-content-center  mb-lg-4 mb-0 align-items-center text-center">
                     <div class="toggleCaption">
-                        <h1 class="white shadow-text  align-middle" >California</h1>
+                        <h1 class="white shadow-text  align-middle" >Pelaminan</h1>
                     </div>
                     <div class="toggleButton">
-                        <h4 class="white shadow-text align-middle" >Meet Santa Monica Beach</h4>
+                        <h4 class="white shadow-text align-middle" >Penuh Warna</h4>
                     </div>
                 </div>
             </div>
             <div class="carousel-item">
-                <img class="d-block img-fluid" src="<?= base_url();?>assets/frontend/assets/images/male-tourist.jpg" alt="Third slide">
+                <img class="d-block img-fluid" src="<?= base_url();?>assets/frontend/assets/images/Antam-2-Large.jpg" alt="Third slide">
                 <div class="carousel-caption justify-content-center  mb-lg-4 mb-0 align-items-center text-center">
                     <div class="toggleCaption">
-                        <h1 class="white shadow-text align-middle"  >Norway</h1>
+                        <h1 class="white shadow-text align-middle"  >Nuansa</h1>
                     </div>
                     <div class="toggleButton">
-                        <h4 class="white shadow-text align-middle"  >Adventure for outdoorsy travelers</h4>
+                        <h4 class="white shadow-text align-middle"  >Indah Mempersona</h4>
                     </div>
                 </div>
             </div>

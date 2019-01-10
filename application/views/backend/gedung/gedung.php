@@ -7,7 +7,7 @@
 			</div>
 		</div>
 		<div class="content-body">
-
+			
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -96,37 +96,8 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-
 					<form action="<?php echo base_url()?>backend/Gedung/save_gedung" method="POST" enctype="multipart/form-data">
 						<div class="modal-body">
-							<ul class="nav nav-tabs nav-underline no-hover-bg">
-								<li class="nav-item">
-									<a class="nav-link active" id="base-tab31" data-toggle="tab" aria-controls="tab31" href="#tab31" role="tab" aria-selected="true">Informasi Gedung</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" id="base-tab32" data-toggle="tab" aria-controls="tab32" href="#tab32" role="tab" aria-selected="false">Detail Gedung</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" id="base-tab33" data-toggle="tab" aria-controls="tab33" href="#tab33" role="tab" aria-selected="false">Alamat Gedung</a>
-								</li>
-							</ul>
-							<div class="tab-content px-1 pt-1">
-								<div class="tab-pane active" id="tab31" role="tab" aria-labelledby="base-tab31">
-									<div class="row">
-										<div class="col-md-12">
-											<div class="form-group">
-												<label>Gedung Kode: </label>
-												<?php 
-												$kd = "GD";
-												$tgl = date('ydm');
-												$rand1 = rand(0,999);
-												$rand2 = rand(0,9);
-												$gkode = $kd.$tgl.$rand1.$rand2;
-												?>
-												<input type="text" name="gedung_kode" value="<?= $gkode; ?>" class="form-control" readonly>
-											</div>
-										</div>
-
 
 							<div class="row">
 								<div class="card-body">
@@ -158,7 +129,6 @@
 												<label>Nama Gedung: </label>
 												<input type="text" placeholder="Nama Gedung" name="gedung_nama" class="form-control">
 											</div>
-
 											<div class="form-group">
 												<label>Deskripsi: </label>
 												<textarea name="gedung_deskripsi" placeholder="Deskripsi" class="form-control"></textarea>
@@ -296,10 +266,6 @@
 				</div>
 			</div>
 		</div>
-
-
-
-		 
 
 		<?php foreach ($gedung as $i)  : ?>
 			<div class="modal fade text-left" id="modalEdit<?php echo $i['gedung_kode']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel34" aria-hidden="true">
@@ -461,6 +427,3 @@
 			</div>
 
 		<?php endforeach; ?>
-
-
-	
