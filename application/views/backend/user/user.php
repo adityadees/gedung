@@ -94,7 +94,7 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<form action="<?php echo base_url()?>BackendC/save_user" method="POST">
+					<form action="<?php echo base_url()?>backend/user/save_user" method="POST">
 						<div class="modal-body">
 
 							<div class="row">
@@ -158,7 +158,7 @@
 										<label>Role: </label>
 										<select name="role" class="form-control">
 											<option value="admin">Admin</option>
-											<option value="customer">Customer</option>
+											<option value="pemilik">Pemilik Gedung</option>
 										</select>
 									</div>
 								</div>
@@ -168,6 +168,14 @@
 									<div class="form-group">
 										<label>Alamat: </label>
 										<textarea name="alamat" class="form-control"></textarea>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label>Foto: </label>
+										<input type="file" name="filefoto" class="form-control">
 									</div>
 								</div>
 							</div>
@@ -191,7 +199,7 @@
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
-						<form action="<?php echo base_url()?>BackendC/edit_user" method="POST">
+						<form action="<?php echo base_url()?>backend/user/update_user" enctype="multipart/form-data" method="POST">
 							<div class="modal-body">
 
 								<div class="row">
@@ -239,8 +247,8 @@
 										<div class="form-group">
 											<label>Role: </label>
 											<select name="role" class="form-control">
-												<option value="admin" <?php if($i['user_role']=='admin'){echo "checked";} else {}?>>Admin</option>
-												<option value="customer" <?php if($i['user_role']=='customer'){echo "checked";} else {}?>>Customer</option>
+												<option value="admin" <?php if($i['user_role']=='admin'){echo "selected";} else {}?>>Admin</option>
+												<option value="pemilik" <?php if($i['user_role']=='pemilik'){echo "selected";} else {}?>>Pemilik Gedung</option>
 											</select>
 										</div>
 									</div>
@@ -250,6 +258,15 @@
 										<div class="form-group">
 											<label>Alamat: </label>
 											<textarea name="alamat" class="form-control"><?php echo $i['user_alamat']; ?></textarea>
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label>Foto: </label>
+											<input type="file" name="filefoto" class="form-control">
 										</div>
 									</div>
 								</div>
@@ -278,14 +295,14 @@
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
-						<form action="<?php echo base_url()?>BackendC/delete_user" method="POST">
+						<form action="<?php echo base_url()?>backend/user/delete_user" method="POST">
 							<div class="modal-body bg-red">
 
 								<div class="row">
 									<div class="col-md-12">
 										<div class="form-group">
 											<input type="hidden" name="user_id" value="<?php echo $i['user_id'];?>">
-											<label class="text-center">Anda yakin ingin menghapus user <b><?php echo $i['user_username']; ?></b> ?</label>
+											<label class="text-center text-white">Anda yakin ingin menghapus user <b><?php echo $i['user_username']; ?></b> ?</label>
 										</div>
 									</div>
 

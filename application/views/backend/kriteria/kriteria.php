@@ -60,9 +60,6 @@
 																<button type="button" class="btn btn-icon btn-pink dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-info"></i></button>
 																<div class="dropdown-menu">
 																	<a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalEdit<?php echo $i['kriteria_kode']; ?>">Edit</a>
-																	<a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalHapus<?php echo $i['kriteria_kode']; ?>">Hapus</a>
-																	<div class="dropdown-divider"></div>
-																	<a class="dropdown-item" href="#">Lihat Detail</a>
 																</div>
 															</div>
 														</td>
@@ -186,7 +183,7 @@
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
-						<form action="<?php echo base_url()?>BackendC/edit_user" method="POST">
+						<form action="<?php echo base_url()?>backend/kriteria/edit_kriteria" method="POST">
 							<div class="modal-body">
 
 								<div class="col-md-12">
@@ -206,8 +203,8 @@
 									<div class="form-group">
 										<label>Attribute: </label>
 										<select name="kriteria_attribute" class="form-control">
-											<option value="benefit" <?php if($i['kriteria_attribute']=='benefit'){echo "checked";} else {}?>>Benefit</option>
-											<option value="cost" <?php if($i['kriteria_attribute']=='cost'){echo "checked";} else {}?>>Cost</option>
+											<option value="benefit" <?php if($i['kriteria_attribute']=='benefit'){echo "selected";} else {}?>>Benefit</option>
+											<option value="cost" <?php if($i['kriteria_attribute']=='cost'){echo "selected";} else {}?>>Cost</option>
 										</select>
 									</div>
 								</div>
@@ -225,38 +222,5 @@
 
 			<?php
 		endforeach;
-		foreach ($kriteria as $i)  : 
-			?>
+		?>
 
-			<div class="modal fade text-left" id="modalHapus<?php echo $i['kriteria_kode']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel34" aria-hidden="true">
-				<div class="modal-dialog modal-sm" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h3 class="modal-title" id="myModalLabel34">Konfirmasi</h3>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<form action="<?php echo base_url()?>BackendC/delete_user" method="POST">
-							<div class="modal-body bg-red">
-
-								<div class="row">
-									<div class="col-md-12">
-										<div class="form-group">
-											<input type="hidden" name="kriteria_kode" value="<?php echo $i['kriteria_kode'];?>">
-											<label class="text-center text-white">Anda yakin ingin menghapus kriteria <b><?php echo $i['kriteria_nama']; ?></b> ?</label>
-										</div>
-									</div>
-
-								</div>
-							</div>
-							<div class="modal-footer">
-								<input type="reset" class="btn btn-outline-secondary btn-lg" data-dismiss="modal" value="close">
-								<input type="submit" class="btn btn-outline-primary btn-lg" value="Submit">
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-
-		<?php endforeach; ?>

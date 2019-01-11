@@ -8,42 +8,48 @@ class FrontendC extends CI_Controller{
 
 	public function index()
 	{
+		$jumlah_data = $this->Mymod->ViewDataRows('gedung');
+		$this->load->library('pagination');
+		$config['base_url'] = base_url().'index';
+		$config['total_rows'] = $jumlah_data;
+		$config['per_page'] = 6;
+		$from = $this->uri->segment(2);
 
-		/*$prod = $this->Mymod->ViewData('produk');
-		$kat = $this->Mymod->ViewData('kategori');
-		$slide = $this->Mymod->ViewData('slider');
-		$promo = $this->Mymod->ViewData('promo');
-		$best = $this->Mymod->best_seller()->result_array();
-		$tgl=date('Y-m-d H:i:s');
+		$config['query_string_segment'] = 'start';
 
-		$jtable=[
-			'promo' => 'produk_kode',
-			'produk' => 'produk_kode'
-		];
-		$where=[
-			't1.promo_start <='=>$tgl,
-			't1.promo_end >'=>$tgl,
-		];
-		$promo = $this->Mymod->GetDataJoin($jtable,$where)->result_array();
-		$shoprand = $this->Mymod->order_by_rand('kategori');
+		$config['full_tag_open'] = '<nav><ul class="pagination" style="margin-top:0px">';
+		$config['full_tag_close'] = '</ul></nav>';
 
-		$x['produk'] = $prod;
-		$xx['produk'] = $prod;
-		$x['shoprand'] = $shoprand;
-		$x['kategori'] = $kat;
-		$y['kategori'] = $kat;
-		$x['slider'] = $slide;
-		$x['promo'] = $promo;
-		$x['best'] = $best;
+		$config['first_link'] = 'First';
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
 
+		$config['last_link'] = 'Last';
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
 
+		$config['next_link'] = 'Next';
+		$config['next_tag_open'] = '<li>';
+		$config['next_tag_close'] = '</li>';
 
-		*/
+		$config['prev_link'] = 'Prev';
+		$config['prev_tag_open'] = '<li>';
+		$config['prev_tag_close'] = '</li>';
+
+		$config['cur_tag_open'] = '<li class="active"><a>';
+		$config['cur_tag_close'] = '</a></li>';
+
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';		
+
+		$this->pagination->initialize($config);
+
+		$x['gedung'] = $this->Mymod->pagging('gedung',$config['per_page'],$from);
 		$y['title']='Home';
 		$this->load->view('frontend/layout/header',$y);
 		$this->load->view('frontend/layout/topbar');
 		$this->load->view('frontend/slider/slider');
-		$this->load->view('frontend/index');
+		$this->load->view('frontend/index',$x);
 		$this->load->view('frontend/layout/footer');
 
 	}
@@ -192,14 +198,16 @@ class FrontendC extends CI_Controller{
 	public function register(){
 		$y['title']='Register';
 		$this->load->view('frontend/layout/header',$y);
-		$this->load->view('frontend/form/register');
+		$this->load->view('frontend/layout/topbar');
+		$this->load->view('frontend/myaccount/register');
 		$this->load->view('frontend/layout/footer');
 	}
 
 	public function login(){
 		$y['title']='Login';
 		$this->load->view('frontend/layout/header',$y);
-		$this->load->view('frontend/form/login');
+		$this->load->view('frontend/layout/topbar');
+		$this->load->view('frontend/myaccount/login');
 		$this->load->view('frontend/layout/footer');
 	}
 
@@ -233,7 +241,7 @@ class FrontendC extends CI_Controller{
 		$this->load->view('frontend/layout/footer');		
 	}
 
-	public function myaccount(){
+	public function amyaccount(){
 		$y['title']='My Account';
 		if(isset($_SESSION['logged_in_user'])){
 			$data=$_SESSION['user_id'];
@@ -505,41 +513,7 @@ class FrontendC extends CI_Controller{
 			redirect('myaccount');			
 		}
 	}
-	public function update_password(){
-
-		$password=$this->input->post('password');
-		$repassword=$this->input->post('repassword');
-		$user_id=$_SESSION['user_id'];
-
-		$title='Password';
-		$table='user';
-
-		if ($password==$repassword) {
-
-			$where=[
-				'user_id'=>$user_id
-			];
-
-			$data=[
-				'user_password'=>md5($password),
-			];
-			$rd=$this->Mymod->UpdateData($table, $data, $where);
-			if($rd){
-				$this->session->set_flashdata('success', 'Berhasil merubah '.$title);
-				redirect('myaccount');			
-			}	else {
-				$this->session->set_flashdata('error', 'Gagal merubah '.$title);
-				redirect('myaccount');			
-			}
-		} else {
-
-			$this->session->set_flashdata('error', 'Gagal merubah '.$title);
-			redirect('myaccount');			
-		}
-
-
-	}
-
+	
 
 	function upbukti(){
 		$pembayaran_nama=$this->input->post('pembayaran_nama');

@@ -45,7 +45,8 @@
 											<thead>
 												<tr>
 													<th>Kode</th>
-													<th>Nama</th>
+													<th>Nama Gedung</th>
+													<th>Nama Pemilik</th>
 													<th>Koordinat</th>
 													<th>Alamat</th>
 													<th>Deskripsi</th>
@@ -58,10 +59,11 @@
 													<tr>
 														<td><?php echo $i['gedung_kode'];?></td>
 														<td><?php echo $i['gedung_nama'];?></td>
+														<td><?php echo $i['user_nama'];?></td>
 														<td><?php echo $i['gedung_lat']." - ".$i['gedung_long'];?></td>
 														<td><?php echo $i['gedung_alamat'];?></td>
 														<td><?php echo $i['gedung_deskripsi'];?></td>
-														<td><?php echo $i['gedung_header'];?></td>
+														<td><img src="<?= base_url()?>assets/images/<?php echo $i['gedung_header'];?>" width="50px" height="50px"></td>
 														<td class=" text-center">
 															<div class="btn-group mr-1 mb-1">
 																<button type="button" class="btn btn-icon btn-pink dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-info"></i></button>
@@ -69,7 +71,7 @@
 																	<a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalEdit<?php echo $i['gedung_kode']; ?>">Edit</a>
 																	<a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalHapus<?php echo $i['gedung_kode']; ?>">Hapus</a>
 																	<div class="dropdown-divider"></div>
-																	<a class="dropdown-item" href="#">Lihat Detail</a>
+																	<a class="dropdown-item" href="<?= base_url();?>admin/gedung/detail/<?= $i['gedung_kode']; ?>">Lihat Detail</a>
 																</div>
 															</div>
 														</td>
@@ -124,6 +126,14 @@
 												$gkode = $kd.$tgl.$rand1.$rand2;
 												?>
 												<input type="text" name="gedung_kode" value="<?= $gkode; ?>" class="form-control" readonly>
+											</div>
+											<div class="form-group">
+												<label>Pemilik Gedung: </label>
+												<select name="pemilik_gedung"  class="form-control">
+													<?php foreach ($user as $u):?>
+														<option value="<?= $u['user_id']; ?>"><?= $u['user_nama']; ?></option>
+													<?php endforeach; ?>
+												</select>
 											</div>
 											<div class="form-group">
 												<label>Nama Gedung: </label>
@@ -272,12 +282,12 @@
 				<div class="modal-dialog modal-lg" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h3 class="modal-title" id="myModalLabel34">Edit User</h3>
+							<h3 class="modal-title" id="myModalLabel34">Edit Gedung</h3>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
-						<form action="<?php echo base_url()?>BackendC/edit_user" method="POST" enctype="multipart/form-data">
+						<form action="<?= base_url();?>backend/gedung/update_gedung" method="POST" enctype="multipart/form-data">
 							<div class="modal-body">
 
 
@@ -298,14 +308,16 @@
 											<div class="tab-pane active" id="tab31<?= $i['gedung_kode']; ?>" role="tab" aria-labelledby="base-tab31<?= $i['gedung_kode']; ?>">
 												<div class="form-group">
 													<label>Gedung Kode: </label>
-													<?php 
-													$kd = "GD";
-													$tgl = date('ydm');
-													$rand1 = rand(0,999);
-													$rand2 = rand(0,9);
-													$gkode = $kd.$tgl.$rand1.$rand2;
-													?>
-													<input type="text" name="gedung_kode" value="<?= $gkode; ?>" class="form-control" readonly>
+													<input type="text" name="gedung_kode" value="<?= $i['gedung_kode']; ?>" class="form-control" readonly>
+												</div>
+
+												<div class="form-group">
+													<label>Pemilik Gedung: </label>
+													<select name="pemilik_gedung"  class="form-control">
+														<?php foreach ($user as $u):?>
+															<option value="<?= $u['user_id']; ?>" <?php if($u['user_id']==$i['user_id']){echo "selected";}else{}?>><?= $u['user_nama']; ?></option>
+														<?php endforeach; ?>
+													</select>
 												</div>
 												<div class="form-group">
 													<label>Nama Gedung: </label>
@@ -313,11 +325,11 @@
 												</div>
 												<div class="form-group">
 													<label>Deskripsi: </label>
-													<textarea name="deskripsi" class="form-control"><?= $i['gedung_deskripsi']; ?></textarea>
+													<textarea name="gedung_deskripsi" class="form-control"><?= $i['gedung_deskripsi']; ?></textarea>
 												</div>
 												<div class="form-group">
 													<label>Foto Cover: </label>
-													<input type="file" name="" class="dropzone dropzone-area form-control" id="dpz-single-file">
+													<input type="file" name="filefoto" class="dropzone dropzone-area form-control" id="dpz-single-file">
 												</div>
 
 											</div>
@@ -325,53 +337,120 @@
 
 												<div class="form-group">
 													<label>Harga: </label>
-													<input type="number" placeholder="Harga Gedung" name="gedung_harga" class="form-control harga">
+													<input type="number" placeholder="Harga Gedung" name="gedung_harga" value="<?= $i['gedung_sewa']; ?>" class="form-control harga">
 												</div>
 
 												<div class="form-group">
 													<label>Kapasitas Tamu: </label>
-													<input type="text" placeholder="Kapasitas Tamu" name="gedung_kapasitas" class="form-control">
+													<input type="text" placeholder="Kapasitas Tamu" name="kapasitas_tamu" value="<?= $i['gedung_kapasitas']; ?>"  class="form-control">
 												</div>
 												<div class="form-group">
 													<label>Kapasitas Parkir: </label>
-													<input type="text" placeholder="Kapasitas Parkir" name="repassword" class="form-control">
-												</div>									
+													<input type="text" placeholder="Kapasitas Parkir" name="kapasitas_parkir"  value="<?= $i['gedung_parkir']; ?>"  class="form-control">
+												</div>                                  
 
 												<div class="form-group">
 													<label>Jenis Gedung: </label>
 													<select name="jenis_gedung" class="form-control">
-														<option value="pendidikan">Gedung Pendidikan</option>
-														<option value="">Gedung Instansi / Pemerintah</option>
-														<option value="">Ballroom Hotel</option>
-														<option value="">Gedung Serbaguna</option>
+														<option value="pendidikan" <?php if($i['gedung_jenis']=='pendidikan') {echo "selected";} else {}?>>Gedung Pendidikan</option>
+														<option value="instansi" <?php if($i['gedung_jenis']=='instansi') {echo "selected";} else {}?>>Gedung Instansi / Pemerintah</option>
+														<option value="ballroom" <?php if($i['gedung_jenis']=='ballroom') {echo "selected";} else {}?>>Ballroom Hotel</option>
+														<option value="serbaguna" <?php if($i['gedung_jenis']=='serbaguna') {echo "selected";} else {}?>>Gedung Serbaguna</option>
 													</select>
 												</div>
 
 												<div class="form-group">
 													<label>Fasilitas: </label>
+													<div class="row skin skin-flat">
+														<div class="col-md-4 col-sm-12">
 
-													<div class="skin skin-flat">
-														<fieldset>
-															<input type="checkbox" id="input-15">
-															<label for="input-15">Checkbox</label>
-														</fieldset>
+
+															<?php
+
+															$gfasis =  (explode(", ",$i['gedung_fasilitas']));
+
+															$fasi = [
+																1=>
+																"Catering",
+																"Dekorasi Pelaminan",
+																"Photo & Video Akad Resepsi",
+																"Album Kolase",
+																"Makeup",
+																"Mc / Pembawa Acara",
+																"Weeding Organizer",
+																"Entertainment",
+																"Pakaian Pengantin",
+																"Ruang Full AC",
+																"Meja VIP",
+																"Lighting",
+																"Lcd Proyektor",
+																"Tari Tradisional",
+																"Photo Both",
+																"Seragam Keluarga",
+																"Seragam Orang tua",
+																"Meja Akad nikah",
+																"Buku Tamu",
+																"Kotak Amplop",
+																"Box Hantaran",
+																"Free Menginap di Hotel",
+																"Qoori Akad / Resepsi",
+																"Ruang Hias",
+																"Raung Tunggu Pengantin",
+																"Beskap Pengantin",
+																"Rental Mobil Pengantin",
+																"Kursi sofa",
+																"Meja makan prasmanan",
+																"Gazebo Pintu Masuk",
+																"Red Carpet"
+															];
+
+															for($kk=1; $kk<=11; $kk++) { ?>
+																<fieldset>
+																	<input type="checkbox" id="<?= $kk; ?>" name="fasilitas[]" value="<?= $kk; ?>">
+																	<label for="<?= $kk; ?>"><?= $fasi[$kk]; ?></label>
+																</fieldset>
+															<?php } ?>
+														</div>
+														<div class="col-md-4 col-sm-12">
+															<?php
+															for($kk=12; $kk<=21; $kk++) { ?>
+																<fieldset>
+																	<input type="checkbox" id="<?= $kk; ?>" name="fasilitas[]" value="<?= $kk; ?>">
+																	<label for="<?= $kk; ?>"><?= $fasi[$kk]; ?></label>
+																</fieldset>
+															<?php } ?>
+
+														</div>
+
+														<div class="col-md-4 col-sm-12">
+															<?php
+															for($kk=22; $kk<=31; $kk++) { ?>
+																<fieldset>
+																	<input type="checkbox" id="<?= $kk; ?>" name="fasilitas[]" value="<?= $kk; ?>">
+																	<label for="<?= $kk; ?>"><?= $fasi[$kk]; ?></label>
+																</fieldset>
+															<?php } ?>
+														</div>
+
+
 													</div>
 												</div>
+
 											</div>
 											<div class="tab-pane" id="tab33<?= $i['gedung_kode']; ?>" aria-labelledby="base-tab33<?= $i['gedung_kode']; ?>">
 												<div class="form-group">
 													<label>Alamat</label>
 													<input type="hidden" name="numkor">
-													<input type="text" class="inputAddress input-xxlarge form-control" value="Palembang, Kota Palembang, Sumatera Selatan, Indonesia" name="inputAddress" autocomplete="off" placeholder="Type in your address">
-												</div>	
+													<input type="text" class="inputAddress input-xxlarge form-control" value="<?= $i['gedung_alamat']; ?>" name="inputAddress" autocomplete="off" placeholder="Type in your address">
+												</div>  
 
 												<div class="form-group">
 													<label>Latitude</label>
-													<input type="text" class="latitude form-control" value="latitude" name="latitude" >
+													<input type="text" class="latitude form-control" value="latitude" readonly name="latitude" >
 												</div>
 												<div class="form-group">
 													<label>Longitude</label>
-													<input type="text" class="longitude form-control" value="longitude" name="longitude">
+													<input type="text" class="longitude form-control" value="longitude" readonly name="longitude">
 												</div>
 											</div>
 										</div>
@@ -404,7 +483,7 @@
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
-						<form action="<?php echo base_url()?>BackendC/delete_user" method="POST">
+						<form action="<?= base_url();?>backend/gedung/delete_gedung" method="POST">
 							<div class="modal-body bg-red">
 
 								<div class="row">
@@ -426,4 +505,9 @@
 				</div>
 			</div>
 
+
+
 		<?php endforeach; ?>
+
+
+

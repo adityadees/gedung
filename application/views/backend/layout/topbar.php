@@ -9,7 +9,7 @@
         </li>
         <li class="nav-item mr-auto">
           <a class="navbar-brand" href="<?= base_url();?>admin">
-            <h2 class="brand-text">SPK</h2>
+            <h2 class="brand-text">Nikah Yuuk !!</h2>
           </a>
         </li>
         <li class="nav-item d-none d-md-block nav-toggle">

@@ -19,6 +19,13 @@
   <script src="<?php echo base_url();?>assets/backend/js/scripts/forms/wizard-steps.js" type="text/javascript"></script>
   <script src="<?php echo base_url();?>assets/backend/js/extensions/jquery.steps.min.js" type="text/javascript"></script>
 -->
+
+
+<script src="<?= base_url()?>assets/backend/vendors/js/gallery/masonry/masonry.pkgd.min.js"></script>
+<script src="<?= base_url()?>assets/backend/vendors/js/gallery/photo-swipe/photoswipe.min.js"></script>
+<script src="<?= base_url()?>assets/backend/vendors/js/gallery/photo-swipe/photoswipe-ui-default.min.js"></script>
+<script src="<?= base_url()?>assets/backend/js/scripts/gallery/photo-swipe/photoswipe-script.min.js"></script>
+
 <script src="<?php echo base_url();?>assets/backend/vendors/js/tables/datatable/datatables.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/backend/js/scripts/extensions/sweet-alerts.js" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/backend/vendors/js/extensions/sweetalert.min.js" type="text/javascript"></script>

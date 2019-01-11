@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 09, 2019 at 01:37 PM
+-- Generation Time: Jan 11, 2019 at 01:46 AM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -34,6 +34,13 @@ CREATE TABLE `foto_gedung` (
   `fg_foto` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `foto_gedung`
+--
+
+INSERT INTO `foto_gedung` (`fg_id`, `gedung_kode`, `fg_foto`) VALUES
+(1, 'ALT1', 'book_fair_2010_flyer_copy4.jpg');
+
 -- --------------------------------------------------------
 
 --
@@ -42,6 +49,7 @@ CREATE TABLE `foto_gedung` (
 
 CREATE TABLE `gedung` (
   `gedung_kode` varchar(20) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `gedung_nama` varchar(50) NOT NULL,
   `gedung_lat` float NOT NULL,
   `gedung_long` float NOT NULL,
@@ -59,17 +67,17 @@ CREATE TABLE `gedung` (
 -- Dumping data for table `gedung`
 --
 
-INSERT INTO `gedung` (`gedung_kode`, `gedung_nama`, `gedung_lat`, `gedung_long`, `gedung_alamat`, `gedung_sewa`, `gedung_kapasitas`, `gedung_parkir`, `gedung_jenis`, `gedung_fasilitas`, `gedung_deskripsi`, `gedung_header`) VALUES
-('ALT1', 'Gedung A', 0, 0, '', 0, 0, 0, 'pendidikan', '', '', ''),
-('ALT2', 'Gedung B', 0, 0, '', 0, 0, 0, 'pendidikan', '', '', ''),
-('ALT3', 'Gedung C', 0, 0, '', 0, 0, 0, 'pendidikan', '', '', ''),
-('ALT4', 'Gedung D', 0, 0, '', 0, 0, 0, 'pendidikan', '', '', ''),
-('ALT5', 'Gedung E', 0, 0, '', 0, 0, 0, 'pendidikan', '', '', ''),
-('ALT6', 'Gedung F', 0, 0, '', 0, 0, 0, 'pendidikan', '', '', ''),
-('ALT7', 'Gedung G', 0, 0, '', 0, 0, 0, 'pendidikan', '', '', ''),
-('GD1909015270', 'Gedung Azhar', -3.28366, 105.009, 'Pampangan, Kabupaten Ogan Komering Ilir, Sumatera Selatan, Indonesia', 100000000, 754, 830, 'serbaguna', '1, 2, 5, 7, 10', 'asds', '48ebb81655d4ed565ece050898d245f0.jpg'),
-('GD1909015944', 'Gedug Alma', -2.97607, 104.775, 'Palembang, Kota Palembang, Sumatera Selatan, Indonesia', 250000, 50, 425, 'serbaguna', '1, 2, 3, 4, 5, 6, 8, 10, 12, 14, 15, 17, 19, 20, 21, 23, 24, 25, 27, 29, 30', ' asdsad', 'book_fair_2010_flyer_copy.jpg'),
-('GD1909016627', 'gedug asdsje', -3.16233, 105.065, 'Unnamed Road, Tj. Kemang, Pangkalan Lapam, Kabupaten Ogan Komering Ilir, Sumatera Selatan 30654, Indonesia', 2412456, 343, 356, 'ballroom', '1, 2, 3, 4, 5, 7', 'asda', 'index.jpg');
+INSERT INTO `gedung` (`gedung_kode`, `user_id`, `gedung_nama`, `gedung_lat`, `gedung_long`, `gedung_alamat`, `gedung_sewa`, `gedung_kapasitas`, `gedung_parkir`, `gedung_jenis`, `gedung_fasilitas`, `gedung_deskripsi`, `gedung_header`) VALUES
+('ALT1', 4, 'Gedung Ab', -2.74613, 104.927, 'Palembang, Kota Palembang, Sumatera Selatan, Indonesia', 232, 232, 232, 'pendidikan', '4, 14, 24', 'asda\r\n\r\n', 'hqdefault3.jpg'),
+('ALT3', 2, 'Gedung Ceeee', -2.96996, 104.754, 'Lorong Belimbing I No.80, Sekip Jaya, Kemuning, Kota Palembang, Sumatera Selatan 30114, Indonesia', 0, 0, 0, 'pendidikan', '', 'asdsda', 'book_fair_2010_flyer_copy2.jpg'),
+('ALT6', 2, 'Gedung F', -2.99863, 104.746, '', 0, 0, 0, 'pendidikan', '', '', ''),
+('ALT7', 2, 'Gedung G', -3.00309, 104.731, '', 0, 0, 0, 'pendidikan', '', '', ''),
+('GD1910011053', 4, 'asdasd', -3.05993, 104.166, 'Unnamed Road, Muaraabab, Rantau Bayur, Kabupaten Banyu Asin, Sumatera Selatan 30968, Indonesia', 1233321, 21, 231, 'ballroom', '1, 2, 4, 5', '', 'index1.jpg'),
+('GD1910016003', 4, 'Gedungccc', -2.97607, 104.775, 'Palembang, Kota Palembang, Sumatera Selatan, Indonesia', 10000, 200, 300, 'serbaguna', '1, 2, 3, 5, 6, 7, 9, 10, 11, 14, 15, 16', 'asdas', 'book_fair_2010_flyer_copy3.jpg'),
+('GD1910016182', 2, 'Gedung Azhar', -3.17233, 105.048, 'Unnamed Road, Pampangan, Kabupaten Ogan Komering Ilir, Sumatera Selatan 30654, Indonesia', 100000000, 754, 830, 'ballroom', '1, 2, 4, 5, 6, 8, 10, 12, 13, 14, 16, 17, 19, 20, 23, 24, 26, 27', 'asdasd', 'hqdefault.jpg'),
+('GD1910016687', 2, 'Gedung Rez', -2.93875, 103.926, 'Bailangu, Sekayu, Kabupaten Musi Banyuasin, Sumatera Selatan, Indonesia', 100000, 200, 400, 'pendidikan', '2, 4, 6, 7, 9, 10, 11, 12, 13, 14, 15, 17, 19', 'asdsad', '48ebb81655d4ed565ece050898d245f01.jpg'),
+('GD1910017496', 2, 'G1SKaaa', -2.74613, 104.927, 'Upang, Makarti Jaya, Banyu Asin Regency, South Sumatra, Indonesia', 400000, 24, 53, 'ballroom', '4, 12, 17, 22, 29', 'asdsd', 'promo_buku_parcelbuku.gif'),
+('GD1911011212', 2, 'gedunga asdksadk', -3.05981, 105.688, 'Simpang Tiga Sakti, Tulung Selapan, Ogan Komering Ilir Regency, South Sumatra, Indonesia', 23242, 2432, 34, 'pendidikan', '2, 3, 4, 6', 'asd', '48ebb81655d4ed565ece050898d245f03.jpg');
 
 -- --------------------------------------------------------
 
@@ -89,8 +97,8 @@ CREATE TABLE `kriteria` (
 --
 
 INSERT INTO `kriteria` (`kriteria_kode`, `kriteria_nama`, `kriteria_bobot`, `kriteria_attribute`) VALUES
-('C1', 'Harga', 2, 'benefit'),
-('C2', 'Kapasitas Gedung', 4, 'benefit'),
+('C1', 'Hargaaa', 5, 'benefit'),
+('C2', 'Kapasitas Gedung', 1, 'benefit'),
 ('C3', 'Luas Area Parkir', 1, 'benefit'),
 ('C4', 'Jenis Gedung', 1, 'benefit'),
 ('C5', 'Fasilitas Gedung', 1, 'benefit'),
@@ -107,74 +115,73 @@ CREATE TABLE `nilai` (
   `gedung_kode` varchar(20) DEFAULT NULL,
   `kriteria_kode` varchar(5) DEFAULT NULL,
   `nilai_nilai` double DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `nilai`
 --
 
 INSERT INTO `nilai` (`nilai_id`, `gedung_kode`, `kriteria_kode`, `nilai_nilai`) VALUES
-(83, 'ALT1', 'C1', 5),
-(84, 'ALT1', 'C2', 1),
-(85, 'ALT1', 'C3', 5),
-(86, 'ALT1', 'C4', 2),
-(87, 'ALT1', 'C5', 1),
-(88, 'ALT1', 'C6', 5),
-(89, 'ALT2', 'C1', 2),
-(90, 'ALT2', 'C2', 4),
-(91, 'ALT2', 'C3', 2),
-(92, 'ALT2', 'C4', 5),
-(93, 'ALT2', 'C5', 4),
-(94, 'ALT2', 'C6', 4),
-(95, 'ALT3', 'C1', 1),
-(96, 'ALT3', 'C2', 4),
-(97, 'ALT3', 'C3', 2),
-(98, 'ALT3', 'C4', 5),
-(99, 'ALT3', 'C5', 2),
-(100, 'ALT3', 'C6', 4),
-(101, 'ALT4', 'C1', 2),
-(102, 'ALT4', 'C2', 4),
-(103, 'ALT4', 'C3', 4),
-(104, 'ALT4', 'C4', 5),
-(105, 'ALT4', 'C5', 4),
-(106, 'ALT4', 'C6', 2),
-(107, 'ALT5', 'C1', 5),
-(108, 'ALT5', 'C2', 4),
-(109, 'ALT5', 'C3', 4),
-(110, 'ALT5', 'C4', 1),
-(111, 'ALT5', 'C5', 2),
-(112, 'ALT5', 'C6', 4),
+(83, 'ALT1', 'C6', 2),
+(84, 'ALT1', 'C6', 2),
+(85, 'ALT1', 'C6', 2),
+(86, 'ALT1', 'C6', 2),
+(87, 'ALT1', 'C6', 2),
+(88, 'ALT1', 'C6', 2),
+(95, 'ALT3', 'C6', 2),
+(96, 'ALT3', 'C6', 2),
+(97, 'ALT3', 'C6', 2),
+(98, 'ALT3', 'C6', 2),
+(99, 'ALT3', 'C6', 2),
+(100, 'ALT3', 'C6', 2),
 (113, 'ALT6', 'C1', 4),
 (114, 'ALT6', 'C2', 4),
-(115, 'ALT6', 'C3', 2),
-(116, 'ALT6', 'C4', 5),
-(117, 'ALT6', 'C5', 2),
+(115, 'ALT6', 'C3', 4),
+(116, 'ALT6', 'C4', 4),
+(117, 'ALT6', 'C5', 4),
 (118, 'ALT6', 'C6', 4),
 (119, 'ALT7', 'C1', 4),
-(120, 'ALT7', 'C2', 2),
-(121, 'ALT7', 'C3', 2),
-(122, 'ALT7', 'C4', 5),
-(123, 'ALT7', 'C5', 2),
-(124, 'ALT7', 'C6', 1),
-(125, 'GD1909015270', 'C', 4),
-(126, 'GD1909015270', 'C', 4),
-(127, 'GD1909015270', 'C', 5),
-(128, 'GD1909015270', 'C', 1),
-(129, 'GD1909015270', 'C', 2),
-(130, 'GD1909015270', 'C', NULL),
-(131, 'GD1909015944', 'C2', 1),
-(132, 'GD1909015944', 'C3', 1),
-(133, 'GD1909015944', 'C4', 5),
-(134, 'GD1909015944', 'C5', 4),
-(135, 'GD1909015944', 'C6', 2),
-(136, 'GD1909015944', NULL, NULL),
-(137, 'GD1909016627', 'C1', 5),
-(138, 'GD1909016627', 'C2', 2),
-(139, 'GD1909016627', 'C3', 1),
-(140, 'GD1909016627', 'C4', 4),
-(141, 'GD1909016627', 'C5', 1),
-(142, 'GD1909016627', 'C6', 2),
-(143, 'GD1909016627', NULL, NULL);
+(120, 'ALT7', 'C2', 4),
+(121, 'ALT7', 'C3', 4),
+(122, 'ALT7', 'C4', 4),
+(123, 'ALT7', 'C5', 4),
+(124, 'ALT7', 'C6', 4),
+(144, 'GD1910016182', 'C1', 1),
+(145, 'GD1910016182', 'C2', 1),
+(146, 'GD1910016182', 'C3', 1),
+(147, 'GD1910016182', 'C4', 1),
+(148, 'GD1910016182', 'C5', 1),
+(149, 'GD1910016182', 'C6', 1),
+(151, 'GD1910016687', 'C2', 1),
+(152, 'GD1910016687', 'C3', 1),
+(153, 'GD1910016687', 'C4', 1),
+(154, 'GD1910016687', 'C5', 1),
+(155, 'GD1910016687', 'C6', 1),
+(156, 'GD1910016687', 'C1', 1),
+(157, 'GD1910017496', 'C5', 1),
+(158, 'GD1910017496', 'C4', 4),
+(159, 'GD1910017496', 'C3', 1),
+(160, 'GD1910017496', 'C2', 1),
+(161, 'GD1910017496', 'C1', 5),
+(162, 'GD1910017496', 'C6', 2),
+(163, 'GD1910016003', 'C1', 5),
+(164, 'GD1910016003', 'C2', 1),
+(165, 'GD1910016003', 'C3', 1),
+(166, 'GD1910016003', 'C4', 5),
+(167, 'GD1910016003', 'C5', 1),
+(168, 'GD1910016003', 'C6', 2),
+(169, 'GD1910011053', 'C1', 5),
+(170, 'GD1910011053', 'C2', 1),
+(171, 'GD1910011053', 'C3', 1),
+(172, 'GD1910011053', 'C4', 4),
+(173, 'GD1910011053', 'C5', 1),
+(174, 'GD1910011053', 'C6', 2),
+(175, 'GD1911011212', 'C1', 5),
+(176, 'GD1911011212', 'C2', 5),
+(177, 'GD1911011212', 'C3', 1),
+(178, 'GD1911011212', 'C4', 1),
+(179, 'GD1911011212', 'C5', 1),
+(180, 'GD1911011212', 'C6', 2);
 
 -- --------------------------------------------------------
 
@@ -235,15 +242,18 @@ CREATE TABLE `user` (
   `user_tel` char(12) NOT NULL,
   `user_alamat` text NOT NULL,
   `user_jk` enum('L','P') NOT NULL,
-  `user_role` enum('pemilik','admin') NOT NULL
+  `user_role` enum('pemilik','admin') NOT NULL,
+  `user_foto` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`user_id`, `user_username`, `user_password`, `user_nama`, `user_email`, `user_tel`, `user_alamat`, `user_jk`, `user_role`) VALUES
-(1, 'admin', '202cb962ac59075b964b07152d234b70', 'admin', 'admin@aaa.com33', '082222333', 'jl.aaa44411', 'L', 'admin');
+INSERT INTO `user` (`user_id`, `user_username`, `user_password`, `user_nama`, `user_email`, `user_tel`, `user_alamat`, `user_jk`, `user_role`, `user_foto`) VALUES
+(1, 'admin', '202cb962ac59075b964b07152d234b70', 'admin', 'admin@aaa.com33', '082222333', 'jl.aaa44411', 'L', 'admin', ''),
+(2, 'adityads', '202cb962ac59075b964b07152d234b70', 'Aditya Dharmawan Saputra', 'adityads@ymail.com', '082371373347', 'asd', 'L', 'pemilik', 'hqdefault2.jpg'),
+(4, 'rudi', '202cb962ac59075b964b07152d234b70', 'Rudi hartono', 'asdsa@aaa.com', '21323', 'asdasd', 'P', 'pemilik', '');
 
 --
 -- Indexes for dumped tables
@@ -253,13 +263,15 @@ INSERT INTO `user` (`user_id`, `user_username`, `user_password`, `user_nama`, `u
 -- Indexes for table `foto_gedung`
 --
 ALTER TABLE `foto_gedung`
-  ADD PRIMARY KEY (`fg_id`);
+  ADD PRIMARY KEY (`fg_id`),
+  ADD KEY `gedung_kode` (`gedung_kode`);
 
 --
 -- Indexes for table `gedung`
 --
 ALTER TABLE `gedung`
-  ADD PRIMARY KEY (`gedung_kode`);
+  ADD PRIMARY KEY (`gedung_kode`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `kriteria`
@@ -271,7 +283,8 @@ ALTER TABLE `kriteria`
 -- Indexes for table `nilai`
 --
 ALTER TABLE `nilai`
-  ADD PRIMARY KEY (`nilai_id`);
+  ADD PRIMARY KEY (`nilai_id`),
+  ADD KEY `gedung_kode` (`gedung_kode`);
 
 --
 -- Indexes for table `sub_kriteria`
@@ -281,6 +294,12 @@ ALTER TABLE `sub_kriteria`
   ADD KEY `kriteria_kode` (`kriteria_kode`);
 
 --
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`user_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -288,13 +307,13 @@ ALTER TABLE `sub_kriteria`
 -- AUTO_INCREMENT for table `foto_gedung`
 --
 ALTER TABLE `foto_gedung`
-  MODIFY `fg_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `fg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `nilai`
 --
 ALTER TABLE `nilai`
-  MODIFY `nilai_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=144;
+  MODIFY `nilai_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=181;
 
 --
 -- AUTO_INCREMENT for table `sub_kriteria`
@@ -303,8 +322,32 @@ ALTER TABLE `sub_kriteria`
   MODIFY `sk_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `foto_gedung`
+--
+ALTER TABLE `foto_gedung`
+  ADD CONSTRAINT `foto_gedung_ibfk_1` FOREIGN KEY (`gedung_kode`) REFERENCES `gedung` (`gedung_kode`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `gedung`
+--
+ALTER TABLE `gedung`
+  ADD CONSTRAINT `gedung_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `nilai`
+--
+ALTER TABLE `nilai`
+  ADD CONSTRAINT `nilai_ibfk_1` FOREIGN KEY (`gedung_kode`) REFERENCES `gedung` (`gedung_kode`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `sub_kriteria`

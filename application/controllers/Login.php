@@ -7,7 +7,7 @@ class Login extends CI_Controller{
     function auth(){
         $user_username=strip_tags(str_replace("'", "", $this->input->post('username',TRUE)));
         $user_password=strip_tags(str_replace("'", "", $this->input->post('password',TRUE)));
-        $user_role='customer';
+        $user_role='pemilik';
         $table='user';
 
         $where= [
@@ -45,7 +45,6 @@ class Login extends CI_Controller{
         $tel=$this->input->post('tel');
         $alamat=$this->input->post('alamat');
         $jk=$this->input->post('jk');
-        $role='customer';
 
         $table='user';
         $where='user_username';
@@ -58,6 +57,46 @@ class Login extends CI_Controller{
         }else{
             if($password==$repassword){
 
+                if(!empty($_FILES['filefoto']['name'])){
+                    $config['upload_path'] = 'assets\images';
+                    $config['allowed_types'] = 'jpg|jpeg|png|gif';
+                    $config['file_name'] = $_FILES['filefoto']['name'];
+                    $config['width'] = 1920;
+                    $config['height'] = 683;
+
+                    $this->load->library('upload',$config);
+                    $this->upload->initialize($config);
+
+                    if($this->upload->do_upload('filefoto')){
+                        $uploadData = $this->upload->data();
+                        $user_foto = $uploadData['file_name'];
+                    }else{
+                        $user_foto='';
+                    }
+                }else{
+                    $user_foto='';
+                }
+
+                $data =[ 
+                    'user_username' => $username,
+                    'user_password' => md5($password),
+                    'user_nama' => $nama,
+                    'user_tel' => $tel,
+                    'user_alamat' => $alamat,
+                    'user_jk' => $jk,
+                    'user_email' => $email,
+                    'user_role' => 'pemilik',
+                    'user_foto' => $user_foto
+                ];
+                $InsertData=$this->Mymod->InsertData($table,$data);
+                if($InsertData){
+                    $this->session->set_flashdata('success', 'Berhasil menambah data '.$title);
+                    redirect('register');       
+                }else{
+                    $this->session->set_flashdata('error', 'Gagal menambah data '.$title);
+                    redirect('register');       
+                }
+
                 if($jk=='on'){
                     $jk='L';
                 }else {
@@ -66,14 +105,16 @@ class Login extends CI_Controller{
                 $title='User';
                 $table='user';
                 $data=[
-                    'user_username'=>$username,
-                    'user_password'=>md5($password),
-                    'user_nama'=>$nama,
-                    'user_email'=>$email,
-                    'user_alamat'=>$alamat,
-                    'user_jk'=>$jk,
-                    'user_tel'=>$tel,
-                    'user_role'=>$role,
+                    'user_username' => $username,
+                    'user_password' => $password,
+                    'user_nama' => $nama,
+                    'user_tel' => $tel,
+                    'user_alamat' => $alamat,
+                    'user_jk' => $jk,
+                    'user_email' => $user_email,
+                    'user_role' => 'pemilik',
+                    'user_foto' => $user_foto
+
                 ];
                 $rd=$this->Mymod->InsertData($table,$data);
                 $this->session->set_flashdata('success', 'Berhasil menambah '.$title);
@@ -88,7 +129,7 @@ class Login extends CI_Controller{
     }   
 
     function gagallogin(){
-        $url=base_url('Login');
+        $url=base_url('login');
         $this->session->set_flashdata('error', 'Username atau password salah silahkan ulangi lagi');
         redirect($url);
     }

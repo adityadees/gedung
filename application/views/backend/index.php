@@ -1,63 +1,3 @@
-<!-- <div class="app-content content">
-    	<div class="content-wrapper">
-    		<div class="content-header row">
-    		</div>
-    		<div class="content-body">
-    			
-    			<div class="row">
-    				<div class="col-12">
-    					<div class="card">
-    						<div class="card-header">
-    							<h4 class="card-title">
-    								<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-    								<div class="heading-elements">
-    									<ul class="list-inline mb-0">
-    										<li><a data-action="collapse"><i class="ft-minus"></i></a></li>
-    										<li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
-    										<li><a data-action="expand"><i class="ft-maximize"></i></a></li>
-    										<li><a data-action="close"><i class="ft-x"></i></a></li>
-    									</ul>
-    								</div>
-    							</div>
-    							<div class="card-content collapse show">
-    								<div class="card-body card-dashboard">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>          
-
-    </div>
-</div>
-</div>
--->
-
-<?php
-//old 
-/*
-for ($i=0;$i<count($kriteria);$i++)
-{
-    $maxKepentingan[$i] = 0;
-    for ($j=0;$j<count($alternatif);$j++)
-    {
-
-        if ($j == 0) 
-        { 
-            $maxKepentingan[$i] = $alternatifkriteria[$j][$i];
-        }
-        else 
-        {
-            if ($maxKepentingan[$i] < $alternatifkriteria[$j][$i])
-            {
-                $maxKepentingan[$i] = $alternatifkriteria[$j][$i];
-            }
-        }
-    }
-}
-*/
-?>
-
-
 <div class="app-content content">
     <div class="content-wrapper">
         <div class="content-header row">
@@ -82,12 +22,7 @@ for ($i=0;$i<count($kriteria);$i++)
                             <div class="card-content collapse show">
                                 <div class="card-body card-dashboard">
 
-
-
-
                                     <?php
-
-
                                     function showt($gdarray)
                                     {
                                         echo '<div class="table table-responsive">';
@@ -142,7 +77,7 @@ for ($i=0;$i<count($kriteria);$i++)
                                     $i=0;
                                     $galternatif = $this->db->query('SELECT * FROM gedung');
                                     foreach ($galternatif->result_array()  as $dataalternatif) :
-                                        $alternatif[$i] = $dataalternatif['gedung_nama'];
+                                        $alternatif[$i] = $dataalternatif['gedung_kode'];
                                         $i++;
                                     endforeach;
 
@@ -161,7 +96,6 @@ for ($i=0;$i<count($kriteria);$i++)
                                         $kriteria_bobot[$i] = $datakriteria['kriteria_bobot'];
                                         $i++;
                                     endforeach;
-
 
 
                                     $alternatifkriteria = array();
@@ -195,7 +129,6 @@ for ($i=0;$i<count($kriteria);$i++)
                                             $bobotAwal[$i] = $kriteria_bobot[$i]/$sumBobot['sumbot'];
                                         }
                                     }
-
 
 
 
@@ -352,10 +285,45 @@ for ($i=0;$i<count($kriteria);$i++)
                                         $Qj[$i] = (0.5*(($sj[$i]-$sjMin)/($sjMax-$sjMin))) + ((1-0.5) * (($rj[$i]-$rjMin) / ($rjMax-$rjMin)));
                                     }
 
+                                    $sql= $this->Mymod->ViewData('gedung');
+
+                                    /*$arrk = array();
+                                    foreach ($sql as $key) {
+                                        echo $gedung_kode = $key['gedung_kode'];
+
+                                    }
+*/
+
+                                    $hasilrangking = array();
+                                    $alternatifrangking = array();
+                                    for ($i=0;$i<count($alternatif);$i++)
+                                    {
+                                        $hasilrangking[$i] = $Qj[$i];
+                                        $alternatifrangking[$i] = $alternatif[$i];
+                                    }
+
+
+                                    for ($i=0;$i<count($alternatif);$i++)
+                                    {
+                                        for ($j=$i;$j<count($alternatif);$j++)
+                                        {
+                                            if ($hasilrangking[$j] < $hasilrangking[$i])
+                                            {
+                                                $tmphasil = $hasilrangking[$i];
+                                                $tmpalternatif = $alternatifrangking[$i];
+                                                $hasilrangking[$i] = $hasilrangking[$j];
+                                                $alternatifrangking[$i] = $alternatifrangking[$j];
+                                                $hasilrangking[$j] = $tmphasil;
+                                                $alternatifrangking[$j] = $tmpalternatif;
+                                            }
+                                        }
+                                    }
+
+                                    showb($hasilrangking);
+                                    showb($alternatifrangking);
                                     showb($Qj);
 
-
-                                    sort($Qj,1);
+/*                                    sort($Qj,1);
                                     $arrlength = count($Qj);
                                     $rank = 1;
                                     $prev_rank = $rank;
@@ -380,11 +348,10 @@ for ($i=0;$i<count($kriteria);$i++)
                                     }
 
 
+*/
 
 
-
-
-                                    $setMatriks = array();
+                                    /*$setMatriks = array();
                                     $a=0;
                                     $talternatif = $this->db->query('SELECT * FROM gedung');
                                     $tkriteria = $this->db->query('SELECT * FROM kriteria');
@@ -399,15 +366,6 @@ for ($i=0;$i<count($kriteria);$i++)
                                     }
 
 
-
-
-
-
-
-
-
-
-
                                     $matriksKuadrat = array();
                                     $c=0;
                                     foreach ($talternatif->result() as $baris) {
@@ -420,7 +378,6 @@ for ($i=0;$i<count($kriteria);$i++)
                                         $c++;
                                     }
 
-                // print json_encode($matriksKuadrat); 
 
 
                                     $jumlahBarisMatriks = array();
@@ -460,8 +417,7 @@ for ($i=0;$i<count($kriteria);$i++)
                                         }
                                         $j++;
                                     }
-
-
+*/
                                     ?>
 
 

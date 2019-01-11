@@ -26,7 +26,9 @@
   <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/backend/vendors/css/extensions/sweetalert.css">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/backend/vendors/css/extensions/toastr.css">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/backend/css/plugins/extensions/toastr.min.css">
-
+  <link rel="stylesheet" type="text/css" href="<?= base_url()?>assets/backend/vendors/js/gallery/photo-swipe/photoswipe.css">
+  <link rel="stylesheet" type="text/css" href="<?= base_url()?>assets/backend/vendors/js/gallery/photo-swipe/default-skin/default-skin.css">
+  <link rel="stylesheet" type="text/css" href="<?= base_url()?>assets/backend/css/pages/gallery.min.css">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/backend/css/plugins/file-uploaders/dropzone.min.css">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/map/jquery.addressPickerByGiro.css" media="screen">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/backend/vendors/css/forms/icheck/icheck.css">

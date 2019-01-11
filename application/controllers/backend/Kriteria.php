@@ -38,6 +38,8 @@ class Kriteria extends CI_Controller{
 		$this->load->view('backend/layout/footer');
 	}
 
+
+
 	public function save_subkrit()
 	{
 
@@ -95,6 +97,26 @@ class Kriteria extends CI_Controller{
 			$this->session->set_flashdata('error', 'Gagal merubah data '.$title);
 			redirect('admin/kriteria/sub');		
 		}
+	}
+
+
+
+	public function edit_kriteria(){
+		$kriteria_nama=$this->input->post('kriteria_nama');
+		$kriteria_attribute=$this->input->post('kriteria_attribute');
+		$kriteria_kode=$this->input->post('kriteria_kode');
+		$title = 'Kriteria';
+		$table='kriteria';
+		$data=[
+			'kriteria_nama'=>$kriteria_nama,	
+			'kriteria_attribute'=>$kriteria_attribute
+		];
+		$where =[ 
+			'kriteria_kode' => $kriteria_kode
+		];
+		$this->Mymod->UpdateData($table,$data,$where);
+		$this->session->set_flashdata('success', 'Berhasil merubah data '.$title);
+		redirect('admin/kriteria');		
 	}
 
 }
