@@ -396,13 +396,17 @@ class Pencarian extends CI_Controller{
 			$dnilai =[ 
 				'nilai_nilai'=>$ar[$j],
 			];
-
 			$wnilai =[ 
 				'gedung_kode'=>$arrNilai[$j],
+				'kriteria_kode'=>'C6',
 			];
-
 			$this->Mymod->UpdateData('nilai',$dnilai,$wnilai);
 		}
+
+		
+
+		$this->session->set_flashdata('success', 'Berhasil merubah data '.$title);
+		redirect('pencarian');	
 	}
 
 }

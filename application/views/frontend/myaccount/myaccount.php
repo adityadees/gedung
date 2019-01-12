@@ -30,11 +30,11 @@
         <div class="row">
             <div class="col-12">
                 <div class="card ">
-                    <div class="card-header" style="background: #0c373b;">
+                    <div class="card-header" style="background: #fcfcfc;">
                         <div class="col-lg-12 col-sm-12 col-12 mx-auto mt-3">
-                            <ul class="nav nav-pills nav-justified">
-                                <li class="nav-item">
-                                    <a class="nav-link active" data-toggle="pill" href="#gedungSaya">Gedung Saya</a>
+                            <ul class="nav nav-pills nav-justified" >
+                                <li class="nav-item" >
+                                    <a class="nav-link active" data-toggle="pill" href="#gedungSaya" >Gedung Saya</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" data-toggle="pill" href="#dataPribadi">Data Pribadi</a>
@@ -45,11 +45,11 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="card-content bg-darken collapse show" style="background: #6fb98f;">
+                    <div class="card-content bg-darken collapse show" style="background: #eeebf4;">
                         <div class="card-body card-dashboard">
-                          <div class="tab-content">
-                              <div class="tab-pane container active" id="gedungSaya">
-                                <table class="table table-striped table-bordered zero-configuration">
+                          <div class="tab-content" >
+                              <div class="tab-pane container active" id="gedungSaya" >
+                                <table class="table table-striped table-bordered zero-configuration" >
                                     <thead>
                                         <tr>
                                             <th>Nama Gedung</th>
@@ -74,6 +74,8 @@
                                                     <div class="btn-group mr-1 mb-1">
                                                         <button type="button" class="btn btn-info btn-min-width dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-info"></i> &nbsp;Aksi</button>
                                                         <div class="dropdown-menu">
+                                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalAddF<?php echo $i['gedung_kode']; ?>">Tambah Foto</a>
+                                                            <div class="divider"></div>
                                                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalEdit<?php echo $i['gedung_kode']; ?>">Edit</a>
                                                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalHapus<?php echo $i['gedung_kode']; ?>">Hapus</a>
                                                         </div>
@@ -331,6 +333,7 @@
                                                         "Red Carpet"
                                                     ];
 
+
                                                     for($kk=1; $kk<=11; $kk++) { ?>
                                                         <fieldset>
                                                             <input type="checkbox" id="<?= $kk; ?>" name="fasilitas[]" value="<?= $kk; ?>">
@@ -432,7 +435,44 @@ foreach ($gedung as $i)  :
         </div>
     </div>
 
+    <?php
+endforeach;
+foreach ($gedung as $i)  : 
+    ?>
+
+
+    <div class="modal fade text-left" id="modalAddF<?= $i['gedung_kode'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel34" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="myModalLabel34">Tambah Foto</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="<?php echo base_url()?>frontend/myaccount/upload_foto" method="POST" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label>Foto: </label>
+                                    <input type="hidden" name="gedung_kode" value="<?= $i['gedung_kode']; ?>">
+                                    <input type="file" name="filefoto" class="dropzone dropzone-area form-control" id="dpz-single-file">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                      <input type="reset" class="btn btn-outline-secondary btn-lg" data-dismiss="modal" value="close">
+                      <input type="submit" class="btn btn-outline-primary btn-lg" value="Submit">
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+
 <?php endforeach; ?>
+
 <script src="<?php echo base_url();?>assets/backend/vendors/js/forms/icheck/icheck.min.js"></script>
 <script src="<?php echo base_url();?>assets/backend/js/scripts/forms/checkbox-radio.min.js"></script>
 

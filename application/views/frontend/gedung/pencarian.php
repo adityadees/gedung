@@ -10,7 +10,7 @@
           <div class="col-md-4 order-lg-first order-last mt-3 mt-lg-0">
             <div class="form-container py-3">
                 <h4 class="black bold mt-3 px-4 pb-2 text-center">Cari Gedung</h4>
-                <form id="sidebar-form" class="px-xl-5 px-lg-3 px-4"> 
+                <form id="sidebar-form" class="px-xl-5 px-lg-3 px-4" method="POST" action="<?= base_url();?>frontend/pencarian/cari"> 
                     <div class="form-group row">
                         <div class="col-sm-12">
                             <span>Harga Gedung</span>

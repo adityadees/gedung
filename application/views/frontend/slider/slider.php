@@ -13,7 +13,7 @@
                         <h1 class="white shadow-text  align-middle">Paket Lengkap</h1>
                     </div>
                     <div class="toggleButton">
-                        <h4 class="white shadow-text align-middle" >Katering Terbaik</h4>
+                        <h4 class="white shadow-text align-middle" >Berbagai Macam Pilihan</h4>
                     </div>
                 </div>
             </div>

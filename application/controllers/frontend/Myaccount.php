@@ -510,6 +510,47 @@ class Myaccount extends CI_Controller{
 	}
 
 
+	public function upload_foto(){
+		$gedung_kode=$this->input->post('gedung_kode');
+
+		$title = 'Foto Gedung';
+		if(!empty($_FILES['filefoto']['name'])){
+			$config['upload_path'] = 'assets\images';
+			$config['allowed_types'] = 'jpg|jpeg|png|gif';
+			$config['file_name'] = $_FILES['filefoto']['name'];
+			$config['width'] = 1920;
+			$config['height'] = 683;
+
+			$this->load->library('upload',$config);
+			$this->upload->initialize($config);
+
+			if($this->upload->do_upload('filefoto')){
+				$uploadData = $this->upload->data();
+				$fg_foto = $uploadData['file_name'];
+			}else{
+				$this->session->set_flashdata('error', 'Gagal mengupload data '.$title);
+				redirect('myaccount');   
+			}
+		}else{
+			$this->session->set_flashdata('error', 'Gagal menambah data '.$title. ' Harap Masukan foto');
+			redirect('myaccount');
+		}
+
+		$data =[ 
+			'gedung_kode' => $gedung_kode,
+			'fg_foto' => $fg_foto,
+		];
+		$InsertData=$this->Mymod->InsertData('foto_gedung',$data);
+		if($InsertData){
+			$this->session->set_flashdata('success', 'Berhasil menambah data '.$title);
+			redirect('myaccount');       
+		}else{
+			$this->session->set_flashdata('error', 'Gagal menambah data '.$title);
+			redirect('myaccount');       
+		}
+
+	}
+
 }
 
 ?>

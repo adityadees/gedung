@@ -22,7 +22,7 @@
                             <?php foreach ($gedung as $i) :?>
                                 <div class="col-xs-12 col-md-6 col-lg-4 mb-4">
                                     <div class="card ">
-                                        <small class="white front"><strong><?= $i['gedung_kapasitas']; ?></strong></small>
+                                       
                                         <a class="img-card" href="<?= base_url()?>gedung/detail/<?= $i['gedung_kode']; ?>">
                                             <img src="<?= base_url()?>assets/images/<?= $i['gedung_header']?>" alt=""/>
                                         </a>

@@ -30,185 +30,214 @@
         <div class="row">
             <div class="col-12">
                 <div class="card ">
-                    <div class="card-header" style="background: #0c373b;">
+                    <div class="card-header text-white" style="background: #0c373b;">
+                        <h5 style="border-bottom: 1px solid;">Publish</h5>
                     </div>
                     <div class="card-content bg-darken collapse show" style="background: #fff;">
                         <div class="card-body card-dashboard">
-
                             <form action="<?php echo base_url()?>frontend/myaccount/save_gedung" method="POST" enctype="multipart/form-data">
-
                                 <div class="row">
-                                    <div class="card-body">
-                                        <ul class="nav nav-tabs nav-underline no-hover-bg">
-                                            <li class="nav-item">
-                                                <a class="nav-link active" id="base-tab31" data-toggle="tab" aria-controls="tab31" href="#tab31" role="tab" aria-selected="true">Informasi</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" id="base-tab32" data-toggle="tab" aria-controls="tab32" href="#tab32" role="tab" aria-selected="false">Kriteria</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" id="base-tab33" data-toggle="tab" aria-controls="tab33" href="#tab33" role="tab" aria-selected="false">Alamat</a>
-                                            </li>
-                                        </ul>
-                                        <div class="tab-content px-1 pt-1">
-                                            <div class="tab-pane active" id="tab31" role="tab" aria-labelledby="base-tab31">
-                                                <div class="form-group">
-                                                    <label>Gedung Kode: </label>
-                                                    <?php 
-                                                    $kd = "GD";
-                                                    $tgl = date('ydm');
-                                                    $rand1 = rand(0,999);
-                                                    $rand2 = rand(0,9);
-                                                    $gkode = $kd.$tgl.$rand1.$rand2;
-                                                    ?>
-                                                    <input type="text" name="gedung_kode" value="<?= $gkode; ?>" class="form-control" readonly>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Nama Gedung: </label>
-                                                    <input type="text" placeholder="Nama Gedung" name="gedung_nama" class="form-control">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Deskripsi: </label>
-                                                    <textarea name="gedung_deskripsi" placeholder="Deskripsi" class="form-control"></textarea>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Foto Cover: </label>
-                                                    <input type="file" name="filefoto" class="dropzone dropzone-area form-control" id="dpz-single-file">
-                                                </div>
+                                  <div class="col-md-12">
 
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>Gedung Kode: </label>
+                                                <?php 
+                                                $kd = "GD";
+                                                $tgl = date('ydm');
+                                                $rand1 = rand(0,999);
+                                                $rand2 = rand(0,9);
+                                                $gkode = $kd.$tgl.$rand1.$rand2;
+                                                ?>
+                                                <input type="text" name="gedung_kode" value="<?= $gkode; ?>" class="form-control" readonly>
                                             </div>
-                                            <div class="tab-pane" id="tab32" aria-labelledby="base-tab32">
+                                        </div>
+                                    </div>
 
-                                                <div class="form-group">
-                                                    <label>Harga: </label>
-                                                    <input type="text" placeholder="Harga Gedung" name="gedung_harga" class="form-control">
-                                                </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>Nama Gedung: </label>
+                                                <input type="text" placeholder="Nama Gedung" name="gedung_nama" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                                <div class="form-group">
-                                                    <label>Kapasitas Tamu: </label>
-                                                    <input type="text" placeholder="Kapasitas Tamu" name="kapasitas_tamu" class="form-control">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Kapasitas Parkir: </label>
-                                                    <input type="text" placeholder="Kapasitas Parkir" name="kapasitas_parkir" class="form-control">
-                                                </div>                                  
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>Deskripsi: </label>
+                                                <textarea name="gedung_deskripsi" placeholder="Deskripsi" class="form-control"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                                <div class="form-group">
-                                                    <label>Jenis Gedung: </label>
-                                                    <select name="jenis_gedung" class="form-control">
-                                                        <option value="pendidikan">Gedung Pendidikan</option>
-                                                        <option value="instansi">Gedung Instansi / Pemerintah</option>
-                                                        <option value="ballroom">Ballroom Hotel</option>
-                                                        <option value="serbaguna">Gedung Serbaguna</option>
-                                                    </select>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label>Fasilitas: </label>
-                                                    <div class="row skin skin-flat">
-                                                        <div class="col-md-4 col-sm-12">
-
-                                                            <?php
-                                                            $fasi = [
-                                                                1=>
-                                                                "Catering",
-                                                                "Dekorasi Pelaminan",
-                                                                "Photo & Video Akad Resepsi",
-                                                                "Album Kolase",
-                                                                "Makeup",
-                                                                "Mc / Pembawa Acara",
-                                                                "Weeding Organizer",
-                                                                "Entertainment",
-                                                                "Pakaian Pengantin",
-                                                                "Ruang Full AC",
-                                                                "Meja VIP",
-                                                                "Lighting",
-                                                                "Lcd Proyektor",
-                                                                "Tari Tradisional",
-                                                                "Photo Both",
-                                                                "Seragam Keluarga",
-                                                                "Seragam Orang tua",
-                                                                "Meja Akad nikah",
-                                                                "Buku Tamu",
-                                                                "Kotak Amplop",
-                                                                "Box Hantaran",
-                                                                "Free Menginap di Hotel",
-                                                                "Qoori Akad / Resepsi",
-                                                                "Ruang Hias",
-                                                                "Raung Tunggu Pengantin",
-                                                                "Beskap Pengantin",
-                                                                "Rental Mobil Pengantin",
-                                                                "Kursi sofa",
-                                                                "Meja makan prasmanan",
-                                                                "Gazebo Pintu Masuk",
-                                                                "Red Carpet"
-                                                            ];
-                                                            for($i=1; $i<=11; $i++) { ?>
-                                                                <fieldset>
-                                                                    <input type="checkbox" id="<?= $i; ?>" name="fasilitas[]" value="<?= $i; ?>">
-                                                                    <label for="<?= $i; ?>"><?= $fasi[$i]; ?></label>
-                                                                </fieldset>
-                                                            <?php } ?>
-                                                        </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Harga: </label>
+                                                <input type="text" placeholder="Harga Gedung" name="gedung_harga" class="form-control">
+                                            </div>
+                                        </div>
 
 
-                                                        <div class="col-md-4 col-sm-12">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Kapasitas Tamu: </label>
+                                                <input type="text" placeholder="Kapasitas Tamu" name="kapasitas_tamu" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Kapasitas Parkir: </label>
+                                                <input type="text" placeholder="Kapasitas Parkir" name="kapasitas_parkir" class="form-control">
+                                            </div>                                  
+                                        </div>                                  
+
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Jenis Gedung: </label>
+                                                <select name="jenis_gedung" class="form-control">
+                                                    <option value="pendidikan">Gedung Pendidikan</option>
+                                                    <option value="instansi">Gedung Instansi / Pemerintah</option>
+                                                    <option value="ballroom">Ballroom Hotel</option>
+                                                    <option value="serbaguna">Gedung Serbaguna</option>
+                                                </select>
+                                            </div>
+                                        </div>   
+                                    </div>   
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>Fasilitas: </label>
+                                                <div class="row skin skin-flat">
+                                                    <div class="col-md-4 col-sm-12">
+
+                                                        <?php
+                                                        $fasi = [
+                                                            1=>
+                                                            "Catering",
+                                                            "Dekorasi Pelaminan",
+                                                            "Photo & Video Akad Resepsi",
+                                                            "Album Kolase",
+                                                            "Makeup",
+                                                            "Mc / Pembawa Acara",
+                                                            "Weeding Organizer",
+                                                            "Entertainment",
+                                                            "Pakaian Pengantin",
+                                                            "Ruang Full AC",
+                                                            "Meja VIP",
+                                                            "Lighting",
+                                                            "Lcd Proyektor",
+                                                            "Tari Tradisional",
+                                                            "Photo Both",
+                                                            "Seragam Keluarga",
+                                                            "Seragam Orang tua",
+                                                            "Meja Akad nikah",
+                                                            "Buku Tamu",
+                                                            "Kotak Amplop",
+                                                            "Box Hantaran",
+                                                            "Free Menginap di Hotel",
+                                                            "Qoori Akad / Resepsi",
+                                                            "Ruang Hias",
+                                                            "Raung Tunggu Pengantin",
+                                                            "Beskap Pengantin",
+                                                            "Rental Mobil Pengantin",
+                                                            "Kursi sofa",
+                                                            "Meja makan prasmanan",
+                                                            "Gazebo Pintu Masuk",
+                                                            "Red Carpet"
+                                                        ];
+                                                        for($i=1; $i<=11; $i++) { ?>
+                                                            <fieldset>
+                                                                <input type="checkbox" id="<?= $i; ?>" name="fasilitas[]" value="<?= $i; ?>">
+                                                                <label for="<?= $i; ?>"><?= $fasi[$i]; ?></label>
+                                                            </fieldset>
+                                                        <?php } ?>
+                                                    </div>
 
 
-                                                            <?php
-                                                            for($i=12; $i<=21; $i++) { ?>
-                                                                <fieldset>
-                                                                    <input type="checkbox" id="<?= $i; ?>" name="fasilitas[]" value="<?= $i; ?>">
-                                                                    <label for="<?= $i; ?>"><?= $fasi[$i]; ?></label>
-                                                                </fieldset>
-                                                            <?php } ?>
+                                                    <div class="col-md-4 col-sm-12">
 
-                                                        </div>
 
-                                                        <div class="col-md-4 col-sm-12">
-                                                            <?php
-                                                            for($i=22; $i<=31; $i++) { ?>
-                                                                <fieldset>
-                                                                    <input type="checkbox" id="<?= $i; ?>" name="fasilitas[]" value="<?= $i; ?>">
-                                                                    <label for="<?= $i; ?>"><?= $fasi[$i]; ?></label>
-                                                                </fieldset>
-                                                            <?php } ?>
-                                                        </div>
+                                                        <?php
+                                                        for($i=12; $i<=21; $i++) { ?>
+                                                            <fieldset>
+                                                                <input type="checkbox" id="<?= $i; ?>" name="fasilitas[]" value="<?= $i; ?>">
+                                                                <label for="<?= $i; ?>"><?= $fasi[$i]; ?></label>
+                                                            </fieldset>
+                                                        <?php } ?>
+
+                                                    </div>
+
+                                                    <div class="col-md-4 col-sm-12">
+                                                        <?php
+                                                        for($i=22; $i<=31; $i++) { ?>
+                                                            <fieldset>
+                                                                <input type="checkbox" id="<?= $i; ?>" name="fasilitas[]" value="<?= $i; ?>">
+                                                                <label for="<?= $i; ?>"><?= $fasi[$i]; ?></label>
+                                                            </fieldset>
+                                                        <?php } ?>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="tab-pane" id="tab33" aria-labelledby="base-tab33">
-                                                <div class="form-group">
-                                                    <label>Alamat</label>
-                                                    <input type="text" class="inputAddress input-xxlarge form-control" value="Palembang, Kota Palembang, Sumatera Selatan, Indonesia" name="inputAddress" autocomplete="off" placeholder="Type in your address">
-                                                </div>  
+                                        </div>
+                                    </div>
 
-                                                <div class="form-group">
-                                                    <label>Latitude</label>
-                                                    <input type="text" class="latitude form-control" name="latitude" >
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Longitude</label>
-                                                    <input type="text" class="longitude form-control" name="longitude">
-                                                </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>Alamat</label>
+                                                <input type="text" class="inputAddress input-xxlarge form-control" value="Palembang, Kota Palembang, Sumatera Selatan, Indonesia" name="inputAddress" autocomplete="off" placeholder="Type in your address">
+                                            </div>  
+                                        </div>  
+                                    </div>  
+
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Latitude</label>
+                                                <input type="text" class="latitude form-control" name="latitude" readonly>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <input type="submit" value="Save" class="btn btn-primary">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Longitude</label>
+                                                <input type="text" class="longitude form-control" name="longitude" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Foto Cover: </label>
+                                                <input type="file" name="filefoto" class="dropzone dropzone-area form-control" id="dpz-single-file">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </form>
 
-
-                        </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <input type="submit" value="Save" class="btn btn-primary">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </section>
 
 

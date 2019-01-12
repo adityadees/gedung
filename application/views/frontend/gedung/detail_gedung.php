@@ -127,6 +127,10 @@
                                     <div class="tour-item-title list-font">Jenis Gedung </div>
                                     <div class="tour-item-description list-font"><?= ucwords($gedung['gedung_jenis']); ?></div>
                                 </li> 
+                                <li>
+                                    <div class="tour-item-title list-font">Alamat Gedung </div>
+                                    <div class="tour-item-description list-font"><?= ucwords($gedung['gedung_alamat']); ?></div>
+                                </li> 
 
                             </ul> 
 
