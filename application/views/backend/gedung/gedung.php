@@ -407,7 +407,7 @@
 
 														for($kk=1; $kk<=11; $kk++) { ?>
 															<fieldset>
-																<input type="checkbox" id="<?= $kk; ?>" name="fasilitas[]" value="<?= $kk; ?>">
+																<input type="checkbox" id="<?= $kk; ?>" name="fasilitas[]" value="<?= $kk; ?>"  <?php if (in_array($kk, $gfasis)){  echo "checked";}?>>
 																<label for="<?= $kk; ?>"><?= $fasi[$kk]; ?></label>
 															</fieldset>
 														<?php } ?>
@@ -416,7 +416,7 @@
 														<?php
 														for($kk=12; $kk<=21; $kk++) { ?>
 															<fieldset>
-																<input type="checkbox" id="<?= $kk; ?>" name="fasilitas[]" value="<?= $kk; ?>">
+																<input type="checkbox" id="<?= $kk; ?>" name="fasilitas[]" value="<?= $kk; ?>"  <?php if (in_array($kk, $gfasis)){  echo "checked";}?>>
 																<label for="<?= $kk; ?>"><?= $fasi[$kk]; ?></label>
 															</fieldset>
 														<?php } ?>
@@ -427,7 +427,7 @@
 														<?php
 														for($kk=22; $kk<=31; $kk++) { ?>
 															<fieldset>
-																<input type="checkbox" id="<?= $kk; ?>" name="fasilitas[]" value="<?= $kk; ?>">
+																<input type="checkbox" id="<?= $kk; ?>" name="fasilitas[]" value="<?= $kk; ?>"  <?php if (in_array($kk, $gfasis)){  echo "checked";}?>>
 																<label for="<?= $kk; ?>"><?= $fasi[$kk]; ?></label>
 															</fieldset>
 														<?php } ?>

@@ -65,15 +65,6 @@
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <label>Deskripsi: </label>
-                                                <textarea name="gedung_deskripsi" placeholder="Deskripsi" class="form-control"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Harga: </label>
@@ -214,7 +205,15 @@
                                         </div>
                                     </div>
 
-
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>Deskripsi: </label>
+                                                <textarea name="gedung_deskripsi" placeholder="Deskripsi" class="form-control"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
@@ -223,6 +222,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
 
                                 <div class="row">

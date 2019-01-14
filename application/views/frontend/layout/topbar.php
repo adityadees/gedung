@@ -16,14 +16,11 @@
                     </a>
                 </li>
 
-                <?php if(isset($_SESSION['logged_in_user'])) { ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link   mr-3 open my-lg-0 my-2 ml-lg-0 ml-3" href="<?= base_url();?>myaccount/tambah-gedung"  id="navbarDropdown1"  aria-haspopup="true" aria-expanded="false">
                             Tambah Gedung
                         </a>
                     </li>
-                <?php } ?>
-
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle dropdown-menu-right  ml-lg-0 ml-3 mr-4 my-lg-0 my-2 lastitem" href="#" id="navbarDropdown6" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

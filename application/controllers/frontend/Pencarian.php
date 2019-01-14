@@ -205,7 +205,7 @@ class Pencarian extends CI_Controller{
 			$calc = 0;
 			foreach($col as $prob){
 				$calc += $prob * log($prob);
-				$entropy = ((-1)/log(7)) * $calc;
+				$entropy = ((-1)/log(count($alternatif))) * $calc;
 			}
 			array_push($entropy_arr, $entropy);
 		}
@@ -301,7 +301,45 @@ class Pencarian extends CI_Controller{
 			}
 		}
 
-		$x['hasil'] = $alternatifrangking;
+		$this->load->library('pagination');
+		$config['base_url'] = base_url().'pencarian';
+		$config['total_rows'] = count($alternatif);
+		$config['per_page'] = 3;
+		$from = $this->uri->segment(2);
+
+		$config['query_string_segment'] = 'start';
+
+		$config['full_tag_open'] = '<nav><ul class="pagination" style="margin-top:0px">';
+		$config['full_tag_close'] = '</ul></nav>';
+
+		$config['first_link'] = 'First';
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+
+		$config['last_link'] = 'Last';
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
+
+		$config['next_link'] = 'Next';
+		$config['next_tag_open'] = '<li>';
+		$config['next_tag_close'] = '</li>';
+
+		$config['prev_link'] = 'Prev';
+		$config['prev_tag_open'] = '<li>';
+		$config['prev_tag_close'] = '</li>';
+
+		$config['cur_tag_open'] = '<li class="active"><a>';
+		$config['cur_tag_close'] = '</a></li>';
+
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';		
+
+		$this->pagination->initialize($config);
+
+
+		$x['maxAl'] = $config['per_page'];
+		$x['from'] = $from;
+		$x['hasil'] = array_slice($alternatifrangking, $from, $config['per_page']);
 		$x['harga'] = $this->Mymod->getJoinWhere($jharga,$wharga)->result_array();
 		$x['kapasitas'] = $this->Mymod->getJoinWhere($jkapasitas,$wkapasitas)->result_array();
 		$x['parkir'] = $this->Mymod->getJoinWhere($jparkir,$wparkir)->result_array();

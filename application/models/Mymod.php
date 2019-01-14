@@ -34,7 +34,6 @@ class Mymod extends CI_Model{
         return $query = $this->db->get($table,$number,$offset)->result_array();       
     }
 
-
     public function ViewDataRows($table){
         $res=$this->db->get($table);
         return $res->num_rows();

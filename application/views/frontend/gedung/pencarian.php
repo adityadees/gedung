@@ -150,23 +150,16 @@
                     </div>
                 </form>
             </div>
-            <div class="more-info mx-auto my-4">
-                <h6 class="black semibold text-center mx-4 mt-3 mb-3 info-title">Quick Contact</h6>
-                <div class="pb-2">                      
-
-                    <a href="tel:+133331111"><h5 class="grey text-center tel-info"><i class="fas primary-color fa-phone faa-tada animated mr-2 grey my-lg-0 mb-1"></i>(+62) 8888888</h5></a>  
-                    <a href="mailto:hello@ourcompany.com"><h5 class="grey text-center mail-info"><i class="fas fa-envelope faa-horizontal animated primary-color mr-2"></i>nikah@yuk.com</h5></a>                        
-                </div>
-            </div>
         </div>
 
         <div class="col-md-8">
             <?php
             $no=0;
-            for($i=0;$i<10;$i++){
+            for($i=0;$i<count($hasil);$i++){
                 $no++;
                 $arrH[$i] = $hasil[$i];
                 $ck = $this->db->query("SELECT * from gedung where gedung_kode='$arrH[$i]'")->row_array();
+
                 ?>
                 <div class="card mb-4">
                     <a class="img-card" href="<?= base_url()?>gedung/detail/<?= $ck['gedung_kode']; ?>">
@@ -201,6 +194,11 @@
             <?php } ?>
 
             
+            <div class="row">
+                <div class="col-md-12">
+                    <?= $this->pagination->create_links(); ?>
+                </div>
+            </div>
 
         </div>
 

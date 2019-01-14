@@ -27,7 +27,12 @@ class Gedung extends CI_Controller{
 			'gedung_kode' => $segment
 		];
 
-		$x['gedung'] = $this->Mymod->ViewDetail('gedung',$where);
+		$table = [
+			'gedung' => 'user_id',
+			'user' => 'user_id'
+		];
+
+		$x['gedung'] = $this->Mymod->getJoinWhere($table,$where)->row_array();
 		$x['foto'] = $this->Mymod->ViewDataWhere('foto_gedung',$wheref);
 		$this->load->view('frontend/layout/header',$y);
 		$this->load->view('frontend/layout/topbar');

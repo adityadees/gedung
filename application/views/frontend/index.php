@@ -21,8 +21,8 @@
 
                             <?php foreach ($gedung as $i) :?>
                                 <div class="col-xs-12 col-md-6 col-lg-4 mb-4">
-                                    <div class="card ">
-                                       
+                                    <div class="card" style="min-height: 400px;">
+
                                         <a class="img-card" href="<?= base_url()?>gedung/detail/<?= $i['gedung_kode']; ?>">
                                             <img src="<?= base_url()?>assets/images/<?= $i['gedung_header']?>" alt=""/>
                                         </a>
@@ -35,8 +35,8 @@
                                             <h6 class="primary-color text-right "><?= "Rp. ".number_format($i['gedung_sewa'])?></h6>
                                             <h6 class="black"><a href="<?= base_url()?>gedung/detail/<?= $i['gedung_kode']; ?>"><?= $i['gedung_nama'];?></a></h6>
                                             <p class="">
-                                                <?= $i['gedung_deskripsi'];?>
-                                                 <a href="<?= base_url()?>gedung/detail/<?= $i['gedung_kode']; ?>"><span>... See more</span></a>
+                                                <?= substr($i['gedung_deskripsi'],0,30);?>
+                                                <a href="<?= base_url()?>gedung/detail/<?= $i['gedung_kode']; ?>"><span>... See more</span></a>
                                             </p>
                                         </div>
                                     </div>

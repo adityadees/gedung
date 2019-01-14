@@ -43,6 +43,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">
+                            <a class="btn btn-primary" href="<?= base_url();?>admin/rumus" >Detail Rumus</a></h4>
                             <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
                             <div class="heading-elements">
                                 <ul class="list-inline mb-0">
@@ -91,6 +92,8 @@
                                     echo '</table>';
                                     echo '</div>';
                                 }
+
+
 
                                 function showk($gdarray)
                                 {
@@ -355,127 +358,47 @@
                                         }
                                     }
 
-
-                                    showb($alternatif);
-                                    showb($kriteria);
-                                    showb($kriteria_attribute);
-                                    showb($kriteria_bobot);
-                                    showt($alternatifkriteria);
-                                    showb($bobotAwal);
-                                    showb($maxKepentingan);
-                                    showt($normalisasi);
-                                    showb($sumNormal);
-                                    showt($probabilitas);
-                                    showb($fiMax);
-                                    showb($fiMin);
-                                    showb($entropy_arr);
-                                    showb($divergence);
-                                    showb($lamda);
-                                    showb($lamdaXbobotA);
-                                    showb($bobotEntropy);
-                                    showt($solusi);
-                                    showb($sj);
-                                    showb($rj);
-                                    showb($Qj);
-                                    showb($hasilrangking);
-                                    showb($alternatifrangking);
-
-/*                                    sort($Qj,1);
-                                    $arrlength = count($Qj);
-                                    $rank = 1;
-                                    $prev_rank = $rank;
-
-                                    for($x = 0; $x < $arrlength; $x++) {
-
-                                        if ($x==0) {
-                                            echo $Qj[$x]." - ".($rank);
-                                        }
-
-                                        elseif ($Qj[$x] != $Qj[$x-1]) {
-                                            $rank++;
-                                            $prev_rank = $rank;
-                                            echo $Qj[$x]." - ".($rank);
-                                        }
-
-                                        else{
-                                            $rank++;
-                                            echo $Qj[$x]." - ".($prev_rank);
-                                        }
-                                        echo "<br>";
-                                    }
-
-
-*/
-
-
-                                    /*$setMatriks = array();
-                                    $a=0;
-                                    $talternatif = $this->db->query('SELECT * FROM gedung');
-                                    $tkriteria = $this->db->query('SELECT * FROM kriteria');
-                                    foreach ($talternatif->result() as $baris) {
-                                        $b=0;
-                                        foreach ($tkriteria->result() as $kolom) {
-                                            $tnilai = $this->db->query("SELECT * FROM nilai WHERE kriteria_kode = '$kolom->kriteria_kode'")->row()->nilai_nilai;
-                                            $setMatriks[$a][$b] = $tnilai;
-                                            $b++;
-                                        }
-                                        $a++;
-                                    }
-
-
-                                    $matriksKuadrat = array();
-                                    $c=0;
-                                    foreach ($talternatif->result() as $baris) {
-                                        $d=0;
-                                        foreach ($tkriteria->result() as $kolom) {
-                                            $tnilai = $this->db->query("SELECT * FROM nilai WHERE kriteria_kode = '$kolom->kriteria_kode'")->row()->nilai_nilai;
-                                            $matriksKuadrat[$c][$d] = pow($tnilai, 2);
-                                            $d++;
-                                        }
-                                        $c++;
-                                    }
-
-
-
-                                    $jumlahBarisMatriks = array();
-                                    $e=0;
-                                    foreach ($talternatif->result() as $row) {
-                                        $f=0;
-                                        $jumlah = 0;
-                                        foreach ($tkriteria->result() as $column) {
-                                            $jumlah = $jumlah + $matriksKuadrat[$e][$f];
-                                            $f++;
-                                        }
-
-                                        $jumlahBarisMatriks[] = $jumlah;
-                                        $e++;
-                                    }
-
-                                    $akarMatriks = array();
-                                    for ($g=0; $g < count($jumlahBarisMatriks) ; $g++) { 
-                                        $akarMatriks[$g] = round(sqrt($jumlahBarisMatriks[$g]),3);
-                                    }
-
-                                    $normalisasi = array();
-                                    for ($h=0; $h < $talternatif->num_rows() ; $h++) { 
-                                        for ($i=0; $i < $tkriteria->num_rows() ; $i++) { 
-                                            $normalisasi[$h][$i] = round($setMatriks[$h][$i]/$akarMatriks[$h],3);  
-                                        }
-                                    }   
-                                    $nilaiBobot = array();
-                                    $j=0;
-                                    foreach ($talternatif->result() as $baris) {
-                                        $k=0;
-                                        foreach ($tkriteria->result() as $kolom) {
-                                            $tnilai = $this->db->query("SELECT * FROM nilai WHERE kriteria_kode = '$kolom->kriteria_kode'")->row()->nilai_nilai;
-                                            $bobot = $this->db->query("SELECT * FROM kriteria WHERE kriteria_kode = '$kolom->kriteria_kode'")->row()->kriteria_bobot;
-                                            $nilaiBobot[$j][$k] = round($normalisasi[$j][$k] * $bobot , 3);
-                                            $k++;
-                                        }
-                                        $j++;
-                                    }
-*/
                                     ?>
+
+                                    <div class="table table-responsive">
+                                        <table class="table table-striped table-bordered complex-headers">
+                                            <thead>
+                                                <tr>
+                                                    <td>Rank</td>
+                                                    <td>Kode</td>
+                                                    <td>Nama Gedung</td>
+                                                    <td>Pemilik Gedung</td>
+                                                    <td class="text-center">#</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                $no=0;
+                                                for ($i=0;$i<count($alternatifrangking);$i++)
+                                                {
+                                                    $no++;
+
+                                                    $where = [
+                                                        't1.gedung_kode' => $alternatifrangking[$i]
+                                                    ];
+
+                                                    $table = [
+                                                        'gedung' => 'user_id',
+                                                        'user' => 'user_id'
+                                                    ];
+                                                    $ck = $this->Mymod->getJoinWhere($table,$where)->row_array();
+                                                    ?>
+                                                    <tr>
+                                                        <td><?= $no ?></td>
+                                                        <td><?= $alternatifrangking[$i] ?></td>
+                                                        <td><?= $ck['gedung_nama'] ?></td>
+                                                        <td><?= $ck['user_nama'] ?></td>
+                                                        <td class="text-center"><a href="<?= base_url();?>admin/gedung/detail/<?= $ck['gedung_kode'] ?>" class="btn btn-primary">Detail</a></td>
+                                                    </tr>
+                                                <?php } ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
 
 
                                 </div>
@@ -487,4 +410,3 @@
         </div>
     </div>
 
-    

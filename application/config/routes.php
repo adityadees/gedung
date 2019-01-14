@@ -60,6 +60,7 @@ $route['logout']='loginadmin/logout';
 $route['index/(:any)']='FrontendC/index/$1';
 $route['index']='FrontendC/index';
 $route['gedung/detail/(:any)']='frontend/gedung/detail/$1';
+$route['pencarian/(:any)']='frontend/Pencarian/index/$1';
 $route['pencarian']='frontend/Pencarian';
 $route['gedung']='frontend/Gedung';
 $route['myaccount/tambah-gedung']='frontend/myaccount/tambah_gedung';
@@ -67,6 +68,7 @@ $route['myaccount']='frontend/Myaccount';
 
 $route['admin/user']='backend/User';
 $route['admin/kriteria']='backend/kriteria';
+$route['admin/rumus']='backend/rumus';
 $route['admin/kriteria/sub']='backend/kriteria/sub_kriteria';
 $route['admin/gedung']='backend/Gedung/index';
 $route['admin/gedung/detail/(:any)']='backend/Gedung/gedung_detail/$1';

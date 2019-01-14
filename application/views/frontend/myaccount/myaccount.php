@@ -220,7 +220,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title" id="myModalLabel34">Edit Gedung</h3>
+                    <h5 class="modal-title" id="myModalLabel34">Edit Gedung</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -231,175 +231,196 @@
 
                         <div class="row">
                             <div class="card-body">
-                                <ul class="nav nav-tabs nav-underline no-hover-bg">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" id="base-tab31<?= $i['gedung_kode']; ?>" data-toggle="tab" aria-controls="tab31<?= $i['gedung_kode']; ?>" href="#tab31<?= $i['gedung_kode']; ?>" role="tab" aria-selected="true">Informasi</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="base-tab32<?= $i['gedung_kode']; ?>" data-toggle="tab" aria-controls="tab32<?= $i['gedung_kode']; ?>" href="#tab32<?= $i['gedung_kode']; ?>" role="tab" aria-selected="false">Kriteria</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="base-tab33<?= $i['gedung_kode']; ?>" data-toggle="tab" aria-controls="tab33<?= $i['gedung_kode']; ?>" href="#tab33<?= $i['gedung_kode']; ?>" role="tab" aria-selected="false">Alamat</a>
-                                    </li>
-                                </ul>
-                                <div class="tab-content px-1 pt-1">
-                                    <div class="tab-pane active" id="tab31<?= $i['gedung_kode']; ?>" role="tab" aria-labelledby="base-tab31<?= $i['gedung_kode']; ?>">
+                                <div class="row">
+                                    <div class="col-sm-12">
                                         <div class="form-group">
                                             <label>Gedung Kode: </label>
                                             <input type="text" name="gedung_kode" value="<?= $i['gedung_kode']; ?>" class="form-control" readonly>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
                                         <div class="form-group">
                                             <label>Nama Gedung: </label>
                                             <input type="text" placeholder="Nama Gedung" name="gedung_nama" value="<?= $i['gedung_nama']; ?>" class="form-control">
                                         </div>
-                                        <div class="form-group">
-                                            <label>Deskripsi: </label>
-                                            <textarea name="gedung_deskripsi" class="form-control"><?= $i['gedung_deskripsi']; ?></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Foto Cover: </label>
-                                            <input type="file" name="filefoto" class="dropzone dropzone-area form-control" id="dpz-single-file">
-                                        </div>
-
                                     </div>
-                                    <div class="tab-pane" id="tab32<?= $i['gedung_kode']; ?>" aria-labelledby="base-tab32<?= $i['gedung_kode']; ?>">
+                                </div>
 
+                                <div class="row">
+                                    <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>Harga: </label>
                                             <input type="number" placeholder="Harga Gedung" name="gedung_harga" value="<?= $i['gedung_sewa']; ?>" class="form-control harga">
                                         </div>
+                                    </div>
 
+                                    <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>Kapasitas Tamu: </label>
                                             <input type="text" placeholder="Kapasitas Tamu" name="kapasitas_tamu" value="<?= $i['gedung_kapasitas']; ?>"  class="form-control">
                                         </div>
-                                        <div class="form-group">
-                                            <label>Kapasitas Parkir: </label>
-                                            <input type="text" placeholder="Kapasitas Parkir" name="kapasitas_parkir"  value="<?= $i['gedung_parkir']; ?>"  class="form-control">
-                                        </div>                                  
+                                    </div>
+                                </div>
 
-                                        <div class="form-group">
-                                            <label>Jenis Gedung: </label>
-                                            <select name="jenis_gedung" class="form-control">
-                                                <option value="pendidikan" <?php if($i['gedung_jenis']=='pendidikan') {echo "selected";} else {}?>>Gedung Pendidikan</option>
-                                                <option value="instansi" <?php if($i['gedung_jenis']=='instansi') {echo "selected";} else {}?>>Gedung Instansi / Pemerintah</option>
-                                                <option value="ballroom" <?php if($i['gedung_jenis']=='ballroom') {echo "selected";} else {}?>>Ballroom Hotel</option>
-                                                <option value="serbaguna" <?php if($i['gedung_jenis']=='serbaguna') {echo "selected";} else {}?>>Gedung Serbaguna</option>
-                                            </select>
-                                        </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                      <div class="form-group">
+                                        <label>Kapasitas Parkir: </label>
+                                        <input type="text" placeholder="Kapasitas Parkir" name="kapasitas_parkir"  value="<?= $i['gedung_parkir']; ?>"  class="form-control">
+                                    </div>                                  
+                                </div>                                  
 
-                                        <div class="form-group">
-                                            <label>Fasilitas: </label>
-                                            <div class="row skin skin-flat">
-                                                <div class="col-md-4 col-sm-12">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Jenis Gedung: </label>
+                                        <select name="jenis_gedung" class="form-control">
+                                            <option value="pendidikan" <?php if($i['gedung_jenis']=='pendidikan') {echo "selected";} else {}?>>Gedung Pendidikan</option>
+                                            <option value="instansi" <?php if($i['gedung_jenis']=='instansi') {echo "selected";} else {}?>>Gedung Instansi / Pemerintah</option>
+                                            <option value="ballroom" <?php if($i['gedung_jenis']=='ballroom') {echo "selected";} else {}?>>Ballroom Hotel</option>
+                                            <option value="serbaguna" <?php if($i['gedung_jenis']=='serbaguna') {echo "selected";} else {}?>>Gedung Serbaguna</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
 
-
-                                                    <?php
-
-                                                    $gfasis =  (explode(", ",$i['gedung_fasilitas']));
-
-                                                    $fasi = [
-                                                        1=>
-                                                        "Catering",
-                                                        "Dekorasi Pelaminan",
-                                                        "Photo & Video Akad Resepsi",
-                                                        "Album Kolase",
-                                                        "Makeup",
-                                                        "Mc / Pembawa Acara",
-                                                        "Weeding Organizer",
-                                                        "Entertainment",
-                                                        "Pakaian Pengantin",
-                                                        "Ruang Full AC",
-                                                        "Meja VIP",
-                                                        "Lighting",
-                                                        "Lcd Proyektor",
-                                                        "Tari Tradisional",
-                                                        "Photo Both",
-                                                        "Seragam Keluarga",
-                                                        "Seragam Orang tua",
-                                                        "Meja Akad nikah",
-                                                        "Buku Tamu",
-                                                        "Kotak Amplop",
-                                                        "Box Hantaran",
-                                                        "Free Menginap di Hotel",
-                                                        "Qoori Akad / Resepsi",
-                                                        "Ruang Hias",
-                                                        "Raung Tunggu Pengantin",
-                                                        "Beskap Pengantin",
-                                                        "Rental Mobil Pengantin",
-                                                        "Kursi sofa",
-                                                        "Meja makan prasmanan",
-                                                        "Gazebo Pintu Masuk",
-                                                        "Red Carpet"
-                                                    ];
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label>Fasilitas: </label>
+                                        <div class="row skin skin-flat">
+                                            <div class="col-md-4 col-sm-12">
 
 
-                                                    for($kk=1; $kk<=11; $kk++) { ?>
-                                                        <fieldset>
-                                                            <input type="checkbox" id="<?= $kk; ?>" name="fasilitas[]" value="<?= $kk; ?>">
-                                                            <label for="<?= $kk; ?>"><?= $fasi[$kk]; ?></label>
-                                                        </fieldset>
-                                                    <?php } ?>
-                                                </div>
-                                                <div class="col-md-4 col-sm-12">
-                                                    <?php
-                                                    for($kk=12; $kk<=21; $kk++) { ?>
-                                                        <fieldset>
-                                                            <input type="checkbox" id="<?= $kk; ?>" name="fasilitas[]" value="<?= $kk; ?>">
-                                                            <label for="<?= $kk; ?>"><?= $fasi[$kk]; ?></label>
-                                                        </fieldset>
-                                                    <?php } ?>
+                                                <?php
 
-                                                </div>
+                                                $gfasis =  (explode(", ",$i['gedung_fasilitas']));
 
-                                                <div class="col-md-4 col-sm-12">
-                                                    <?php
-                                                    for($kk=22; $kk<=31; $kk++) { ?>
-                                                        <fieldset>
-                                                            <input type="checkbox" id="<?= $kk; ?>" name="fasilitas[]" value="<?= $kk; ?>">
-                                                            <label for="<?= $kk; ?>"><?= $fasi[$kk]; ?></label>
-                                                        </fieldset>
-                                                    <?php } ?>
-                                                </div>
+                                                $fasi = [
+                                                    1=>
+                                                    "Catering",
+                                                    "Dekorasi Pelaminan",
+                                                    "Photo & Video Akad Resepsi",
+                                                    "Album Kolase",
+                                                    "Makeup",
+                                                    "Mc / Pembawa Acara",
+                                                    "Weeding Organizer",
+                                                    "Entertainment",
+                                                    "Pakaian Pengantin",
+                                                    "Ruang Full AC",
+                                                    "Meja VIP",
+                                                    "Lighting",
+                                                    "Lcd Proyektor",
+                                                    "Tari Tradisional",
+                                                    "Photo Both",
+                                                    "Seragam Keluarga",
+                                                    "Seragam Orang tua",
+                                                    "Meja Akad nikah",
+                                                    "Buku Tamu",
+                                                    "Kotak Amplop",
+                                                    "Box Hantaran",
+                                                    "Free Menginap di Hotel",
+                                                    "Qoori Akad / Resepsi",
+                                                    "Ruang Hias",
+                                                    "Raung Tunggu Pengantin",
+                                                    "Beskap Pengantin",
+                                                    "Rental Mobil Pengantin",
+                                                    "Kursi sofa",
+                                                    "Meja makan prasmanan",
+                                                    "Gazebo Pintu Masuk",
+                                                    "Red Carpet"
+                                                ];
 
+
+                                                for($kk=1; $kk<=11; $kk++) { ?>
+                                                    <fieldset>
+                                                        <input type="checkbox" id="<?= $kk; ?>" name="fasilitas[]" value="<?= $kk; ?>" <?php if (in_array($kk, $gfasis)){  echo "checked";}?>>
+                                                        <label for="<?= $kk; ?>"><?= $fasi[$kk]; ?></label>
+                                                    </fieldset>
+                                                <?php } ?>
+                                            </div>
+                                            <div class="col-md-4 col-sm-12">
+                                                <?php
+                                                for($kk=12; $kk<=21; $kk++) { ?>
+                                                    <fieldset>
+                                                        <input type="checkbox" id="<?= $kk; ?>" name="fasilitas[]" value="<?= $kk; ?>" <?php if (in_array($kk, $gfasis)){  echo "checked";}?>>
+                                                        <label for="<?= $kk; ?>"><?= $fasi[$kk]; ?></label>
+                                                    </fieldset>
+                                                <?php } ?>
 
                                             </div>
-                                        </div>
 
-                                    </div>
-                                    <div class="tab-pane" id="tab33<?= $i['gedung_kode']; ?>" aria-labelledby="base-tab33<?= $i['gedung_kode']; ?>">
-                                        <div class="form-group">
-                                            <label>Alamat</label>
-                                            <input type="hidden" name="numkor">
-                                            <input type="text" class="inputAddress input-xxlarge form-control" value="<?= $i['gedung_alamat']; ?>" name="inputAddress" autocomplete="off" placeholder="Type in your address">
-                                        </div>  
-
-                                        <div class="form-group">
-                                            <label>Latitude</label>
-                                            <input type="text" class="latitude form-control" value="latitude" readonly name="latitude" >
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Longitude</label>
-                                            <input type="text" class="longitude form-control" value="longitude" readonly name="longitude">
+                                            <div class="col-md-4 col-sm-12">
+                                                <?php
+                                                for($kk=22; $kk<=31; $kk++) { ?>
+                                                    <fieldset>
+                                                        <input type="checkbox" id="<?= $kk; ?>" name="fasilitas[]" value="<?= $kk; ?>" <?php if (in_array($kk, $gfasis)){  echo "checked";}?>>
+                                                        <label for="<?= $kk; ?>"><?= $fasi[$kk]; ?></label>
+                                                    </fieldset>
+                                                <?php } ?>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label>Alamat</label>
+                                        <input type="hidden" name="numkor">
+                                        <input type="text" class="inputAddress input-xxlarge form-control" value="<?= $i['gedung_alamat']; ?>" name="inputAddress" autocomplete="off" placeholder="Type in your address">
+                                    </div>  
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Latitude</label>
+                                        <input type="text" class="latitude form-control" value="latitude" readonly name="latitude" >
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Longitude</label>
+                                        <input type="text" class="longitude form-control" value="longitude" readonly name="longitude">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label>Deskripsi: </label>
+                                        <textarea name="gedung_deskripsi" class="form-control"><?= $i['gedung_deskripsi']; ?></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label>Foto Cover: </label>
+                                        <input type="file" name="filefoto" class="dropzone dropzone-area form-control" id="dpz-single-file">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-
                     </div>
+                </div>
 
-                    <div class="modal-footer">
-                        <input type="reset" class="btn btn-outline-secondary btn-lg" data-dismiss="modal" value="close">
-                        <input type="submit" class="btn btn-outline-primary btn-lg" value="Submit">
-                    </div>
-                </form>
-            </div>
+                <div class="modal-footer">
+                    <input type="reset" class="btn btn-outline-secondary btn-lg" data-dismiss="modal" value="close">
+                    <input type="submit" class="btn btn-outline-primary btn-lg" value="Submit">
+                </div>
+            </form>
         </div>
     </div>
+</div>
 
 
-    <?php
+<?php
 endforeach;
 foreach ($gedung as $i)  : 
     ?>
