@@ -254,12 +254,10 @@
                                     $calc = 0;
                                     foreach($col as $prob){
                                         $calc += $prob * log($prob);
-                                        $entropy = ((-1)/log(7)) * $calc;
+                                        $entropy = ((-1)/log(count($alternatif))) * $calc;
                                     }
                                     array_push($entropy_arr, $entropy);
                                 }
-
-
 
 
                                 $divergence = array();
@@ -357,9 +355,30 @@
                                         }
                                     }
 
+
+                                    showb($alternatif);
+                                    showb($kriteria);
+                                    showb($kriteria_attribute);
+                                    showb($kriteria_bobot);
+                                    showt($alternatifkriteria);
+                                    showb($bobotAwal);
+                                    showb($maxKepentingan);
+                                    showt($normalisasi);
+                                    showb($sumNormal);
+                                    showt($probabilitas);
+                                    showb($fiMax);
+                                    showb($fiMin);
+                                    showb($entropy_arr);
+                                    showb($divergence);
+                                    showb($lamda);
+                                    showb($lamdaXbobotA);
+                                    showb($bobotEntropy);
+                                    showt($solusi);
+                                    showb($sj);
+                                    showb($rj);
+                                    showb($Qj);
                                     showb($hasilrangking);
                                     showb($alternatifrangking);
-                                    showb($Qj);
 
 /*                                    sort($Qj,1);
                                     $arrlength = count($Qj);
