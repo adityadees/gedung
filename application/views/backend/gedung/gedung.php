@@ -104,19 +104,8 @@
 
 						<div class="row">
 							<div class="card-body">
-								<ul class="nav nav-tabs nav-underline no-hover-bg">
-									<li class="nav-item">
-										<a class="nav-link active" id="base-tab31" data-toggle="tab" aria-controls="tab31" href="#tab31" role="tab" aria-selected="true">Informasi</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" id="base-tab32" data-toggle="tab" aria-controls="tab32" href="#tab32" role="tab" aria-selected="false">Kriteria</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" id="base-tab33" data-toggle="tab" aria-controls="tab33" href="#tab33" role="tab" aria-selected="false">Alamat</a>
-									</li>
-								</ul>
-								<div class="tab-content px-1 pt-1">
-									<div class="tab-pane active" id="tab31" role="tab" aria-labelledby="base-tab31">
+								<div class="row">
+									<div class="col-md-12">
 										<div class="form-group">
 											<label>Gedung Kode: </label>
 											<?php 
@@ -128,6 +117,11 @@
 											?>
 											<input type="text" name="gedung_kode" value="<?= $gkode; ?>" class="form-control" readonly>
 										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-md-12">
 										<div class="form-group">
 											<label>Pemilik Gedung: </label>
 											<select name="pemilik_gedung"  class="form-control">
@@ -136,36 +130,41 @@
 												<?php endforeach; ?>
 											</select>
 										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
 										<div class="form-group">
 											<label>Nama Gedung: </label>
 											<input type="text" placeholder="Nama Gedung" name="gedung_nama" class="form-control">
 										</div>
-										<div class="form-group">
-											<label>Deskripsi: </label>
-											<textarea name="gedung_deskripsi" placeholder="Deskripsi" class="form-control"></textarea>
-										</div>
-										<div class="form-group">
-											<label>Foto Cover: </label>
-											<input type="file" name="filefoto" class="dropzone dropzone-area form-control" id="dpz-single-file">
-										</div>
-
 									</div>
-									<div class="tab-pane" id="tab32" aria-labelledby="base-tab32">
+								</div>
 
+
+								<div class="row">
+									<div class="col-md-6">
 										<div class="form-group">
 											<label>Harga: </label>
 											<input type="text" placeholder="Harga Gedung" name="gedung_harga" class="form-control">
 										</div>
-
+									</div>
+									<div class="col-md-6">
 										<div class="form-group">
 											<label>Kapasitas Tamu: </label>
 											<input type="text" placeholder="Kapasitas Tamu" name="kapasitas_tamu" class="form-control">
 										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-md-6">
 										<div class="form-group">
 											<label>Kapasitas Parkir: </label>
 											<input type="text" placeholder="Kapasitas Parkir" name="kapasitas_parkir" class="form-control">
-										</div>									
-
+										</div>	
+									</div>
+									<div class="col-md-6">
 										<div class="form-group">
 											<label>Jenis Gedung: </label>
 											<select name="jenis_gedung" class="form-control">
@@ -175,7 +174,11 @@
 												<option value="serbaguna">Gedung Serbaguna</option>
 											</select>
 										</div>
+									</div>
+								</div>
 
+								<div class="row">
+									<div class="col-md-12">
 										<div class="form-group">
 											<label>Fasilitas: </label>
 											<div class="row skin skin-flat">
@@ -250,19 +253,46 @@
 											</div>
 										</div>
 									</div>
-									<div class="tab-pane" id="tab33" aria-labelledby="base-tab33">
+								</div>
+
+								<div class="row">
+									<div class="col-md-12">
 										<div class="form-group">
 											<label>Alamat</label>
 											<input type="text" class="inputAddress input-xxlarge form-control" value="Palembang, Kota Palembang, Sumatera Selatan, Indonesia" name="inputAddress" autocomplete="off" placeholder="Type in your address">
 										</div>	
+									</div>	
+								</div>	
 
+								<div class="row">
+									<div class="col-md-6">
 										<div class="form-group">
 											<label>Latitude</label>
-											<input type="text" class="latitude form-control" name="latitude" >
+											<input type="text" class="latitude form-control" name="latitude" readonly>
 										</div>
+									</div>
+									<div class="col-md-6">
 										<div class="form-group">
 											<label>Longitude</label>
-											<input type="text" class="longitude form-control" name="longitude">
+											<input type="text" class="longitude form-control" name="longitude" readonly>
+										</div>
+									</div>
+								</div>
+
+
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label>Deskripsi: </label>
+											<textarea name="gedung_deskripsi" placeholder="Deskripsi" class="form-control"></textarea>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label>Foto Cover: </label>
+											<input type="file" name="filefoto[]" multiple="" class="dropzone dropzone-area form-control" id="dpz-single-file">
 										</div>
 									</div>
 								</div>
@@ -294,24 +324,18 @@
 
 							<div class="row">
 								<div class="card-body">
-									<ul class="nav nav-tabs nav-underline no-hover-bg">
-										<li class="nav-item">
-											<a class="nav-link active" id="base-tab31<?= $i['gedung_kode']; ?>" data-toggle="tab" aria-controls="tab31<?= $i['gedung_kode']; ?>" href="#tab31<?= $i['gedung_kode']; ?>" role="tab" aria-selected="true">Informasi</a>
-										</li>
-										<li class="nav-item">
-											<a class="nav-link" id="base-tab32<?= $i['gedung_kode']; ?>" data-toggle="tab" aria-controls="tab32<?= $i['gedung_kode']; ?>" href="#tab32<?= $i['gedung_kode']; ?>" role="tab" aria-selected="false">Kriteria</a>
-										</li>
-										<li class="nav-item">
-											<a class="nav-link" id="base-tab33<?= $i['gedung_kode']; ?>" data-toggle="tab" aria-controls="tab33<?= $i['gedung_kode']; ?>" href="#tab33<?= $i['gedung_kode']; ?>" role="tab" aria-selected="false">Alamat</a>
-										</li>
-									</ul>
-									<div class="tab-content px-1 pt-1">
-										<div class="tab-pane active" id="tab31<?= $i['gedung_kode']; ?>" role="tab" aria-labelledby="base-tab31<?= $i['gedung_kode']; ?>">
+									<div class="row">
+										<div class="col-md-12">
 											<div class="form-group">
 												<label>Gedung Kode: </label>
 												<input type="text" name="gedung_kode" value="<?= $i['gedung_kode']; ?>" class="form-control" readonly>
 											</div>
+										</div>
+									</div>
 
+
+									<div class="row">
+										<div class="col-md-12">
 											<div class="form-group">
 												<label>Pemilik Gedung: </label>
 												<select name="pemilik_gedung"  class="form-control">
@@ -320,36 +344,48 @@
 													<?php endforeach; ?>
 												</select>
 											</div>
+										</div>
+									</div>
+
+
+									<div class="row">
+										<div class="col-md-12">
 											<div class="form-group">
 												<label>Nama Gedung: </label>
 												<input type="text" placeholder="Nama Gedung" name="gedung_nama" value="<?= $i['gedung_nama']; ?>" class="form-control">
 											</div>
-											<div class="form-group">
-												<label>Deskripsi: </label>
-												<textarea name="gedung_deskripsi" class="form-control"><?= $i['gedung_deskripsi']; ?></textarea>
-											</div>
-											<div class="form-group">
-												<label>Foto Cover: </label>
-												<input type="file" name="filefoto" class="dropzone dropzone-area form-control" id="dpz-single-file">
-											</div>
-
 										</div>
-										<div class="tab-pane" id="tab32<?= $i['gedung_kode']; ?>" aria-labelledby="base-tab32<?= $i['gedung_kode']; ?>">
+									</div>
 
+
+
+									<div class="row">
+										<div class="col-md-6">
 											<div class="form-group">
 												<label>Harga: </label>
 												<input type="number" placeholder="Harga Gedung" name="gedung_harga" value="<?= $i['gedung_sewa']; ?>" class="form-control harga">
 											</div>
+										</div>
 
+										
+										<div class="col-md-6">
 											<div class="form-group">
 												<label>Kapasitas Tamu: </label>
 												<input type="text" placeholder="Kapasitas Tamu" name="kapasitas_tamu" value="<?= $i['gedung_kapasitas']; ?>"  class="form-control">
 											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-md-6">
 											<div class="form-group">
 												<label>Kapasitas Parkir: </label>
 												<input type="text" placeholder="Kapasitas Parkir" name="kapasitas_parkir"  value="<?= $i['gedung_parkir']; ?>"  class="form-control">
-											</div>                                  
+											</div>   
+										</div>
 
+										
+										<div class="col-md-6">
 											<div class="form-group">
 												<label>Jenis Gedung: </label>
 												<select name="jenis_gedung" class="form-control">
@@ -359,7 +395,12 @@
 													<option value="serbaguna" <?php if($i['gedung_jenis']=='serbaguna') {echo "selected";} else {}?>>Gedung Serbaguna</option>
 												</select>
 											</div>
+										</div>
+									</div>
 
+
+									<div class="row">
+										<div class="col-md-12">
 											<div class="form-group">
 												<label>Fasilitas: </label>
 												<div class="row skin skin-flat">
@@ -432,32 +473,58 @@
 															</fieldset>
 														<?php } ?>
 													</div>
-
-
 												</div>
 											</div>
-
 										</div>
-										<div class="tab-pane" id="tab33<?= $i['gedung_kode']; ?>" aria-labelledby="base-tab33<?= $i['gedung_kode']; ?>">
+									</div>
+
+
+									<div class="row">
+										<div class="col-md-12">
 											<div class="form-group">
 												<label>Alamat</label>
 												<input type="hidden" name="numkor">
 												<input type="text" class="inputAddress input-xxlarge form-control" value="<?= $i['gedung_alamat']; ?>" name="inputAddress" autocomplete="off" placeholder="Type in your address">
 											</div>  
+										</div>  
+									</div>  
 
+									<div class="row">
+										<div class="col-md-6">
 											<div class="form-group">
 												<label>Latitude</label>
 												<input type="text" class="latitude form-control" value="latitude" readonly name="latitude" >
 											</div>
+										</div>
+										<div class="col-md-6">
 											<div class="form-group">
 												<label>Longitude</label>
 												<input type="text" class="longitude form-control" value="longitude" readonly name="longitude">
 											</div>
 										</div>
 									</div>
+
+
+									<div class="row">
+										<div class="col-md-12">
+											<div class="form-group">
+												<label>Deskripsi: </label>
+												<textarea name="gedung_deskripsi" class="form-control"><?= $i['gedung_deskripsi']; ?></textarea>
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-md-12">
+											<div class="form-group">
+												<label>Foto Cover: </label>
+												<input type="file" name="filefoto[]"  multiple="" class="dropzone dropzone-area form-control" id="dpz-single-file">
+											</div>
+										</div>
+									</div>
+
 								</div>
 							</div>
-
 						</div>
 
 						<div class="modal-footer">
