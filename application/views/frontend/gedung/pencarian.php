@@ -164,8 +164,14 @@
                 <div class="card mb-4">
                     <a class="img-card" href="<?= base_url()?>gedung/detail/<?= $ck['gedung_kode']; ?>">
                         <small class="white front tiny"><span class="mr-2 white"></span><?= $no;?></small>
-                        <div class="bottom-tour-background"></div>                         
-                        <img src="<?= base_url()?>assets/images/<?= $ck['gedung_header']?>" alt="image" />
+                        <div class="bottom-tour-background"></div>              
+                        <?php 
+                        $wherefg = [
+                            'gedung_kode' => $ck['gedung_kode']
+                        ];
+                        $ckk = $this->Mymod->ViewDetail('foto_gedung',$wherefg);
+                        ?>           
+                        <img src="<?= base_url()?>assets/images/<?= $ckk['fg_foto']?>" alt="image" />
                     </a>
                     <div class="card-content"> 
                         <div class="row align-items-center">  

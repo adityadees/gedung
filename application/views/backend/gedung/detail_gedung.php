@@ -40,7 +40,14 @@
       </div>
       <div id="project-info" class="card-body row">
         <div class="col-md-12">        
-          <img src="<?= base_url()?>assets/images/<?= $gedung['gedung_header']; ?>" class="form-control">
+
+          <?php 
+          $wherefg = [
+            'gedung_kode' => $gedung['gedung_kode']
+          ];
+          $ckk = $this->Mymod->ViewDetail('foto_gedung',$wherefg);
+          ?>
+          <img src="<?= base_url()?>assets/images/<?= $ckk['fg_foto']; ?>" class="form-control" style="height: 550px;">
         </div>
       </div>
       <div class="card-body">
@@ -161,6 +168,71 @@
             <li>Kapasitas : Rp. <?= $gedung['gedung_kapasitas'];?></li>
             <li>Parkir : Rp. <?= $gedung['gedung_parkir'];?></li>
             <li>Jenis : Rp. <?= ucwords($gedung['gedung_jenis']);?></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Fasilitas Gedung</h4>
+          <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+          <div class="heading-elements">
+            <ul class="list-inline mb-0">
+              <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+              <li><a data-action="close"><i class="ft-x"></i></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="card-body">
+           <ul>
+            <?php
+            $gfasis =  (explode(", ",$gedung['gedung_fasilitas']));
+
+            $fasi = [
+              1=>
+              "Catering",
+              "Dekorasi Pelaminan",
+              "Photo & Video Akad Resepsi",
+              "Album Kolase",
+              "Makeup",
+              "Mc / Pembawa Acara",
+              "Weeding Organizer",
+              "Entertainment",
+              "Pakaian Pengantin",
+              "Ruang Full AC",
+              "Meja VIP",
+              "Lighting",
+              "Lcd Proyektor",
+              "Tari Tradisional",
+              "Photo Both",
+              "Seragam Keluarga",
+              "Seragam Orang tua",
+              "Meja Akad nikah",
+              "Buku Tamu",
+              "Kotak Amplop",
+              "Box Hantaran",
+              "Free Menginap di Hotel",
+              "Qoori Akad / Resepsi",
+              "Ruang Hias",
+              "Raung Tunggu Pengantin",
+              "Beskap Pengantin",
+              "Rental Mobil Pengantin",
+              "Kursi sofa",
+              "Meja makan prasmanan",
+              "Gazebo Pintu Masuk",
+              "Red Carpet"
+            ];
+
+            for($kk=1; $kk<=31; $kk++) { 
+              ?>
+              <li>
+                <?php if (in_array($kk, $gfasis)) {echo "<label style='color:red'>".$fasi[$kk]."</label>"; } else { echo "<label><strike>".$fasi[$kk]."</strike></label>";}?>
+              </li>
+            <?php } 
+            ?>
           </ul>
         </div>
       </div>

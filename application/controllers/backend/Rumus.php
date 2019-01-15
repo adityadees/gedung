@@ -12,17 +12,18 @@ class Rumus extends CI_Controller{
 
 	public function index()
 	{
-		$y['title']='Rumus';
-	
-		$maxNK = $this->Mymod->maxKepentingan()->result_array();
-		$maxNKz = $this->Mymod->ViewData('user');
-		
+		if($_SESSION['user_role']=='admin'){
+			$y['title']='Rumus';
+			
+			$maxNK = $this->Mymod->maxKepentingan()->result_array();
+			$maxNKz = $this->Mymod->ViewData('user');
+			
 
-		$this->load->view('backend/layout/header',$y);
-		$this->load->view('backend/layout/topbar');
-		$this->load->view('backend/layout/sidebar');
-		$this->load->view('backend/rumus/rumus');
-		$this->load->view('backend/layout/footer');
+			$this->load->view('backend/layout/header',$y);
+			$this->load->view('backend/layout/topbar');
+			$this->load->view('backend/layout/sidebar');
+			$this->load->view('backend/rumus/rumus');
+			$this->load->view('backend/layout/footer');
+		}
 	}
-
 }
