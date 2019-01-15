@@ -63,7 +63,16 @@
 														<td><?php echo $i['gedung_lat']." - ".$i['gedung_long'];?></td>
 														<td><?php echo $i['gedung_alamat'];?></td>
 														<td><?php echo $i['gedung_deskripsi'];?></td>
-														<td><img src="<?= base_url()?>assets/images/<?php echo $i['gedung_header'];?>" width="50px" height="50px"></td>
+														<td>
+															<?php 
+															$wherefg = [
+																'gedung_kode' => $i['gedung_kode']
+															];
+															$ckk = $this->Mymod->ViewDetail('foto_gedung',$wherefg);
+															?>
+															<img src="<?= base_url()?>assets/images/<?php echo $ckk['fg_foto'];?>" width="50px" height="50px">
+
+														</td>
 														<td class=" text-center">
 															<div class="btn-group mr-1 mb-1">
 																<button type="button" class="btn btn-icon btn-pink dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-info"></i></button>
@@ -105,7 +114,8 @@
 						<div class="row">
 							<div class="card-body">
 								<div class="row">
-									<div class="col-md-12">
+
+									<div class="col-sm-12">
 										<div class="form-group">
 											<label>Gedung Kode: </label>
 											<?php 
@@ -121,7 +131,8 @@
 								</div>
 
 								<div class="row">
-									<div class="col-md-12">
+
+									<div class="col-sm-12">
 										<div class="form-group">
 											<label>Pemilik Gedung: </label>
 											<select name="pemilik_gedung"  class="form-control">
@@ -132,8 +143,10 @@
 										</div>
 									</div>
 								</div>
+
+
 								<div class="row">
-									<div class="col-md-12">
+									<div class="col-sm-12">
 										<div class="form-group">
 											<label>Nama Gedung: </label>
 											<input type="text" placeholder="Nama Gedung" name="gedung_nama" class="form-control">
@@ -142,14 +155,16 @@
 								</div>
 
 
+
 								<div class="row">
-									<div class="col-md-6">
+									<div class="col-sm-6">
 										<div class="form-group">
 											<label>Harga: </label>
 											<input type="text" placeholder="Harga Gedung" name="gedung_harga" class="form-control">
 										</div>
 									</div>
-									<div class="col-md-6">
+									
+									<div class="col-sm-6">
 										<div class="form-group">
 											<label>Kapasitas Tamu: </label>
 											<input type="text" placeholder="Kapasitas Tamu" name="kapasitas_tamu" class="form-control">
@@ -157,14 +172,16 @@
 									</div>
 								</div>
 
+
+
 								<div class="row">
-									<div class="col-md-6">
+									<div class="col-sm-6">
 										<div class="form-group">
 											<label>Kapasitas Parkir: </label>
 											<input type="text" placeholder="Kapasitas Parkir" name="kapasitas_parkir" class="form-control">
-										</div>	
+										</div>
 									</div>
-									<div class="col-md-6">
+									<div class="col-sm-6">
 										<div class="form-group">
 											<label>Jenis Gedung: </label>
 											<select name="jenis_gedung" class="form-control">
@@ -177,8 +194,11 @@
 									</div>
 								</div>
 
+
+
+
 								<div class="row">
-									<div class="col-md-12">
+									<div class="col-sm-12">
 										<div class="form-group">
 											<label>Fasilitas: </label>
 											<div class="row skin skin-flat">
@@ -255,8 +275,9 @@
 									</div>
 								</div>
 
+
 								<div class="row">
-									<div class="col-md-12">
+									<div class="col-sm-12">
 										<div class="form-group">
 											<label>Alamat</label>
 											<input type="text" class="inputAddress input-xxlarge form-control" value="Palembang, Kota Palembang, Sumatera Selatan, Indonesia" name="inputAddress" autocomplete="off" placeholder="Type in your address">
@@ -264,8 +285,9 @@
 									</div>	
 								</div>	
 
+
 								<div class="row">
-									<div class="col-md-6">
+									<div class="col-sm-6">
 										<div class="form-group">
 											<label>Latitude</label>
 											<input type="text" class="latitude form-control" name="latitude" readonly>
@@ -280,22 +302,27 @@
 								</div>
 
 
+
+
 								<div class="row">
-									<div class="col-md-12">
+									<div class="col-sm-12">
 										<div class="form-group">
 											<label>Deskripsi: </label>
 											<textarea name="gedung_deskripsi" placeholder="Deskripsi" class="form-control"></textarea>
 										</div>
 									</div>
 								</div>
+
+
 								<div class="row">
-									<div class="col-md-12">
+									<div class="col-sm-12">
 										<div class="form-group">
 											<label>Foto Cover: </label>
 											<input type="file" name="filefoto[]" multiple="" class="dropzone dropzone-area form-control" id="dpz-single-file">
 										</div>
 									</div>
 								</div>
+
 							</div>
 						</div>
 					</div>
@@ -324,8 +351,10 @@
 
 							<div class="row">
 								<div class="card-body">
+
+
 									<div class="row">
-										<div class="col-md-12">
+										<div class="col-sm-12">
 											<div class="form-group">
 												<label>Gedung Kode: </label>
 												<input type="text" name="gedung_kode" value="<?= $i['gedung_kode']; ?>" class="form-control" readonly>
@@ -335,7 +364,7 @@
 
 
 									<div class="row">
-										<div class="col-md-12">
+										<div class="col-sm-12">
 											<div class="form-group">
 												<label>Pemilik Gedung: </label>
 												<select name="pemilik_gedung"  class="form-control">
@@ -347,9 +376,8 @@
 										</div>
 									</div>
 
-
 									<div class="row">
-										<div class="col-md-12">
+										<div class="col-sm-12">
 											<div class="form-group">
 												<label>Nama Gedung: </label>
 												<input type="text" placeholder="Nama Gedung" name="gedung_nama" value="<?= $i['gedung_nama']; ?>" class="form-control">
@@ -358,17 +386,15 @@
 									</div>
 
 
-
 									<div class="row">
-										<div class="col-md-6">
+										<div class="col-sm-6">
 											<div class="form-group">
 												<label>Harga: </label>
 												<input type="number" placeholder="Harga Gedung" name="gedung_harga" value="<?= $i['gedung_sewa']; ?>" class="form-control harga">
 											</div>
 										</div>
 
-										
-										<div class="col-md-6">
+										<div class="col-sm-6">
 											<div class="form-group">
 												<label>Kapasitas Tamu: </label>
 												<input type="text" placeholder="Kapasitas Tamu" name="kapasitas_tamu" value="<?= $i['gedung_kapasitas']; ?>"  class="form-control">
@@ -377,15 +403,13 @@
 									</div>
 
 									<div class="row">
-										<div class="col-md-6">
+										<div class="col-sm-6">
 											<div class="form-group">
 												<label>Kapasitas Parkir: </label>
 												<input type="text" placeholder="Kapasitas Parkir" name="kapasitas_parkir"  value="<?= $i['gedung_parkir']; ?>"  class="form-control">
-											</div>   
+											</div>
 										</div>
-
-										
-										<div class="col-md-6">
+										<div class="col-sm-6">
 											<div class="form-group">
 												<label>Jenis Gedung: </label>
 												<select name="jenis_gedung" class="form-control">
@@ -399,8 +423,9 @@
 									</div>
 
 
+
 									<div class="row">
-										<div class="col-md-12">
+										<div class="col-sm-12">
 											<div class="form-group">
 												<label>Fasilitas: </label>
 												<div class="row skin skin-flat">
@@ -473,6 +498,7 @@
 															</fieldset>
 														<?php } ?>
 													</div>
+
 												</div>
 											</div>
 										</div>
@@ -480,7 +506,7 @@
 
 
 									<div class="row">
-										<div class="col-md-12">
+										<div class="col-sm-12">
 											<div class="form-group">
 												<label>Alamat</label>
 												<input type="hidden" name="numkor">
@@ -489,14 +515,16 @@
 										</div>  
 									</div>  
 
+
 									<div class="row">
-										<div class="col-md-6">
+										<div class="col-sm-6">
 											<div class="form-group">
 												<label>Latitude</label>
 												<input type="text" class="latitude form-control" value="latitude" readonly name="latitude" >
 											</div>
 										</div>
-										<div class="col-md-6">
+
+										<div class="col-sm-6">
 											<div class="form-group">
 												<label>Longitude</label>
 												<input type="text" class="longitude form-control" value="longitude" readonly name="longitude">
@@ -507,6 +535,7 @@
 
 									<div class="row">
 										<div class="col-md-12">
+
 											<div class="form-group">
 												<label>Deskripsi: </label>
 												<textarea name="gedung_deskripsi" class="form-control"><?= $i['gedung_deskripsi']; ?></textarea>
@@ -515,10 +544,11 @@
 									</div>
 
 									<div class="row">
-										<div class="col-md-12">
+
+										<div class="col-sm-12">
 											<div class="form-group">
 												<label>Foto Cover: </label>
-												<input type="file" name="filefoto[]"  multiple="" class="dropzone dropzone-area form-control" id="dpz-single-file">
+												<input type="file" name="filefoto[]" multiple="" class="dropzone dropzone-area form-control" id="dpz-single-file">
 											</div>
 										</div>
 									</div>

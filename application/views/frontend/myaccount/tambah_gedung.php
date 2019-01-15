@@ -218,7 +218,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Foto Cover: </label>
-                                                <input type="file" name="filefoto" class="dropzone dropzone-area form-control" id="dpz-single-file">
+                                                <input type="file" name="filefoto[]" multiple="" class="dropzone dropzone-area form-control" id="dpz-single-file">
                                             </div>
                                         </div>
                                     </div>

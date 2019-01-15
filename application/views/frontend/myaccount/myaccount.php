@@ -69,13 +69,19 @@
                                                 <td><?= number_format($i['gedung_kapasitas']); ?></td>
                                                 <td><?= number_format($i['gedung_parkir']); ?></td>
                                                 <td><?= ucwords($i['gedung_jenis']); ?></td>
-                                                <td><img src="<?= base_url()?>assets/images/<?= $i['gedung_header']; ?>" width="50px" height="50px"></td>
+                                                <td>
+                                                    <?php 
+                                                    $wherefg = [
+                                                        'gedung_kode' => $i['gedung_kode']
+                                                    ];
+                                                    $ckk = $this->Mymod->ViewDetail('foto_gedung',$wherefg);
+                                                    ?>           
+                                                    <img src="<?= base_url()?>assets/images/<?= $ckk['fg_foto']; ?>" width="50px" height="50px">
+                                                </td>
                                                 <td>
                                                     <div class="btn-group mr-1 mb-1">
                                                         <button type="button" class="btn btn-info btn-min-width dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-info"></i> &nbsp;Aksi</button>
                                                         <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalAddF<?php echo $i['gedung_kode']; ?>">Tambah Foto</a>
-                                                            <div class="divider"></div>
                                                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalEdit<?php echo $i['gedung_kode']; ?>">Edit</a>
                                                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalHapus<?php echo $i['gedung_kode']; ?>">Hapus</a>
                                                         </div>
@@ -401,8 +407,8 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label>Foto Cover: </label>
-                                        <input type="file" name="filefoto" class="dropzone dropzone-area form-control" id="dpz-single-file">
+                                        <label>Foto: </label>
+                                        <input type="file" name="filefoto[]" multiple="" class="dropzone dropzone-area form-control" id="dpz-single-file">
                                     </div>
                                 </div>
                             </div>

@@ -24,7 +24,14 @@
                                     <div class="card" style="min-height: 400px;">
 
                                         <a class="img-card" href="<?= base_url()?>gedung/detail/<?= $i['gedung_kode']; ?>">
-                                            <img src="<?= base_url()?>assets/images/<?= $i['gedung_header']?>" alt=""/>
+                                            <?php 
+                                            $wherefg = [
+                                                'gedung_kode' => $i['gedung_kode']
+                                            ];
+                                            $ckk = $this->Mymod->ViewDetail('foto_gedung',$wherefg);
+                                            ?>
+                                            <img src="<?= base_url()?>assets/images/<?= $ckk['fg_foto']?>" alt=""/>
+
                                         </a>
                                         <div class="card-content">
                                             <div>

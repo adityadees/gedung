@@ -242,24 +242,33 @@ class Myaccount extends CI_Controller{
 
 
 
+		$datasx = array();
 		if(!empty($_FILES['filefoto']['name'])){
-			$config['upload_path'] = 'assets\images';
-			$config['allowed_types'] = 'jpg|jpeg|png|gif';
-			$config['file_name'] = $_FILES['filefoto']['name'];
-			$config['width'] = 700;
-			$config['height'] = 700;
+			$filesCount = count($_FILES['filefoto']['name']);
+			for($i = 0; $i < $filesCount; $i++){
+				$_FILES['file']['name']     = $_FILES['filefoto']['name'][$i];
+				$_FILES['file']['type']     = $_FILES['filefoto']['type'][$i];
+				$_FILES['file']['tmp_name'] = $_FILES['filefoto']['tmp_name'][$i];
+				$_FILES['file']['error']     = $_FILES['filefoto']['error'][$i];
+				$_FILES['file']['size']     = $_FILES['filefoto']['size'][$i];
 
-			$this->load->library('upload',$config);
-			$this->upload->initialize($config);
+				$uploadPath = 'assets/images/';
+				$config['upload_path'] = $uploadPath;
+				$config['allowed_types'] = 'jpg|jpeg|png|gif';
+				$config['width'] = 700;
+				$config['height'] = 700;
 
-			if($this->upload->do_upload('filefoto')){
-				$uploadData = $this->upload->data();
-				$gedung_header = $uploadData['file_name'];
-			}else{
-				$this->session->set_flashdata('error', 'Foto gagal diupload');
-				redirect('myaccount');			
+				$this->load->library('upload', $config);
+				$this->upload->initialize($config);
+
+				if($this->upload->do_upload('file')){
+					$fileData = $this->upload->data();
+					$uploadData[$i]['file_name'] = $fileData['file_name'];
+
+					$datasx[$i] = $uploadData[$i]['file_name'];
+				} 
 			}
-		}else{
+
 			$where = [
 				'gedung_kode'=>$gedung_kode,
 			];
@@ -277,15 +286,65 @@ class Myaccount extends CI_Controller{
 			];
 			$UpdateData=$this->Mymod->UpdateData('gedung',$data,$where);
 			if($UpdateData){
-
-
 				$arrdata = [$bobot_harga,$bobot_tamu,$bobot_parkir,$bobot_jenis,$bobot_fasi,'2'];
 				$kridata = ['C1','C2','C3','C4','C5','C6'];
-
-
 				for($i=0; $i <6; $i++)
 				{
+					$where = [
+						'gedung_kode'=>$gedung_kode,
+						'kriteria_kode'=> $kridata[$i],
+					];
 
+					$dataDetail =[ 
+						'nilai_nilai'=>$arrdata[$i],
+					];
+
+					$this->Mymod->UpdateData('nilai',$dataDetail,$where);
+				}
+
+				if($this->upload->do_upload('file')){
+
+					for($i = 0; $i < $filesCount; $i++){
+						$dataDetail =[ 
+							'gedung_kode'=>$gedung_kode,
+							'fg_foto'=>$datasx[$i],
+						];
+
+						$this->Mymod->InsertData('foto_gedung',$dataDetail);
+
+						
+					}
+				}
+				$this->session->set_flashdata('success', 'Berhasil merubah data '.$title);
+				redirect('myaccount');		
+
+			}else{
+				$this->session->set_flashdata('error', 'Gagal menambah data '.$title);
+				redirect('myaccount');		
+			}
+		} else {
+
+			$where = [
+				'gedung_kode'=>$gedung_kode,
+			];
+			$data =[ 
+				'gedung_nama'=>$gedung_nama,
+				'gedung_lat'=>$gedung_lat,
+				'gedung_long'=>$gedung_long,
+				'gedung_alamat'=>$gedung_alamat,
+				'gedung_sewa'=>$gedung_harga,
+				'gedung_kapasitas'=>$gedung_kapasitas,
+				'gedung_parkir'=>$gedung_parkir,
+				'gedung_jenis'=>$gedung_jenis,
+				'gedung_fasilitas'=>$gedung_fasilitas,
+				'gedung_deskripsi'=>$gedung_deskripsi,
+			];
+			$UpdateData=$this->Mymod->UpdateData('gedung',$data,$where);
+			if($UpdateData){
+				$arrdata = [$bobot_harga,$bobot_tamu,$bobot_parkir,$bobot_jenis,$bobot_fasi,'2'];
+				$kridata = ['C1','C2','C3','C4','C5','C6'];
+				for($i=0; $i <6; $i++)
+				{
 					$where = [
 						'gedung_kode'=>$gedung_kode,
 						'kriteria_kode'=> $kridata[$i],
@@ -299,54 +358,8 @@ class Myaccount extends CI_Controller{
 				}
 				$this->session->set_flashdata('success', 'Berhasil merubah data '.$title);
 				redirect('myaccount');		
-			}else{
-				$this->session->set_flashdata('error', 'Gagal merubah data '.$title);
-				redirect('myaccount');		
-			}	
-		}
 
-		$where = [
-			'gedung_kode'=>$gedung_kode,
-		];
-		$data =[ 
-			'gedung_nama'=>$gedung_nama,
-			'gedung_lat'=>$gedung_lat,
-			'gedung_long'=>$gedung_long,
-			'gedung_alamat'=>$gedung_alamat,
-			'gedung_sewa'=>$gedung_harga,
-			'gedung_kapasitas'=>$gedung_kapasitas,
-			'gedung_parkir'=>$gedung_parkir,
-			'gedung_jenis'=>$gedung_jenis,
-			'gedung_fasilitas'=>$gedung_fasilitas,
-			'gedung_deskripsi'=>$gedung_deskripsi,
-			'gedung_header' => $gedung_header
-		];
-		$UpdateData=$this->Mymod->UpdateData('gedung',$data,$where);
-		if($UpdateData){
-
-
-			$arrdata = [$bobot_harga,$bobot_tamu,$bobot_parkir,$bobot_jenis,$bobot_fasi,'2'];
-			$kridata = ['C1','C2','C3','C4','C5','C6'];
-
-
-			$where = [
-				'gedung_kode'=>$gedung_kode,
-			];
-			for($i=0; $i <6; $i++)
-			{
-
-				$dataDetail =[ 
-					'kriteria_kode'=> $kridata[$i],
-					'nilai_nilai'=>$arrdata[$i],
-				];
-
-				$this->Mymod->UpdateData('nilai',$dataDetail,$where);
 			}
-			$this->session->set_flashdata('success', 'Berhasil merubah data'.$title);
-			redirect('myaccount');		
-		}else{
-			$this->session->set_flashdata('error', 'Gagal merubah data '.$title);
-			redirect('myaccount');		
 		}		
 	}
 
@@ -446,67 +459,89 @@ class Myaccount extends CI_Controller{
 		}
 
 
-
+		$datasx = array();
 		if(!empty($_FILES['filefoto']['name'])){
-			$config['upload_path'] = 'assets\images';
-			$config['allowed_types'] = 'jpg|jpeg|png|gif';
-			$config['file_name'] = $_FILES['filefoto']['name'];
-			$config['width'] = 700;
-			$config['height'] = 700;
+			$filesCount = count($_FILES['filefoto']['name']);
+			for($i = 0; $i < $filesCount; $i++){
+				$_FILES['file']['name']     = $_FILES['filefoto']['name'][$i];
+				$_FILES['file']['type']     = $_FILES['filefoto']['type'][$i];
+				$_FILES['file']['tmp_name'] = $_FILES['filefoto']['tmp_name'][$i];
+				$_FILES['file']['error']     = $_FILES['filefoto']['error'][$i];
+				$_FILES['file']['size']     = $_FILES['filefoto']['size'][$i];
 
-			$this->load->library('upload',$config);
-			$this->upload->initialize($config);
+				$uploadPath = 'assets/images/';
+				$config['upload_path'] = $uploadPath;
+				$config['allowed_types'] = 'jpg|jpeg|png|gif';
+				$config['width'] = 700;
+				$config['height'] = 700;
 
-			if($this->upload->do_upload('filefoto')){
-				$uploadData = $this->upload->data();
-				$gedung_header = $uploadData['file_name'];
-			}else{
-				$this->session->set_flashdata('error', 'Foto gagal diupload');
-				redirect('myaccount/tambah-gedung');			
+				$this->load->library('upload', $config);
+				$this->upload->initialize($config);
+
+				if($this->upload->do_upload('file')){
+					$fileData = $this->upload->data();
+					$uploadData[$i]['file_name'] = $fileData['file_name'];
+
+					$datasx[$i] = $uploadData[$i]['file_name'];
+				} else {
+					$this->session->set_flashdata('error', 'Foto gagal diupload');
+					redirect('myaccount/tambah-gedung');			
+				}
 			}
-		}else{
-			$this->session->set_flashdata('error', 'Gagal menambah data, Silahkan masukan Foto');
+
+			$data =[ 
+				'gedung_kode'=>$gedung_kode,
+				'gedung_nama'=>$gedung_nama,
+				'gedung_lat'=>$gedung_lat,
+				'gedung_long'=>$gedung_long,
+				'gedung_alamat'=>$gedung_alamat,
+				'gedung_sewa'=>$gedung_harga,
+				'gedung_kapasitas'=>$gedung_kapasitas,
+				'gedung_parkir'=>$gedung_parkir,
+				'gedung_jenis'=>$gedung_jenis,
+				'gedung_fasilitas'=>$gedung_fasilitas,
+				'gedung_deskripsi'=>$gedung_deskripsi,
+				'user_id'=>$pemilik_gedung,
+			];
+			$InsertData=$this->Mymod->InsertData('gedung',$data);
+			if($InsertData){
+
+
+				$arrdata = [$bobot_harga,$bobot_tamu,$bobot_parkir,$bobot_jenis,$bobot_fasi,'2'];
+				$kridata = ['C1','C2','C3','C4','C5','C6'];
+				for($i=0; $i <6; $i++)
+				{
+					$dataDetail =[ 
+						'gedung_kode'=>$gedung_kode,
+						'kriteria_kode'=> $kridata[$i],
+						'nilai_nilai'=>$arrdata[$i],
+					];
+
+					$this->Mymod->InsertData('nilai',$dataDetail);
+				}
+
+
+				for($i = 0; $i < $filesCount; $i++){
+					$dataDetail =[ 
+						'gedung_kode'=>$gedung_kode,
+						'fg_foto'=>$datasx[$i],
+					];
+
+					$this->Mymod->InsertData('foto_gedung',$dataDetail);
+				}
+				$this->session->set_flashdata('success', 'Berhasil menambah data '.$title);
+				redirect('myaccount/tambah-gedung');
+
+
+			}else{
+				$this->session->set_flashdata('error', 'Gagal menambah data '.$title);
+				redirect('myaccount/tambah-gedung');		
+			}
+		} else {
+			$this->session->set_flashdata('error', 'Gagal menambah data '.$title.' Foto belum diupload');
 			redirect('myaccount/tambah-gedung');		
 		}
 
-		$data =[ 
-			'gedung_kode'=>$gedung_kode,
-			'gedung_nama'=>$gedung_nama,
-			'gedung_lat'=>$gedung_lat,
-			'gedung_long'=>$gedung_long,
-			'gedung_alamat'=>$gedung_alamat,
-			'gedung_sewa'=>$gedung_harga,
-			'gedung_kapasitas'=>$gedung_kapasitas,
-			'gedung_parkir'=>$gedung_parkir,
-			'gedung_jenis'=>$gedung_jenis,
-			'gedung_fasilitas'=>$gedung_fasilitas,
-			'gedung_deskripsi'=>$gedung_deskripsi,
-			'user_id'=>$pemilik_gedung,
-			'gedung_header' => $gedung_header
-		];
-		$InsertData=$this->Mymod->InsertData('gedung',$data);
-		if($InsertData){
-
-
-			$arrdata = [$bobot_harga,$bobot_tamu,$bobot_parkir,$bobot_jenis,$bobot_fasi,'2'];
-			$kridata = ['C1','C2','C3','C4','C5','C6'];
-
-			for($i=0; $i <6; $i++)
-			{
-				$dataDetail =[ 
-					'gedung_kode'=>$gedung_kode,
-					'kriteria_kode'=> $kridata[$i],
-					'nilai_nilai'=>$arrdata[$i],
-				];
-
-				$this->Mymod->InsertData('nilai',$dataDetail);
-			}
-			$this->session->set_flashdata('success', 'Berhasil menambah data '.$title);
-			redirect('myaccount/tambah-gedung');		
-		}else{
-			$this->session->set_flashdata('error', 'Gagal menambah data '.$title);
-			redirect('myaccount/tambah-gedung');		
-		}		
 	}
 
 

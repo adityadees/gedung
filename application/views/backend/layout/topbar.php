@@ -48,7 +48,7 @@
                 <img src="<?php echo base_url();?>assets/backend/images/portrait/small/avatar-s-1.png" alt="avatar">
                 <i></i>
               </span>
-              <span class="user-name"><?= $_SESSION['user_username'];?></span>
+              <span class="user-name"><?php if($_SESSION['user_role']=='admin') {echo $_SESSION['user_username'];} ?></span>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
               <a class="dropdown-item" href="<?= base_url();?>">
