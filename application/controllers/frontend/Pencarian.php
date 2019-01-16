@@ -442,7 +442,7 @@ class Pencarian extends CI_Controller{
 		}
 
 		
-
+		$title = 'Pencarian';
 		$this->session->set_flashdata('success', 'Berhasil merubah data '.$title);
 		redirect('pencarian');	
 	}

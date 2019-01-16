@@ -2,10 +2,11 @@
   <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/backend/vendors/css/forms/icheck/icheck.css">
   <link rel="stylesheet" type="text/css" href="<?= base_url()?>assets/backend/vendors/css/tables/datatable/datatables.min.css">
   <link rel="stylesheet" type="text/css" href="<?= base_url()?>assets/backend/css/app.min.css">
+  <link rel="stylesheet" type="text/css" href="<?= base_url()?>assets/backend/css/img-style.css">
+  
+<hr>
 
-  <hr>
-
-  <section id="section3">
+<section id="section3">
     <div class="container tour-wrapper">
         <div class="row">
             <div class="col-12 mb-4">
@@ -412,17 +413,41 @@
                                     </div>
                                 </div>
                             </div>
+
+
+                            <div class="row">
+                                <?php
+                                $whrere = [
+                                    'gedung_kode' => $i['gedung_kode']
+                                ];
+                                $cg = $this->Mymod->ViewDataWhere('foto_gedung',$whrere);
+                                foreach ($cg as $cgk) :
+                                    ?>
+                                    <div class="col-sm-12 col-md-3">
+                                        <div class="form-group">
+                                            <div class="img-box-con">
+                                              <img src="<?= base_url()?>assets/images/<?= $cgk['fg_foto']; ?>" alt="Avatar" class="image-mg" style="width:100%">
+                                              <div class="middle-mg">
+                                                <div class="text-mg"><a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalHapusFT<?php echo $cgk['fg_id']; ?>"><i class="fa fa-trash"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
                         </div>
+
+
                     </div>
                 </div>
+            </div>
 
-                <div class="modal-footer">
-                    <input type="reset" class="btn btn-outline-secondary btn-lg" data-dismiss="modal" value="close">
-                    <input type="submit" class="btn btn-outline-primary btn-lg" value="Submit">
-                </div>
-            </form>
-        </div>
+            <div class="modal-footer">
+                <input type="reset" class="btn btn-outline-secondary btn-lg" data-dismiss="modal" value="close">
+                <input type="submit" class="btn btn-outline-primary btn-lg" value="Submit">
+            </div>
+        </form>
     </div>
+</div>
 </div>
 
 
@@ -498,7 +523,46 @@ foreach ($gedung as $i)  :
       </div>
   </div>
 
-<?php endforeach; ?>
+  <?php 
+endforeach; 
+$mhfs = $this->Mymod->ViewData('foto_gedung');
+foreach ($mhfs as $mhf) :
+    ?>
+
+    <div class="modal fade text-left" id="modalHapusFT<?php echo $mhf['fg_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel34" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="myModalLabel34">Konfirmasi</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="<?= base_url();?>frontend/myaccount/delete_fg" method="POST">
+                    <div class="modal-body bg-red">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="hidden" name="fg_id" value="<?php echo $mhf['fg_id'];?>">
+                                    <label class="text-center text-white">Anda yakin ingin menghapus Foto ini ?</label>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="reset" class="btn btn-outline-secondary btn-lg" data-dismiss="modal" value="close">
+                        <input type="submit" class="btn btn-outline-primary btn-lg" value="Submit">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <?php
+endforeach;
+?>
 
 <script src="<?php echo base_url();?>assets/backend/vendors/js/forms/icheck/icheck.min.js"></script>
 <script src="<?php echo base_url();?>assets/backend/js/scripts/forms/checkbox-radio.min.js"></script>

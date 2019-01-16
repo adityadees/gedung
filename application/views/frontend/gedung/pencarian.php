@@ -153,6 +153,20 @@
         </div>
 
         <div class="col-md-8">
+            <p>
+                <?php if($this->session->flashdata('success')){ ?>
+                    <div class="alert alert-success">
+                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+                        <strong>Sukses!</strong> <?php echo $this->session->flashdata('success'); ?>
+                    </div>
+                <?php } else if($this->session->flashdata('error')){?>
+                    <div class="alert alert-warning">
+                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+                        <strong>Error!</strong> <?php echo $this->session->flashdata('error'); ?>
+                    </div>
+                <?php }?>
+            </p>
+            
             <?php
             $no=0;
             for($i=0;$i<count($hasil);$i++){

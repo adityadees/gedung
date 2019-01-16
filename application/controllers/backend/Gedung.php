@@ -451,6 +451,24 @@ class Gedung extends CI_Controller{
 		}		
 	}
 
+
+
+	public function delete_fg(){
+		if($_SESSION['user_role']=='admin'){
+			$title = 'Foto Gedung';
+			$fg_id=$this->input->post('fg_id');
+			$table='foto_gedung';
+
+			$where =[ 
+				'fg_id' => $fg_id
+			];
+			$this->Mymod->DeleteData($table,$where);
+			$this->session->set_flashdata('success', 'Berhasil menghapus data '.$title);
+			redirect('admin/gedung');
+		}		
+	}		
+
+
 	public function upload_foto(){
 		if($_SESSION['user_role']=='admin'){
 			$gedung_kode=$this->input->post('gedung_kode');

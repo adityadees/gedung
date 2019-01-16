@@ -99,12 +99,23 @@ $sumBobot = $this->db->query('SELECT sum(kriteria_bobot) as sumbot FROM kriteria
 $cAlter = $this->db->query('SELECT count(*) as cAlternatif FROM gedung')->row_array();
 
 $alternatif = array(); 
+$alternatifNama = array(); 
 $i=0;
 $galternatif = $this->db->query('SELECT * FROM gedung');
 foreach ($galternatif->result_array()  as $dataalternatif) :
     $alternatif[$i] = $dataalternatif['gedung_kode'];
     $i++;
 endforeach;
+
+$i=0;
+foreach ($galternatif->result_array()  as $dataalternatif) :
+    $alternatifNama[$i] = $dataalternatif['gedung_nama'];
+    $i++;
+endforeach;
+
+
+
+
 
 
 $kriteria = array(); 
@@ -316,7 +327,7 @@ $alternatifrangking = array();
 for ($i=0;$i<count($alternatif);$i++)
 {
     $hasilrangking[$i] = $Qj[$i];
-    $alternatifrangking[$i] = $alternatif[$i];
+    $alternatifrangking[$i] = $alternatifNama[$i];
 }
 
 
@@ -366,13 +377,13 @@ $arKd= ['Gedung'];
                         <div class="card-content collapse show">
                             <div class="card-body card-dashboard">
                                 <div class="row">
-                                    <div class="col-md-3">
+                                    <div class="col-md-3" style="font-size:0.8em;">
                                         <?php 
                                         showb($arKd);
-                                        showk($alternatif); 
+                                        showk($alternatifNama); 
                                         ?>
                                     </div>
-                                    <div class="col-md-9">
+                                    <div class="col-md-9" style="font-size:0.8em;">
                                         <?php 
                                         showb($kriteria); 
                                         shown($alternatifkriteria);
@@ -405,7 +416,7 @@ $arKd= ['Gedung'];
                         <div class="card-content collapse show">
                             <div class="card-body card-dashboard">
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-12" style="font-size:0.8em;">
                                         <?php 
                                         showt($normalisasi,$kriteria);
                                         ?>
@@ -438,7 +449,7 @@ $arKd= ['Gedung'];
                         <div class="card-content collapse show">
                             <div class="card-body card-dashboard">
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-12" style="font-size:0.8em;">
                                         <?php 
                                         showt($probabilitas,$kriteria);
                                         ?>
@@ -506,14 +517,12 @@ $arKd= ['Gedung'];
                 </div>
             </div>
 
-
-
             <div class="row">
-                <div class="col-4">
+                <div class="col-12">
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">
-                                Nilai Entropy utk kriteria
+                                Nilai Entropy utk kriteria 
                             </h4>
                             <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
                             <div class="heading-elements">
@@ -528,30 +537,9 @@ $arKd= ['Gedung'];
                         <div class="card-content collapse show">
                             <div class="card-body card-dashboard">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <?php 
-                                        $arfiMax = [
-                                            'fi*(max)'
-                                        ];
-                                        $arfiMin = [
-                                            'fi- (min)'
-                                        ];
-                                        $arkk = [
-                                            'Kriteria'
-                                        ];
-                                        showb($arkk);
-                                        showk($kriteria); 
-                                        ?>
-                                    </div>
-
-
-                                    <div class="col-md-6">
-                                        <?php 
-                                        $Nentrop = [
-                                            'Nilai Entropy'
-                                        ];
-                                        showb($Nentrop);
-                                        showk($entropy_arr); 
+                                        showbg($entropy_arr,$kriteria);
                                         ?>
                                     </div>
                                 </div>
@@ -559,8 +547,11 @@ $arKd= ['Gedung'];
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="col-8">
+            <div class="row">
+
+                <div class="col-12">
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">
@@ -616,133 +607,7 @@ $arKd= ['Gedung'];
                     </div>
                 </div>
             </div>
-
-
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">
-                                Bobot Entropy 
-                            </h4>
-                            <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-                            <div class="heading-elements">
-                                <ul class="list-inline mb-0">
-                                    <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
-                                    <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
-                                    <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
-                                    <li><a data-action="close"><i class="ft-x"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="card-content collapse show">
-                            <div class="card-body card-dashboard">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <?php 
-                                        showbg($bobotEntropy,$kriteria);
-                                        ?>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">
-                                Matrik ternormalisasi   
-                            </h4>
-                            <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-                            <div class="heading-elements">
-                                <ul class="list-inline mb-0">
-                                    <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
-                                    <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
-                                    <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
-                                    <li><a data-action="close"><i class="ft-x"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="card-content collapse show">
-                            <div class="card-body card-dashboard">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <?php 
-                                        showt($normalisasi,$kriteria);
-                                        ?>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">
-                              Solusi tertinggi dan terendah Sj, Rj      
-                          </h4>
-                          <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-                          <div class="heading-elements">
-                            <ul class="list-inline mb-0">
-                                <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
-                                <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
-                                <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
-                                <li><a data-action="close"><i class="ft-x"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="card-content collapse show">
-                        <div class="card-body card-dashboard">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <?php 
-                                    $arAlt = [
-                                        'Alternatif'
-                                    ];
-                                    showk($arAlt);
-                                    showk($alternatif);
-                                    ?>
-                                </div>
-                                <div class="col-md-4">
-                                    <?php 
-                                    $arSJ = [
-                                        'Sj'
-                                    ];
-                                    showk($arSJ);
-                                    showk($sj);
-                                    ?>
-                                </div>
-                                <div class="col-md-4">
-                                    <?php 
-                                    $arRj = [
-                                        'Rj'
-                                    ];
-                                    showk($arRj);
-                                    showk($rj);
-                                    ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
-
-
-
-
 
 
         <div class="row">
@@ -750,7 +615,7 @@ $arKd= ['Gedung'];
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">
-                            indeks vikor  
+                            Bobot Entropy 
                         </h4>
                         <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
                         <div class="heading-elements">
@@ -765,19 +630,9 @@ $arKd= ['Gedung'];
                     <div class="card-content collapse show">
                         <div class="card-body card-dashboard">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <?php 
-                                    showk($arAlt);
-                                    showk($alternatif);
-                                    ?>
-                                </div>
-                                <div class="col-md-6">
-                                    <?php 
-                                    $arQj = [
-                                        'Qj'
-                                    ];
-                                    showk($arQj);
-                                    showk($Qj);
+                                    showbg($bobotEntropy,$kriteria);
                                     ?>
                                 </div>
                             </div>
@@ -789,6 +644,143 @@ $arKd= ['Gedung'];
 
 
 
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">
+                            Matrik ternormalisasi   
+                        </h4>
+                        <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+                        <div class="heading-elements">
+                            <ul class="list-inline mb-0">
+                                <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                                <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
+                                <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                                <li><a data-action="close"><i class="ft-x"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-content collapse show">
+                        <div class="card-body card-dashboard">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <?php 
+                                    showt($normalisasi,$kriteria);
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">
+                          Solusi tertinggi dan terendah Sj, Rj      
+                      </h4>
+                      <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+                      <div class="heading-elements">
+                        <ul class="list-inline mb-0">
+                            <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                            <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
+                            <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                            <li><a data-action="close"><i class="ft-x"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-content collapse show">
+                    <div class="card-body card-dashboard">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <?php 
+                                $arAlt = [
+                                    'Alternatif'
+                                ];
+                                showk($arAlt);
+                                showk($alternatif);
+                                ?>
+                            </div>
+                            <div class="col-md-4">
+                                <?php 
+                                $arSJ = [
+                                    'Sj'
+                                ];
+                                showk($arSJ);
+                                showk($sj);
+                                ?>
+                            </div>
+                            <div class="col-md-4">
+                                <?php 
+                                $arRj = [
+                                    'Rj'
+                                ];
+                                showk($arRj);
+                                showk($rj);
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+
+
+
+
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">
+                        indeks vikor  
+                    </h4>
+                    <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+                    <div class="heading-elements">
+                        <ul class="list-inline mb-0">
+                            <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                            <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
+                            <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                            <li><a data-action="close"><i class="ft-x"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-content collapse show">
+                    <div class="card-body card-dashboard">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <?php 
+                                showk($arAlt);
+                                showk($alternatifrangking);
+                                ?>
+                            </div>
+                            <div class="col-md-6">
+                                <?php 
+                                $arQj = [
+                                    'Qj'
+                                ];
+                                showk($arQj);
+                                showk($hasilrangking);
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
 </div>
 </div>

@@ -149,9 +149,7 @@
 
                         for($kk=1; $kk<=31; $kk++) { 
                             ?>
-                            <div class="col-md-4">
-                                <?php if (in_array($kk, $gfasis)) {echo "<label style='color:red'>".$fasi[$kk]."</label>"; } else { echo "<label><strike>".$fasi[$kk]."</strike></label>";}?>
-                            </div>
+                            <?php if (in_array($kk, $gfasis)) {echo "<li style='color:red'> - ".$fasi[$kk].", </li>"; }?>
                         <?php } 
                         ?>
                     </div>
