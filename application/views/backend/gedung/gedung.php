@@ -114,6 +114,7 @@
 						<div class="row">
 							<div class="card-body">
 								<div class="row">
+
 									<div class="col-sm-12">
 										<div class="form-group">
 											<label>Gedung Kode: </label>
@@ -130,6 +131,7 @@
 								</div>
 
 								<div class="row">
+
 									<div class="col-sm-12">
 										<div class="form-group">
 											<label>Pemilik Gedung: </label>
@@ -141,6 +143,7 @@
 										</div>
 									</div>
 								</div>
+
 
 								<div class="row">
 									<div class="col-sm-12">
@@ -160,6 +163,7 @@
 											<input type="text" placeholder="Harga Gedung" name="gedung_harga" class="form-control">
 										</div>
 									</div>
+									
 									<div class="col-sm-6">
 										<div class="form-group">
 											<label>Kapasitas Tamu: </label>
@@ -167,6 +171,7 @@
 										</div>
 									</div>
 								</div>
+
 
 
 								<div class="row">
@@ -188,6 +193,7 @@
 										</div>
 									</div>
 								</div>
+
 
 
 
@@ -287,13 +293,15 @@
 											<input type="text" class="latitude form-control" name="latitude" readonly>
 										</div>
 									</div>
-									<div class="col-sm-6">
+									<div class="col-md-6">
 										<div class="form-group">
 											<label>Longitude</label>
 											<input type="text" class="longitude form-control" name="longitude" readonly>
 										</div>
 									</div>
 								</div>
+
+
 
 
 								<div class="row">
@@ -344,6 +352,7 @@
 							<div class="row">
 								<div class="card-body">
 
+
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="form-group">
@@ -352,6 +361,7 @@
 											</div>
 										</div>
 									</div>
+
 
 									<div class="row">
 										<div class="col-sm-12">
@@ -383,6 +393,7 @@
 												<input type="number" placeholder="Harga Gedung" name="gedung_harga" value="<?= $i['gedung_sewa']; ?>" class="form-control harga">
 											</div>
 										</div>
+
 										<div class="col-sm-6">
 											<div class="form-group">
 												<label>Kapasitas Tamu: </label>
@@ -390,6 +401,7 @@
 											</div>
 										</div>
 									</div>
+
 									<div class="row">
 										<div class="col-sm-6">
 											<div class="form-group">
@@ -409,6 +421,7 @@
 											</div>
 										</div>
 									</div>
+
 
 
 									<div class="row">
@@ -491,6 +504,7 @@
 										</div>
 									</div>
 
+
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="form-group">
@@ -509,6 +523,7 @@
 												<input type="text" class="latitude form-control" value="latitude" readonly name="latitude" >
 											</div>
 										</div>
+
 										<div class="col-sm-6">
 											<div class="form-group">
 												<label>Longitude</label>
@@ -519,7 +534,8 @@
 
 
 									<div class="row">
-										<div class="col-sm-12">
+										<div class="col-md-12">
+
 											<div class="form-group">
 												<label>Deskripsi: </label>
 												<textarea name="gedung_deskripsi" class="form-control"><?= $i['gedung_deskripsi']; ?></textarea>
@@ -528,6 +544,7 @@
 									</div>
 
 									<div class="row">
+
 										<div class="col-sm-12">
 											<div class="form-group">
 												<label>Foto Cover: </label>
@@ -561,7 +578,6 @@
 
 								</div>
 							</div>
-
 						</div>
 
 						<div class="modal-footer">
